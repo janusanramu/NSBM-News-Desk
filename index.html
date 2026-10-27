@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM NewsDesk - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ORIGINAL-STYLE HEADER -->
+<!-- MAIN HEADER -->
+<header class="main-header">
+    <div class="header-container">
+
+        <!-- LOGO AND BRAND -->
+        <a href="index.html" class="brand">
+            <img src="nsbmlogo.jpg" alt="NSBM Logo">
+
+            <div class="brand-text">
+                <h2>NSBM <span>NewsDesk</span></h2>
+                <p>NSBM Green University</p>
+            </div>
+        </a>
+
+        <!-- NAVIGATION LINKS -->
+        <nav class="main-navigation">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="news.html" class="nav-link">Latest News</a>
+
+            <a href="categories.html" class="nav-link">
+                Categories <span class="arrow">⌄</span>
+            </a>
+        </nav>
+
+        <!-- HEADER ACTIONS -->
+        <div class="header-actions">
+
+            <form class="search-box" id="headerSearch">
+                <span class="search-icon">⌕</span>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search news..."
+                    aria-label="Search news"
+                >
+            </form>
+
+            <a href="submit-article.html" class="submit-button">
+                <span>+</span> Submit Article
+            </a>
+
+            <button class="notification-button"
+        type="button"
+        aria-label="Notifications"
+        onclick="showHeaderMessage('Notifications')">
+    <i class="fa-regular fa-bell"></i>
+    <span class="notification-dot"></span>
+</button>
+             <button class="profile-button"
+        type="button"
+        onclick="showHeaderMessage('Admin profile')">
+    <span class="profile-circle">A</span>
+    <span class="profile-text">
+        <strong>Admin</strong>
+        <small>Administrator</small>
+    </span>
+    <span class="arrow">⌄</span>
+</button>
+        </div>
+    </div>
+</header>
+
+<!-- KEEP YOUR EXISTING BREAKING NEWS BAR HERE -->
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-heading">ADMIN PORTAL</div>
+
+        <a href="#dashboard" class="side-link active" data-page="dashboard">
+            <i class="fa-solid fa-table-cells-large"></i> Dashboard
+        </a>
+
+        <a href="#articles" class="side-link" data-page="articles">
+            <i class="fa-solid fa-file-lines"></i> Manage Articles
+        </a>
+
+        <a href="#categories" class="side-link" data-page="categories">
+            <i class="fa-solid fa-layer-group"></i> Categories
+        </a>
+
+        <a href="#announcements" class="side-link" data-page="announcements">
+            <i class="fa-solid fa-bullhorn"></i> Announcements
+        </a>
+
+        <a href="#reports" class="side-link" data-page="reports">
+            <i class="fa-solid fa-chart-column"></i> Reports
+        </a>
+
+        <div class="system-card">
+            <h3><i class="fa-solid fa-circle-check"></i> System Status</h3>
+
+            <img src="nsbm-campus.jpg.jpeg"
+                 alt="NSBM Green University campus">
+
+            <strong>NSBM Green University</strong>
+            <p>Campus system status preview.</p>
+
+            <div class="system-line">
+                <span><i class="fa-solid fa-wifi"></i> Campus Network</span>
+                <span class="online">Online*</span>
+            </div>
+
+            <div class="system-line">
+                <span><i class="fa-solid fa-database"></i> Database</span>
+                <span class="online">Demo</span>
+            </div>
+
+            <small>*Demo status only; not a live system check.</small>
+        </div>
+
+        <div class="sidebar-bottom">
+            <strong>Green Minds, Brighter Futures</strong>
+            <p>NSBM NewsDesk Admin Portal</p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- ADMIN OVERVIEW -->
+        <section id="dashboardPage" class="page-section">
+            <div class="page-heading">
+                <div>
+                    <h1>Admin Overview</h1>
+                    <p>Welcome back, Administrator. Here's what's happening across NSBM NewsDesk today.</p>
+                </div>
+
+                <button class="primary-button" id="quickAnnouncement">
+                    <i class="fa-solid fa-plus"></i> New Announcement
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>TOTAL ARTICLES</span>
+                    <i class="fa-solid fa-file-lines stat-icon green"></i>
+                    <h2 id="totalArticles">0</h2>
+                    <p>Sample articles</p>
+                </article>
+
+                <article class="stat-card">
+                    <span>READERSHIP</span>
+                    <i class="fa-solid fa-eye stat-icon blue"></i>
+                    <h2>45.2K</h2>
+                    <p>Sample readership</p>
+                </article>
+
+                <article class="stat-card">
+                    <span>STUDENTS</span>
+                    <i class="fa-solid fa-users stat-icon purple"></i>
+                    <h2>3,850</h2>
+                    <p>Sample student count</p>
+                </article>
+
+                <article class="stat-card">
+                    <span>PENDING REVIEW</span>
+                    <i class="fa-solid fa-clock stat-icon red"></i>
+                    <h2 id="pendingCount">0</h2>
+                    <p>Needs attention</p>
+                </article>
+            </div>
+
+            <section class="content-card">
+                <div class="card-heading">
+                    <div>
+                        <h2>Pending Article Submissions</h2>
+                        <p>Review student articles before publishing.</p>
+                    </div>
+                    <span class="count-badge" id="pendingLabel">0 Pending</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Article Title</th>
+                                <th>Author / Club</th>
+                                <th>Category</th>
+                                <th>Submitted Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingTable"></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <!-- MANAGE ARTICLES -->
+        <section id="articlesPage" class="page-section hidden">
+            <div class="page-heading">
+                <div>
+                    <h1>Manage Articles</h1>
+                    <p>Search and review article submissions.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="filter-row">
+                    <input type="search" id="articleSearch"
+                           placeholder="Search articles...">
+
+                    <select id="statusFilter">
+                        <option value="all">All statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Published">Published</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Article Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="articlesTable"></tbody>
+                    </table>
+                </div>
+                <p id="emptyArticles" class="empty-message hidden">
+                    No matching articles found.
+                </p>
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        <section id="categoriesPage" class="page-section hidden">
+            <div class="page-heading">
+                <div>
+                    <h1>Categories</h1>
+                    <p>Categories used to organise campus news.</p>
+                </div>
+            </div>
+            <div id="categoryGrid" class="category-grid"></div>
+        </section>
+
+        <!-- ANNOUNCEMENTS -->
+        <section id="announcementsPage" class="page-section hidden">
+            <div class="page-heading">
+                <div>
+                    <h1>Announcements</h1>
+                    <p>View and manage university announcements.</p>
+                </div>
+                <button class="primary-button" id="newAnnouncement">
+                    <i class="fa-solid fa-plus"></i> New Announcement
+                </button>
+            </div>
+
+            <div class="content-card">
+                <div class="filter-row">
+                    <input type="search" id="announcementSearch"
+                           placeholder="Search announcements...">
+                    <select id="announcementFilter">
+                        <option value="all">All announcements</option>
+                        <option value="Published">Published</option>
+                    </select>
+                </div>
+                <div id="announcementList" class="announcement-list"></div>
+            </div>
+        </section>
+
+        <!-- REPORTS -->
+        <section id="reportsPage" class="page-section hidden">
+            <div class="page-heading">
+                <div>
+                    <h1>Reports</h1>
+                    <p>Article statistics and submission summaries.</p>
+                </div>
+                <button class="primary-button" id="downloadReport">
+                    <i class="fa-solid fa-download"></i> Download Report
+                </button>
+            </div>
+
+            <div class="stats-grid report-stats">
+                <article class="stat-card">
+                    <span>TOTAL ARTICLES</span>
+                    <h2 id="reportTotal">0</h2>
+                </article>
+                <article class="stat-card">
+                    <span>PENDING</span>
+                    <h2 id="reportPending">0</h2>
+                </article>
+                <article class="stat-card">
+                    <span>PUBLISHED</span>
+                    <h2 id="reportPublished">0</h2>
+                </article>
+                <article class="stat-card">
+                    <span>REJECTED</span>
+                    <h2 id="reportRejected">0</h2>
+                </article>
+            </div>
+
+            <div class="chart-grid">
+                <article class="content-card chart-card">
+                    <h2>Article Status Overview</h2>
+                    <canvas id="statusChart"></canvas>
+                </article>
+
+                <article class="content-card chart-card">
+                    <h2>Articles by Category</h2>
+                    <canvas id="categoryChart"></canvas>
+                </article>
+            </div>
+        </section>
+
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    </main>
+</div>
+
+<!-- MODAL -->
+<div id="modalBackdrop" class="modal-backdrop hidden">
+    <div class="modal" role="dialog" aria-modal="true"
+         aria-labelledby="modalTitle">
+        <button id="closeModal" class="modal-close"
+                aria-label="Close">&times;</button>
+        <h2 id="modalTitle">Details</h2>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<!-- ORIGINAL-STYLE FOOTER -->
+<footer class="site-footer">
+
+    <div>
+        <strong>NSBM NewsDesk</strong>
+        <p>The official campus news and club-post portal for NSBM Green
+            University,Sri Lanka.Keepingg the acdemic community connected
+            and imformed.</p>
+    </div>
+    </div>
+
+    <div>
+        <strong>Quick Links</strong>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="index.html#articlesPage">Latest News</a></p>
+        <p><a href="index.html#articlesPage">Submit and Articles</a></p>
+        <p><a href="index.html#bookmarkPage">Bookmark</a></p>
+    </div>
+
+    <div>
+        <strong>Contact</strong>
+        <p>NSBM Green University</p>
+        <p>Homagama, Sri Lanka</p>
+        <p>
+  Email:
+  <a href="mailto:newsdesk@nsbm.ac.lk">
+    newsdesk@nsbm.ac.lk
+  </a>
+</p>3
+  
+    </div>
+
+</footer>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
