@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSBM NewsDesk - Student Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="registered-style.css">
+</head>
+
+<body>
+
+  <!-- SVG Icon Sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="m20 20-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M4 21c0-4 3.5-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24">
+      <path d="M6 3h12v18l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24">
+      <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2" />
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+    </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21h4" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linejoin="round" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24">
+      <path d="M6 3h9l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 11h7M9 15h7M9 7h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24">
+      <path d="M3 10v4h4l8 5V5l-8 5z" fill="currentColor" />
+      <path d="M18 9c1.5 1.5 1.5 4.5 0 6M20.5 6.5c3 3 3 8 0 11" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" />
+    </symbol>
+  </svg>
+
+  <!-- Student Header Navbar -->
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="registered.html" class="brand">
+        <img src="images/nsbm-logo.png" alt="NSBM Logo" class="brand-logo">
+        <span class="brand-name">NSBM NewsDesk</span>
+      </a>
+
+      <!-- Full Logged-in Student Links -->
+      <ul class="nav-links">
+        <li><a href="registered.html" class="active">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="submit-article.html">Submit Article</a></li>
+        <li><a href="bookmarks.html">My Bookmarks</a></li>
+        <li><a href="my-submissions.html">My Submissions</a></li>
+      </ul>
+
+
+      <div class="nav-actions">
+        <div class="search-box">
+          <svg class="icon">
+            <use href="#i-search" />
+          </svg>
+          <input type="search" placeholder="Search news...">
+        </div>
+
+        <div class="profile-menu">
+          <button type="button" class="avatar-badge" id="profileToggle" title="Student Profile" aria-expanded="false">
+            <svg class="icon">
+              <use href="#i-user" />
+            </svg>
+          </button>
+
+          <div class="profile-dropdown" id="profileDropdown" hidden>
+            <a href="profile.html">My Profile</a>
+            <a href="bookmarks.html">My Bookmarks</a>
+            <button type="button" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- Breaking News Ticker Bar -->
+    <div class="breaking-bar">
+      <span class="breaking-badge">BREAKING</span>
+      <p class="breaking-text">Annual Green Walk 2026 announced with massive participation from all faculties &bull;
+        Faculty of Computing wins the Inter-Faculty Hackathon 2026 &bull; Admissions for the new intake open</p>
+    </div>
+  </header>
+
+  <!-- Main Container Workspace -->
+  <main class="container">
+
+    <!-- Featured Hero Article -->
+    <section class="hero-feature">
+      <div class="hero-content">
+        <div class="hero-meta">
+          <span class="badge badge-featured">FEATURED</span>
+          <span class="date-meta">October 24, 2026 &bull; Campus Sustainability</span>
+        </div>
+        <h1 class="hero-title">NSBM Green University Secures Top Rank in National Sustainability Index 2026</h1>
+        <p class="hero-excerpt">Our commitment to eco-friendly campus infrastructure, renewable energy adoption, and
+          groundbreaking environmental research has propelled NSBM to the very pinnacle of higher education
+          sustainability rankings nationwide.</p>
+        <div class="hero-actions">
+          <a href="article-details.html" class="btn btn-primary">Read Full Story <svg class="icon">
+              <use href="#i-arrow" />
+            </svg></a>
+          <button type="button" class="btn btn-secondary"><svg class="icon">
+              <use href="#i-bookmark" />
+            </svg> Bookmark Story</button>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="images/nsbm-campus-aerial.jpg" alt="NSBM Green University Campus Aerial View">
+        <div class="image-caption"><svg class="icon">
+            <use href="#i-eye" />
+          </svg> Photo by NSBM Media Unit</div>
+      </div>
+    </section>
+
+    <!-- Category Tabs & Subscribe Feed Row -->
+    <div class="filter-row">
+      <div class="category-tabs">
+        <button class="cat-btn active">All News</button>
+        <button class="cat-btn">Computing</button>
+        <button class="cat-btn">Business</button>
+        <button class="cat-btn">Engineering</button>
+        <button class="cat-btn">Student Clubs</button>
+        <button class="cat-btn">Sports</button>
+        <button class="cat-btn">Notices</button>
+      </div>
+      <button type="button" class="subscribe-btn"><svg class="icon">
+          <use href="#i-bell" />
+        </svg> Subscribe Feed</button>
+    </div>
+
+    <!-- Main Content Grid Layout -->
+    <div class="content-grid">
+
+      <!-- News Grid Left Column -->
+      <section class="stories-section">
+        <div class="section-head">
+          <h2 class="section-title"><svg class="icon">
+              <use href="#i-doc" />
+            </svg> Latest Approved Stories</h2>
+          <span class="count-meta">Showing 4 of 24 updates</span>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- Card 1: Computing -->
+          <article class="card">
+            <div class="card-image">
+              <img src="images/computing-lab.jpg" alt="Computing Lab">
+              <span class="tag tag-computing">Computing</span>
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><span>By Prof. Silva</span><span>2 hours ago</span></div>
+              <h3><a href="article-details.html">Faculty of Computing Launches Advanced AI &amp; Robotics Research
+                  Lab</a></h3>
+              <p>Equipped with cutting-edge GPU clusters and robotic hardware, the new facility empowers researchers and
+                undergraduates...</p>
+            </div>
+            <div class="card-footer">
+              <span class="views"><svg class="icon">
+                  <use href="#i-eye" />
+                </svg> 1.4k views</span>
+              <button type="button" class="bookmark-btn" aria-label="Bookmark article"><svg class="icon">
+                  <use href="#i-bookmark" />
+                </svg></button>
+            </div>
+          </article>
+
+          <!-- Card 2: Business -->
+          <article class="card">
+            <div class="card-image">
+              <img src="images/business-competition.jpg" alt="Business Competition">
+              <span class="tag tag-business">Business</span>
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><span>By Business Club</span><span>5 hours ago</span></div>
+              <h3><a href="article-details.html">Annual Inter-University Business Case Competition 2026 Kicks Off</a>
+              </h3>
+              <p>Over 50 teams from leading higher education institutes converge at NSBM to pitch sustainable startup
+                strategies to industry...</p>
+            </div>
+            <div class="card-footer">
+              <span class="views"><svg class="icon">
+                  <use href="#i-eye" />
+                </svg> 980 views</span>
+              <button type="button" class="bookmark-btn" aria-label="Bookmark article"><svg class="icon">
+                  <use href="#i-bookmark" />
+                </svg></button>
+            </div>
+          </article>
+
+          <!-- Card 3: Sports -->
+          <article class="card">
+            <div class="card-image">
+              <img src="images/cricket-champions.jpg" alt="Cricket Squad">
+              <span class="tag tag-sports">Sports</span>
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><span>By Sports Council</span><span>1 day ago</span></div>
+              <h3><a href="article-details.html">NSBM Emeralds Crowned Champions at the National Inter-Club Cricket
+                  League</a></h3>
+              <p>A thrilling final match concluded with an emphatic victory for our cricket squad, showcasing incredible
+                team synergy and...</p>
+            </div>
+            <div class="card-footer">
+              <span class="views"><svg class="icon">
+                  <use href="#i-eye" />
+                </svg> 2.1k views</span>
+              <button type="button" class="bookmark-btn" aria-label="Bookmark article"><svg class="icon">
+                  <use href="#i-bookmark" />
+                </svg></button>
+            </div>
+          </article>
+
+          <!-- Card 4: Engineering -->
+          <article class="card">
+            <div class="card-image">
+              <img src="images/solar-vehicle.jpg" alt="Engineering Project">
+              <span class="tag tag-engineering">Engineering</span>
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><span>By Dept of Engineering</span><span>2 days ago</span></div>
+              <h3><a href="article-details.html">Innovative Solar-Powered Electric Vehicle Prototype Unveiled by
+                  Undergraduates</a></h3>
+              <p>Designed entirely by mechanical and electrical engineering students, the prototype showcases incredible
+                energy...</p>
+            </div>
+            <div class="card-footer">
+              <span class="views"><svg class="icon">
+                  <use href="#i-eye" />
+                </svg> 1.8k views</span>
+              <button type="button" class="bookmark-btn" aria-label="Bookmark article"><svg class="icon">
+                  <use href="#i-bookmark" />
+                </svg></button>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="load-more-wrap">
+          <button type="button" class="btn-load-more">Load More Articles</button>
+        </div>
+
+      </section>
+
+      <!-- Sidebar Right Column -->
+      <aside class="sidebar">
+
+        <!-- Live Announcements Block -->
+        <div class="announcements-panel">
+          <div class="panel-head">
+            <h3><svg class="icon icon-red">
+                <use href="#i-megaphone" />
+              </svg> Announcements</h3>
+            <span class="live-feed">LIVE FEED</span>
+          </div>
+
+          <div class="notice-list">
+
+            <div class="notice notice-urgent">
+              <div class="notice-top">
+                <span class="priority priority-urgent">URGENT</span>
+                <span class="notice-time">Today, 09:30 AM</span>
+              </div>
+              <h4>Mid-Semester Fee Deadline Reminder</h4>
+              <p>All pending tuition installments for the current semester must be cleared before Friday 4:00 PM to
+                avoid late registration penalties.</p>
+            </div>
+
+            <div class="notice notice-high">
+              <div class="notice-top">
+                <span class="priority priority-high">HIGH</span>
+                <span class="notice-time">Yesterday</span>
+              </div>
+              <h4>Library Extended Hours During Exam Week</h4>
+              <p>The main campus library and quiet study halls will remain open 24/7 starting next Monday to facilitate
+                student revision sessions.</p>
+            </div>
+
+            <div class="notice notice-normal">
+              <div class="notice-top">
+                <span class="priority priority-normal">NORMAL</span>
+                <span class="notice-time">Oct 22, 2026</span>
+              </div>
+              <h4>Parking Zone B Temporary Maintenance</h4>
+              <p>Parking Zone B near the Faculty of Computing block will be closed for resurfacing throughout this
+                weekend. Please use Zone C instead.</p>
+            </div>
+
+            <div class="notice notice-normal">
+              <div class="notice-top">
+                <span class="priority priority-normal">NORMAL</span>
+                <span class="notice-time">Oct 20, 2026</span>
+              </div>
+              <h4>Club Registration Drive 2026/27</h4>
+              <p>New students interested in joining university societies can visit the exhibition booths at the main
+                walkway during common hours.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Green Call to Action Box -->
+        <div class="cta-card">
+          <h3>Got a campus story to share?</h3>
+          <p>Submit your club events, research breakthroughs, or opinion pieces directly to the NSBM NewsDesk editorial
+            board.</p>
+          <a href="submit-article.html" class="btn-submit-cta">Submit Your Article &gt;</a>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- 3-Column Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+
+      <div class="footer-col brand-col">
+        <h4>NSBM NewsDesk</h4>
+        <p>The official campus news and club-post portal for NSBM Green University, Sri Lanka. Keeping the academic
+          community connected and informed.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="registered.html">Home</a></li>
+          <li><a href="news.html">Latest News</a></li>
+          <li><a href="submit-article.html">Submit an Article</a></li>
+          <li><a href="bookmarks.html">Bookmarks</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>NSBM Green University, Pitipana, Homagama, Sri Lanka</p>
+        <p>Email: <a href="mailto:newsdesk@nsbm.ac.lk">newsdesk@nsbm.ac.lk</a></p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2026 NSBM NewsDesk. All rights reserved.
+    </div>
+  </footer>
+  <script src="registered-script.js"></script>
+</body>
+
+</html>
