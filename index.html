@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookmarks | NSBM NewsDesk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="brand">
+        <img src="images/nsbm-logo.png.png" alt="NSBM Green University Logo" class="campus-logo" onerror="this.style.display='none'">
+        <span>NSBM NewsDesk</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="submit.html">Submit Article</a>
+        <a href="bookmarks.html" class="active">My Bookmarks</a>
+        <a href="submissions.html">My Submissions</a>
+        <a href="admin.html">Admin Dashboard</a>
+    </nav>
+
+    <input type="search" id="searchInput" placeholder="Search saved news...">
+    <button class="profile" aria-label="User Profile">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+    </button>
+</header>
+
+<div class="breaking">
+    <strong>BREAKING</strong>
+    <marquee>
+        Annual Green Walk 2026 announced with massive participation
+        • Faculty of Computing wins the Inter-Faculty Hackathon 2026
+        • Admissions open for the new intake
+    </marquee>
+</div>
+
+<main class="container">
+
+    <div class="page-heading">
+        <div>
+            <p class="eyebrow">SAVED ARTICLES</p>
+            <h2>My Bookmarks</h2>
+        </div>
+
+        <!-- All Category Filters -->
+        <div class="filters" id="categoryFilters">
+            <button class="filter active" data-category="All">All (<span id="bookmarkCount">0</span>)</button>
+            <button class="filter" data-category="Campus Life">Campus Life</button>
+            <button class="filter" data-category="Sports">Sports</button>
+            <button class="filter" data-category="Technology">Technology</button>
+            <button class="filter" data-category="Arts & Culture">Arts & Culture</button>
+            
+        </div>
+    </div>
+
+    <!-- Article Grid (Dynamically populated via JS to maintain uniform layout) -->
+    <section class="article-grid" id="articleGrid">
+        <!-- JavaScript will render cards here -->
+    </section>
+
+    <!-- Empty State -->
+    <div id="noResults" class="empty-state hidden">
+        <div class="empty-icon">🔖</div>
+        <h3>No Bookmarked Articles Found</h3>
+        <p>You have not saved any articles matching your search or category filter.</p>
+    </div>
+
+</main>
+
+<!-- Toast Notification Element -->
+<div id="toast" class="toast hidden"></div>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h3>NSBM NewsDesk</h3>
+            <p>The official campus news and club-post portal for NSBM Green University, Sri Lanka. Keeping the academic community connected and informed.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="news.html">Latest News</a>
+            <a href="submit.html">Submit an Article</a>
+            <a href="bookmarks.html">Bookmarks</a>
+        </div>
+        <div>
+            <h3>Contact</h3>
+            <p>NSBM Green University, Pitipana, Homagama, Sri Lanka</p>
+            <p>Email: newsdesk@nsbm.ac.lk</p>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2026 NSBM NewsDesk. All rights reserved.
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
