@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM NewsDesk - My Submissions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="header-footer.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="breaking">
+    <span class="breaking-tag">BREAKING</span>
+    <div class="breaking-track">
+        <span class="breaking-text">Annual Green Walk 2024 announced with massive participation from all faculties &bull; Faculty of Computing wins the Inter-Faculty Hackathon 2024 &bull; Admissions for the new intake now open</span>
+    </div>
+</div>
+
+<main class="container">
+
+    <section class="page-head">
+        <div>
+            <div class="eyebrow"><span class="material-symbols-outlined">article</span>AUTHOR PORTAL</div>
+            <h1>My Submissions</h1>
+            <p>Track your editorial pitches, faculty review status, and publication milestones.</p>
+        </div>
+        <a href="submit_article.html" class="btn btn-primary btn-lg">
+            <span class="material-symbols-outlined">add_circle</span>New Submission
+        </a>
+    </section>
+
+    <section class="stats">
+        <div class="stat">
+            <div>
+                <span class="stat-label">Total Submissions</span>
+                <span class="stat-value" id="statTotal">06</span>
+            </div>
+            <span class="stat-icon neutral"><span class="material-symbols-outlined">folder</span></span>
+        </div>
+        <div class="stat">
+            <div>
+                <span class="stat-label">Published / Approved</span>
+                <span class="stat-value green" id="statApproved">03</span>
+            </div>
+            <span class="stat-icon green"><span class="material-symbols-outlined">check_circle</span></span>
+        </div>
+        <div class="stat">
+            <div>
+                <span class="stat-label">Pending Review</span>
+                <span class="stat-value amber" id="statPending">02</span>
+            </div>
+            <span class="stat-icon amber"><span class="material-symbols-outlined">schedule</span></span>
+        </div>
+        <div class="stat">
+            <div>
+                <span class="stat-label">Needs Revision</span>
+                <span class="stat-value red" id="statRejected">01</span>
+            </div>
+            <span class="stat-icon red"><span class="material-symbols-outlined">error</span></span>
+        </div>
+    </section>
+
+    <section class="history">
+        <div class="history-head">
+            <h2>Article History</h2>
+            <div class="filter">
+                <span class="material-symbols-outlined">filter_list</span>
+                <select id="statusFilter">
+                    <option value="all">All Statuses</option>
+                    <option value="approved">Approved</option>
+                    <option value="pending">Pending Review</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="article-list" id="articleList">
+
+            <!-- 1 -->
+            <article class="article" data-status="approved">
+                <div class="article-row">
+                    <img class="thumb" src="images/hackathon.jpg" alt="" onerror="this.removeAttribute('src')">
+                    <div class="article-body">
+                        <div class="meta">
+                            <span class="badge approved"><span class="material-symbols-outlined">check_circle</span>Approved</span>
+                            <span class="meta-text">&bull; Faculty of Computing</span>
+                            <span class="meta-text">&bull; Submitted Nov 12, 2024</span>
+                        </div>
+                        <h3>Faculty of Computing Wins Inter-University Hackathon 2024 with AI Solution</h3>
+                        <p>Our undergraduate team triumphed over 45 national institutions with an innovative automated agricultural diagnostic app.</p>
+                    </div>
+                    <div class="article-actions">
+                        <a href="article.html" class="btn btn-soft"><span class="material-symbols-outlined">visibility</span>View Article</a>
+                        <div class="menu">
+                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
+                            <div class="menu-list">
+                                <a href="article.html">View</a>
+                                <a href="edit_article.html">Edit</a>
+                                <a href="#" class="danger" data-delete>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2 -->
+            <article class="article" data-status="pending">
+                <div class="article-row">
+                    <img class="thumb" src="images/greenwalk.jpg" alt="" onerror="this.removeAttribute('src')">
+                    <div class="article-body">
+                        <div class="meta">
+                            <span class="badge pending"><span class="material-symbols-outlined">schedule</span>Pending Review</span>
+                            <span class="meta-text">&bull; Faculty of Business</span>
+                            <span class="meta-text">&bull; Submitted Nov 18, 2024</span>
+                        </div>
+                        <h3>Annual Green Walk 2024: Sustainability Initiatives Take Center Stage</h3>
+                        <p>A comprehensive preview of the upcoming campus-wide environmental awareness march and tree planting campaign.</p>
+                    </div>
+                    <div class="article-actions">
+                        <a href="edit_article.html" class="btn btn-soft"><span class="material-symbols-outlined">edit</span>Edit Draft</a>
+                        <div class="menu">
+                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
+                            <div class="menu-list">
+                                <a href="article.html">View</a>
+                                <a href="edit_article.html">Edit</a>
+                                <a href="#" class="danger" data-delete>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3 -->
+            <article class="article is-rejected" data-status="rejected">
+                <div class="article-row">
+                    <img class="thumb" src="images/robotics.jpg" alt="" onerror="this.removeAttribute('src')">
+                    <div class="article-body">
+                        <div class="meta">
+                            <span class="badge rejected"><span class="material-symbols-outlined">cancel</span>Rejected</span>
+                            <span class="meta-text">&bull; Faculty of Engineering</span>
+                            <span class="meta-text">&bull; Submitted Nov 05, 2024</span>
+                        </div>
+                        <h3>Underground Robotics Lab Unveils Autonomous Drone Prototype</h3>
+                        <p>Exclusive look at the new mechanical testing bay in the engineering complex.</p>
+                    </div>
+                    <div class="article-actions">
+                        <a href="edit_article.html?resubmit=1" class="btn btn-primary"><span class="material-symbols-outlined">refresh</span>Revise &amp; Resubmit</a>
+                        <div class="menu">
+                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
+                            <div class="menu-list">
+                                <a href="edit_article.html?resubmit=1">Revise</a>
+                                <a href="#" class="danger" data-delete>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rejection-note">
+                    <div class="rejection-title"><span class="material-symbols-outlined">error</span>Faculty Rejection Note (Reviewer: Prof. Silva)</div>
+                    <p>"Article contains unverified performance metrics for the drone prototype. Please remove specific speed claims until official patent clearance is published by the university research board. Resubmit once edited."</p>
+                </div>
+            </article>
+
+            <!-- 4 -->
+            <article class="article" data-status="approved">
+                <div class="article-row">
+                    <img class="thumb" src="images/lecture.jpg" alt="" onerror="this.removeAttribute('src')">
+                    <div class="article-body">
+                        <div class="meta">
+                            <span class="badge approved"><span class="material-symbols-outlined">check_circle</span>Approved</span>
+                            <span class="meta-text">&bull; School of Postgraduate Studies</span>
+                            <span class="meta-text">&bull; Submitted Oct 28, 2024</span>
+                        </div>
+                        <h3>Global Tech Leader Delivers Guest Lecture on AI Ethics</h3>
+                        <p>Industry experts shared profound perspectives on responsible artificial intelligence development in modern enterprise.</p>
+                    </div>
+                    <div class="article-actions">
+                        <a href="article.html" class="btn btn-soft"><span class="material-symbols-outlined">visibility</span>View Article</a>
+                        <div class="menu">
+                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
+                            <div class="menu-list">
+                                <a href="article.html">View</a>
+                                <a href="edit_article.html">Edit</a>
+                                <a href="#" class="danger" data-delete>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 5 -->
+            <article class="article" data-status="pending">
+                <div class="article-row">
+                    <img class="thumb" src="images/sports.jpg" alt="" onerror="this.removeAttribute('src')">
+                    <div class="article-body">
+                        <div class="meta">
+                            <span class="badge pending"><span class="material-symbols-outlined">schedule</span>Pending Review</span>
+                            <span class="meta-text">&bull; Faculty of Business</span>
+                            <span class="meta-text">&bull; Submitted Oct 15, 2024</span>
+                        </div>
+                        <h3>Inter-Faculty Sports Meet Concludes with Record Turnout</h3>
+                        <p>Athletes from every faculty competed across twelve events over the weekend.</p>
+                    </div>
+                    <div class="article-actions">
+                        <a href="edit_article.html" class="btn btn-soft"><span class="material-symbols-outlined">edit</span>Edit Draft</a>
+                        <div class="menu">
+                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
+                            <div class="menu-list">
+                                <a href="article.html">View</a>
+                                <a href="edit_article.html">Edit</a>
+                                <a href="#" class="danger" data-delete>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 6 -->
+            <article class="article" data-status="approved">
+                <div class="article-row">
+                    <img class="thumb" src="images/library.jpg" alt="" onerror="this.removeAttribute('src')">
+                    <div class="article-body">
+                        <div class="meta">
+                            <span class="badge approved"><span class="material-symbols-outlined">check_circle</span>Approved</span>
+                            <span class="meta-text">&bull; Faculty of Computing</span>
+                            <span class="meta-text">&bull; Submitted Oct 02, 2024</span>
+                        </div>
+                        <h3>New Library Wing Opens for Final Year Students</h3>
+                        <p>The extended study space offers 24-hour access during examination weeks.</p>
+                    </div>
+                    <div class="article-actions">
+                        <a href="article.html" class="btn btn-soft"><span class="material-symbols-outlined">visibility</span>View Article</a>
+                        <div class="menu">
+                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
+                            <div class="menu-list">
+                                <a href="article.html">View</a>
+                                <a href="edit_article.html">Edit</a>
+                                <a href="#" class="danger" data-delete>Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="empty" id="emptyState" style="display:none">No submissions found for this filter.</div>
+
+        <div class="history-foot">
+            <span id="showingText">Showing 1-4 of 6 submissions</span>
+            <nav class="pager" id="pager"></nav>
+        </div>
+    </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="layout.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
