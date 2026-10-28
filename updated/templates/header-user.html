@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PAGE_TITLE}}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ASSET_BASE_URL}}/header.css">
+    <link rel="stylesheet" href="{{ASSET_BASE_URL}}/footer.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+
+        <a href="index.php" class="brand">
+            <img src="{{ASSET_BASE_URL}}/assets/nsbm-logo.png" alt="NSBM Green University logo" class="brand-logo">
+            <span class="brand-text">
+                <span class="brand-title">NSBM <span class="accent">NewsDesk</span></span>
+                <span class="brand-sub">NSBM Green University</span>
+            </span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="main-nav" id="mainNav">
+            <a href="index.php" class="nav-link {{HOME_ACTIVE}}">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+            <a href="latest-news.php" class="nav-link {{LATEST_ACTIVE}}">
+                Latest News
+            </a>
+
+            <div class="dropdown" id="categoriesDropdown">
+                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true">
+                    Categories <i class="fa-solid fa-chevron-down chevron"></i>
+                </button>
+                <div class="dropdown-menu">
+                    {{CATEGORY_LINKS}}
+                </div>
+            </div>
+        </nav>
+
+        <form class="search-box" action="search.php" method="get">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="q" placeholder="Search news..." aria-label="Search">
+        </form>
+
+        <div class="header-actions">
+            <a href="submit-article.php" class="btn btn-green">
+                <i class="fa-solid fa-plus"></i> Submit Article
+            </a>
+
+            <button class="icon-btn" type="button" aria-label="Notifications">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notif-dot"></span>
+            </button>
+
+            <span class="divider"></span>
+
+            <div class="dropdown user-dropdown" id="userDropdown">
+                <button class="user-toggle" type="button" aria-haspopup="true">
+                    <span class="avatar">
+                        {{USER_INITIALS}}
+                        <span class="status-dot"></span>
+                    </span>
+                    <span class="user-name">
+                        <span>{{USER_FIRST_NAME}}</span>
+                        <span>{{USER_LAST_NAME}}</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </button>
+                <div class="dropdown-menu dropdown-right">
+                    <a href="profile.php"><i class="fa-regular fa-user"></i> User Profile</a>
+                    <a href="my-submissions.php"><i class="fa-regular fa-file-lines"></i> My Submissions</a>
+                    <a href="bookmarks.php"><i class="fa-regular fa-bookmark"></i> Saved Bookmarks</a>
+                    <a href="logout.php" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="breaking-bar">
+        <div class="breaking-inner">
+            <span class="breaking-badge"><span class="dot"></span> BREAKING</span>
+            <div class="breaking-text">
+                Annual Green Walk 2024 announced with massive university participation • Faculty of Computing wins National Hackathon 2024 • Semester examinations commence next week
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="site-main">
