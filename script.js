@@ -101,10 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const isTech = article.category === "Technology" ? " tech" : "";
 
                 card.innerHTML = `
-                    <div class="image-wrap">
+                  <div class="image-wrap">
                         <img src="${article.image}" alt="${article.title}" onerror="this.src='https://via.placeholder.com/400x200?text=NSBM+News'">
                         <span class="tag${isTech}">${article.category}</span>
-                        <button class="bookmark" data-id="${article.id}" title="Remove bookmark">❤️</button>
+                        <button class="bookmark" data-id="${article.id}" title="Remove bookmark">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </button>
                     </div>
                     <div class="content">
                         <p class="meta">${article.meta}</p>
