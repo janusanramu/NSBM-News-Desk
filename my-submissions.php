@@ -12,11 +12,65 @@ if (!defined('NEWS_DESK_ASSET_BASE_URL')) {
 }
 define('NEWS_DESK_ALLOW_GUEST_PREVIEW', true);
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$sessionUserId = filter_var($_SESSION['user_id'] ?? null, FILTER_VALIDATE_INT);
+$userId = is_int($sessionUserId) && $sessionUserId > 0 ? $sessionUserId : 0;
+$submissions = [];
+$databaseError = false;
+
+try {
+    $pdo = require __DIR__ . '/database.php';
+    $statement = $pdo->prepare(
+        'SELECT id, title, summary, cover_image_url, status,
+                rejection_reason, submission_date, category_name
+         FROM my_submissions_view
+         WHERE author_id = :author_id
+         ORDER BY submission_date DESC, id DESC'
+    );
+    $statement->execute(['author_id' => $userId]);
+    $submissions = $statement->fetchAll();
+} catch (PDOException | RuntimeException $exception) {
+    error_log('Unable to load my submissions: ' . $exception->getMessage());
+    $databaseError = true;
+}
+
+if (!$databaseError) {
+    $_SESSION['submission_count'] = count($submissions);
+}
+
+$escape = static function ($value): string {
+    return htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+};
+
+$statusDetails = [
+    'draft' => ['Draft', 'draft', 'edit_note'],
+    'pending_review' => ['Pending Review', 'pending_review', 'schedule'],
+    'approved' => ['Approved', 'approved', 'check_circle'],
+    'rejected' => ['Needs Revision', 'rejected', 'error'],
+    'archived' => ['Archived', 'archived', 'inventory_2'],
+];
+
+$safeImageUrl = static function ($imageUrl): string {
+    $imageUrl = trim((string)$imageUrl);
+    if ($imageUrl !== '' && filter_var($imageUrl, FILTER_VALIDATE_URL)) {
+        $scheme = strtolower((string)parse_url($imageUrl, PHP_URL_SCHEME));
+        if ($scheme === 'https' || $scheme === 'http') {
+            return $imageUrl;
+        }
+    } elseif (preg_match('/^(?!\\/\\/)[A-Za-z0-9._\\/-]+$/', $imageUrl)) {
+        return $imageUrl;
+    }
+
+    return 'images/nsbm-campus-aerial.jpg';
+};
+
 require __DIR__ . '/updated/header-user.php';
 ?>
 
 <div class="container">
-
     <section class="page-head">
         <div>
             <div class="eyebrow"><span class="material-symbols-outlined">article</span>AUTHOR PORTAL</div>
@@ -32,28 +86,28 @@ require __DIR__ . '/updated/header-user.php';
         <div class="stat">
             <div>
                 <span class="stat-label">Total Submissions</span>
-                <span class="stat-value" id="statTotal">06</span>
+                <span class="stat-value" id="statTotal">00</span>
             </div>
             <span class="stat-icon neutral"><span class="material-symbols-outlined">folder</span></span>
         </div>
         <div class="stat">
             <div>
                 <span class="stat-label">Published / Approved</span>
-                <span class="stat-value green" id="statApproved">03</span>
+                <span class="stat-value green" id="statApproved">00</span>
             </div>
             <span class="stat-icon green"><span class="material-symbols-outlined">check_circle</span></span>
         </div>
         <div class="stat">
             <div>
                 <span class="stat-label">Pending Review</span>
-                <span class="stat-value amber" id="statPending">02</span>
+                <span class="stat-value amber" id="statPending">00</span>
             </div>
             <span class="stat-icon amber"><span class="material-symbols-outlined">schedule</span></span>
         </div>
         <div class="stat">
             <div>
                 <span class="stat-label">Needs Revision</span>
-                <span class="stat-value red" id="statRejected">01</span>
+                <span class="stat-value red" id="statRejected">00</span>
             </div>
             <span class="stat-icon red"><span class="material-symbols-outlined">error</span></span>
         </div>
@@ -64,189 +118,72 @@ require __DIR__ . '/updated/header-user.php';
             <h2>Article History</h2>
             <div class="filter">
                 <span class="material-symbols-outlined">filter_list</span>
-                <select id="statusFilter">
+                <select id="statusFilter" aria-label="Filter submissions by status">
                     <option value="all">All Statuses</option>
+                    <option value="draft">Draft</option>
+                    <option value="pending_review">Pending Review</option>
                     <option value="approved">Approved</option>
-                    <option value="pending">Pending Review</option>
-                    <option value="rejected">Rejected</option>
+                    <option value="rejected">Needs Revision</option>
+                    <option value="archived">Archived</option>
                 </select>
             </div>
         </div>
 
         <div class="article-list" id="articleList">
-
-            <!-- 1 -->
-            <article class="article" data-status="approved">
-                <div class="article-row">
-                    <img class="thumb" src="images/hackathon-champions.jpg" alt="" onerror="this.removeAttribute('src')">
-                    <div class="article-body">
-                        <div class="meta">
-                            <span class="badge approved"><span class="material-symbols-outlined">check_circle</span>Approved</span>
-                            <span class="meta-text">&bull; Faculty of Computing</span>
-                            <span class="meta-text">&bull; Submitted Nov 12, 2024</span>
-                        </div>
-                        <h3>Faculty of Computing Wins Inter-University Hackathon 2024 with AI Solution</h3>
-                        <p>Our undergraduate team triumphed over 45 national institutions with an innovative automated agricultural diagnostic app.</p>
-                    </div>
-                    <div class="article-actions">
-                        <a href="article.html" class="btn btn-soft"><span class="material-symbols-outlined">visibility</span>View Article</a>
-                        <div class="menu">
-                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
-                            <div class="menu-list">
-                                <a href="article.html">View</a>
-                                <a href="edit_article.html">Edit</a>
-                                <a href="#" class="danger" data-delete>Delete</a>
+            <?php foreach ($submissions as $submission):
+                $status = (string)$submission['status'];
+                $details = $statusDetails[$status] ?? ['Unknown', 'archived', 'help'];
+                $timestamp = strtotime((string)$submission['submission_date']);
+                $formattedDate = $timestamp === false ? 'Date unavailable' : date('M j, Y', $timestamp);
+            ?>
+                <article class="article<?= $status === 'rejected' ? ' is-rejected' : '' ?>" data-status="<?= $escape($status) ?>">
+                    <div class="article-row">
+                        <img
+                            class="thumb"
+                            src="<?= $escape($safeImageUrl($submission['cover_image_url'])) ?>"
+                            alt="<?= $escape($submission['title']) ?>"
+                            loading="lazy"
+                        >
+                        <div class="article-body">
+                            <div class="meta">
+                                <span class="badge <?= $escape($details[1]) ?>">
+                                    <span class="material-symbols-outlined"><?= $escape($details[2]) ?></span><?= $escape($details[0]) ?>
+                                </span>
+                                <span class="meta-text">&bull; <?= $escape($submission['category_name']) ?></span>
+                                <span class="meta-text">&bull; Submitted <?= $escape($formattedDate) ?></span>
                             </div>
+                            <h3><?= $escape($submission['title']) ?></h3>
+                            <p><?= $escape($submission['summary']) ?></p>
                         </div>
                     </div>
-                </div>
-            </article>
-
-            <!-- 2 -->
-            <article class="article" data-status="pending">
-                <div class="article-row">
-                    <img class="thumb" src="images/green-walk.jpg" alt="" onerror="this.removeAttribute('src')">
-                    <div class="article-body">
-                        <div class="meta">
-                            <span class="badge pending"><span class="material-symbols-outlined">schedule</span>Pending Review</span>
-                            <span class="meta-text">&bull; Faculty of Business</span>
-                            <span class="meta-text">&bull; Submitted Nov 18, 2024</span>
+                    <?php if ($status === 'rejected' && !empty($submission['rejection_reason'])): ?>
+                        <div class="rejection-note">
+                            <div class="rejection-title"><span class="material-symbols-outlined">error</span>Reviewer Feedback</div>
+                            <p><?= nl2br($escape($submission['rejection_reason'])) ?></p>
                         </div>
-                        <h3>Annual Green Walk 2024: Sustainability Initiatives Take Center Stage</h3>
-                        <p>A comprehensive preview of the upcoming campus-wide environmental awareness march and tree planting campaign.</p>
-                    </div>
-                    <div class="article-actions">
-                        <a href="edit_article.html" class="btn btn-soft"><span class="material-symbols-outlined">edit</span>Edit Draft</a>
-                        <div class="menu">
-                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
-                            <div class="menu-list">
-                                <a href="article.html">View</a>
-                                <a href="edit_article.html">Edit</a>
-                                <a href="#" class="danger" data-delete>Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 3 -->
-            <article class="article is-rejected" data-status="rejected">
-                <div class="article-row">
-                    <img class="thumb" src="images/robotics-lab.jpg" alt="" onerror="this.removeAttribute('src')">
-                    <div class="article-body">
-                        <div class="meta">
-                            <span class="badge rejected"><span class="material-symbols-outlined">cancel</span>Rejected</span>
-                            <span class="meta-text">&bull; Faculty of Engineering</span>
-                            <span class="meta-text">&bull; Submitted Nov 05, 2024</span>
-                        </div>
-                        <h3>Underground Robotics Lab Unveils Autonomous Drone Prototype</h3>
-                        <p>Exclusive look at the new mechanical testing bay in the engineering complex.</p>
-                    </div>
-                    <div class="article-actions">
-                        <a href="edit_article.html?resubmit=1" class="btn btn-primary"><span class="material-symbols-outlined">refresh</span>Revise &amp; Resubmit</a>
-                        <div class="menu">
-                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
-                            <div class="menu-list">
-                                <a href="edit_article.html?resubmit=1">Revise</a>
-                                <a href="#" class="danger" data-delete>Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rejection-note">
-                    <div class="rejection-title"><span class="material-symbols-outlined">error</span>Faculty Rejection Note (Reviewer: Prof. Silva)</div>
-                    <p>"Article contains unverified performance metrics for the drone prototype. Please remove specific speed claims until official patent clearance is published by the university research board. Resubmit once edited."</p>
-                </div>
-            </article>
-
-            <!-- 4 -->
-            <article class="article" data-status="approved">
-                <div class="article-row">
-                    <img class="thumb" src="images/computing-lab.jpg" alt="" onerror="this.removeAttribute('src')">
-                    <div class="article-body">
-                        <div class="meta">
-                            <span class="badge approved"><span class="material-symbols-outlined">check_circle</span>Approved</span>
-                            <span class="meta-text">&bull; School of Postgraduate Studies</span>
-                            <span class="meta-text">&bull; Submitted Oct 28, 2024</span>
-                        </div>
-                        <h3>Global Tech Leader Delivers Guest Lecture on AI Ethics</h3>
-                        <p>Industry experts shared profound perspectives on responsible artificial intelligence development in modern enterprise.</p>
-                    </div>
-                    <div class="article-actions">
-                        <a href="article.html" class="btn btn-soft"><span class="material-symbols-outlined">visibility</span>View Article</a>
-                        <div class="menu">
-                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
-                            <div class="menu-list">
-                                <a href="article.html">View</a>
-                                <a href="edit_article.html">Edit</a>
-                                <a href="#" class="danger" data-delete>Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 5 -->
-            <article class="article" data-status="pending">
-                <div class="article-row">
-                    <img class="thumb" src="images/basketball-champions.jpg" alt="" onerror="this.removeAttribute('src')">
-                    <div class="article-body">
-                        <div class="meta">
-                            <span class="badge pending"><span class="material-symbols-outlined">schedule</span>Pending Review</span>
-                            <span class="meta-text">&bull; Faculty of Business</span>
-                            <span class="meta-text">&bull; Submitted Oct 15, 2024</span>
-                        </div>
-                        <h3>Inter-Faculty Sports Meet Concludes with Record Turnout</h3>
-                        <p>Athletes from every faculty competed across twelve events over the weekend.</p>
-                    </div>
-                    <div class="article-actions">
-                        <a href="edit_article.html" class="btn btn-soft"><span class="material-symbols-outlined">edit</span>Edit Draft</a>
-                        <div class="menu">
-                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
-                            <div class="menu-list">
-                                <a href="article.html">View</a>
-                                <a href="edit_article.html">Edit</a>
-                                <a href="#" class="danger" data-delete>Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 6 -->
-            <article class="article" data-status="approved">
-                <div class="article-row">
-                    <img class="thumb" src="images/nsbm-campus-aerial.jpg" alt="" onerror="this.removeAttribute('src')">
-                    <div class="article-body">
-                        <div class="meta">
-                            <span class="badge approved"><span class="material-symbols-outlined">check_circle</span>Approved</span>
-                            <span class="meta-text">&bull; Faculty of Computing</span>
-                            <span class="meta-text">&bull; Submitted Oct 02, 2024</span>
-                        </div>
-                        <h3>New Library Wing Opens for Final Year Students</h3>
-                        <p>The extended study space offers 24-hour access during examination weeks.</p>
-                    </div>
-                    <div class="article-actions">
-                        <a href="article.html" class="btn btn-soft"><span class="material-symbols-outlined">visibility</span>View Article</a>
-                        <div class="menu">
-                            <button type="button" class="menu-btn" aria-label="More options"><span class="material-symbols-outlined">more_vert</span></button>
-                            <div class="menu-list">
-                                <a href="article.html">View</a>
-                                <a href="edit_article.html">Edit</a>
-                                <a href="#" class="danger" data-delete>Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
+                    <?php endif; ?>
+                </article>
+            <?php endforeach; ?>
         </div>
 
-        <div class="empty" id="emptyState" style="display:none">No submissions found for this filter.</div>
+        <div
+            class="empty"
+            id="emptyState"
+            role="<?= $databaseError ? 'alert' : 'status' ?>"
+            <?= $submissions && !$databaseError ? 'style="display:none"' : '' ?>
+        ><?php
+            if ($databaseError) {
+                echo 'Unable to load submissions. Check the database configuration and try again.';
+            } elseif ($userId === 0) {
+                echo 'Sign in to see submissions linked to your account.';
+            } else {
+                echo 'No submissions found for this filter.';
+            }
+        ?></div>
 
         <div class="history-foot">
-            <span id="showingText">Showing 1-4 of 6 submissions</span>
-            <nav class="pager" id="pager"></nav>
+            <span id="showingText">Showing 0-0 of 0 submissions</span>
+            <nav class="pager" id="pager" aria-label="Submission pages"></nav>
         </div>
     </section>
 </div>

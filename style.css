@@ -222,7 +222,9 @@ ul { list-style: none; }
 }
 .badge .material-symbols-outlined { font-size: 14px; }
 .badge.approved { background: var(--green-soft); color: #0b5a3a; }
-.badge.pending  { background: var(--amber-bg); color: var(--amber); }
+.badge.pending_review { background: var(--amber-bg); color: var(--amber); }
+.badge.draft,
+.badge.archived { background: var(--soft); color: var(--muted); }
 .badge.rejected { background: var(--red); color: #fff; }
 
 .article-body h3 { font-size: 17px; font-weight: 500; margin-bottom: 4px; line-height: 1.3; }
