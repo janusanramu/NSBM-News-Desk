@@ -55,7 +55,7 @@ ul { list-style: none; }
     padding: 3px 9px;
     border-radius: 4px;
 }
-.breaking-track { overflow: hidden; white-space: nowrap; flex: 1; }
+.breaking-track { overflow: hidden; white-space: nowrap; flex: 1; min-width: 0; }
 .breaking-text {
     display: inline-block;
     font-size: 14px;
@@ -67,6 +67,10 @@ ul { list-style: none; }
 @keyframes ticker {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .breaking-track { overflow-x: auto; }
+    .breaking-text { padding-left: 0; animation: none; }
 }
 
 /* ---------- Layout ---------- */

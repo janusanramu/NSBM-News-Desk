@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSBM NewsDesk - My Submissions</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<?php
+$pageTitle = 'NSBM NewsDesk - My Submissions';
+$pageHeadContent = <<<'HTML'
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="header-footer.css">
-</head>
-<body>
+    <style>body { display: flex; flex-direction: column; min-height: 100vh; }</style>
+HTML;
 
-<div id="site-header"></div>
+if (!defined('NEWS_DESK_ASSET_BASE_URL')) {
+    define('NEWS_DESK_ASSET_BASE_URL', 'updated');
+}
+define('NEWS_DESK_ALLOW_GUEST_PREVIEW', true);
 
-<div class="breaking">
-    <span class="breaking-tag">BREAKING</span>
-    <div class="breaking-track">
-        <span class="breaking-text">Annual Green Walk 2024 announced with massive participation from all faculties &bull; Faculty of Computing wins the Inter-Faculty Hackathon 2024 &bull; Admissions for the new intake now open</span>
-    </div>
-</div>
+require __DIR__ . '/updated/header-user.php';
+?>
 
-<main class="container">
+<div class="container">
 
     <section class="page-head">
         <div>
@@ -256,11 +249,7 @@
             <nav class="pager" id="pager"></nav>
         </div>
     </section>
-</main>
+</div>
 
-<div id="site-footer"></div>
-
-<script src="layout.js"></script>
 <script src="main.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/updated/footer-user.php'; ?>
