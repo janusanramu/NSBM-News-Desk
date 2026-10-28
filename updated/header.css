@@ -256,15 +256,34 @@ a { text-decoration: none; color: inherit; }
     border-radius: 50%;
     animation: pulse 1.4s infinite;
 }
+.breaking-track {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
 .breaking-text {
+    display: inline-block;
     color: var(--white);
     font-size: 13px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding-left: 100%;
+    animation: ticker 40s linear infinite;
+}
+.breaking-track:hover .breaking-text {
+    animation-play-state: paused;
+}
+@keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
 }
 
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .breaking-track { overflow-x: auto; }
+    .breaking-text { padding-left: 0; animation: none; }
+}
 
 /* Mobile toggle */
 .nav-toggle {
