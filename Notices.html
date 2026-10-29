@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f8f4">
+  <meta name="description" content="NSBM Green University releases the end semester examination timetable and important instructions for students.">
+  <title>End Semester Examination Timetable Released for All Faculties</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #005b45;
+      --ink: #202724;
+      --muted: #65716a;
+      --page: #f5f8f4;
+      --soft: #eef3ed;
+      --line: #e8eeea;
+      font-family: "DM Sans", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--page);
+    }
+    * { box-sizing: border-box; }
+    body { min-width: 320px; margin: 0; }
+    button, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+
+    .site-header { height: 52px; display: flex; align-items: center; gap: 24px; padding: 0 max(24px, calc((100vw - 1152px) / 2)); background: #fff; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 8px; min-width: 125px; color: #18201c; font-size: 10px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .brand-mark { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #e8f2eb; overflow: hidden; }
+    .brand-mark img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 3px; flex: 1; }
+    .nav-links a { padding: 7px 9px; border-radius: 6px; color: #3e4843; font-size: 9px; text-decoration: none; white-space: nowrap; }
+    .nav-links a.active { background: var(--green); color: #fff; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .top-search { width: 280px; padding: 8px 11px; border: 0; border-radius: 20px; outline-color: #9acbbb; background: #f3f6f3; font-size: 9px; }
+    .profile { width: 24px; height: 24px; border: 0; border-radius: 50%; background: var(--green); color: #fff; }
+    .breaking { min-height: 28px; display: flex; align-items: center; gap: 10px; overflow: hidden; padding: 0 max(24px, calc((100vw - 1152px) / 2)); background: var(--soft); color: #4d5751; font-size: 8px; white-space: nowrap; }
+    .breaking strong { padding: 3px 7px; border-radius: 3px; background: var(--green); color: #fff; font-size: 8px; }
+
+    .article-hero {
+      position: relative;
+      min-height: 275px;
+      background:
+        linear-gradient(0deg, var(--page) 0%, rgb(245 248 244 / 92%) 9%, rgb(245 248 244 / 22%) 70%),
+        linear-gradient(90deg, rgb(245 248 244 / 25%), rgb(245 248 244 / 5%)),
+        url("https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1800&q=90") center 42% / cover;
+    }
+    .hero-inner { max-width: 860px; margin: 0 auto; padding: 177px 24px 14px; }
+    .article-labels { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
+    .category { padding: 4px 8px; border-radius: 12px; background: #8de9bd; color: #15392b; font-size: 8px; font-weight: 700; }
+    .article-meta { color: #56625b; font-size: 9px; }
+    h1 { max-width: 650px; margin: 0 0 10px; font-size: clamp(21px, 3.2vw, 30px); line-height: 1.22; letter-spacing: -.55px; }
+    .hero-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .author { display: flex; align-items: center; gap: 9px; }
+    .author-avatar { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: #fff; font-size: 10px; font-weight: 600; }
+    .author-name { font-size: 10px; font-weight: 600; }
+    .author-role { margin-top: 2px; color: #65716a; font-size: 8px; }
+    .hero-actions { display: flex; gap: 7px; }
+    .hero-actions button { padding: 7px 10px; border: 0; border-radius: 7px; background: rgb(255 255 255 / 85%); color: #334039; font-size: 9px; }
+    .hero-actions button[aria-pressed="true"] { color: var(--green); }
+
+    .article-column { width: min(100% - 32px, 690px); margin: 13px auto 0; }
+    .article-body { padding: 30px 32px; border: 1px solid #edf1ee; border-radius: 12px; background: #fff; box-shadow: 0 4px 14px rgb(29 56 42 / 4%); }
+    .article-body p { margin: 0 0 13px; color: #59645e; font-size: 10px; line-height: 1.65; }
+    .article-body .lead { margin-bottom: 20px; color: #1f2723; font-size: 14px; font-weight: 500; line-height: 1.65; }
+    .article-body h2 { margin: 21px 0 7px; font-size: 12px; font-weight: 600; }
+    blockquote { position: relative; margin: 19px 0; padding: 18px 22px; border-radius: 9px; background: #f0f5f0; color: var(--green); }
+    blockquote p { margin: 0 0 5px !important; color: var(--green) !important; font-size: 10px !important; font-weight: 600; }
+    blockquote cite { color: #64716a; font-size: 8px; font-style: normal; }
+    .article-figure { overflow: hidden; margin: 12px 0; border-radius: 8px; background: #f0f5f0; }
+    .article-figure img { width: 100%; height: 260px; display: block; object-fit: cover; }
+    .article-figure figcaption { padding: 8px; color: #58645d; text-align: center; font-size: 8px; }
+    .author-bio { display: flex; align-items: center; gap: 14px; margin: 18px 0 22px; padding: 20px; border-radius: 11px; background: var(--soft); }
+    .author-bio .author-avatar { width: 48px; height: 48px; flex: 0 0 48px; }
+    .author-bio h2 { margin: 0 0 4px; font-size: 10px; }
+    .author-bio p { margin: 0 0 5px; color: #59645e; font-size: 8px; line-height: 1.5; }
+    .author-bio a { color: var(--green); font-size: 8px; font-weight: 600; text-decoration: none; }
+
+    .discussion-title { margin: 0 0 11px; font-size: 10px; }
+    .comment-form, .comment { padding: 14px; border: 1px solid #edf1ee; border-radius: 10px; background: #fff; }
+    .comment-form { margin-bottom: 11px; }
+    .comment-form label { display: block; margin-bottom: 6px; font-size: 9px; font-weight: 600; }
+    .comment-form textarea { width: 100%; min-height: 72px; resize: vertical; padding: 10px; border: 0; border-radius: 7px; outline: 1px solid transparent; background: #f1f5f1; color: var(--ink); font-size: 9px; }
+    .comment-form textarea:focus { outline-color: #9acbbb; }
+    .comment-form textarea::placeholder { color: #929d96; }
+    .form-footer { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .submit-comment { padding: 8px 13px; border: 0; border-radius: 7px; background: var(--green); color: #fff; font-size: 9px; }
+    .comment-list { display: grid; gap: 9px; }
+    .comment { display: grid; grid-template-columns: 21px 1fr; gap: 8px; padding: 12px; }
+    .comment-avatar { width: 21px; height: 21px; display: grid; place-items: center; border-radius: 50%; background: #93f1bf; font-size: 7px; font-weight: 700; }
+    .comment:nth-child(2) .comment-avatar { background: #e1e7e2; }
+    .comment:nth-child(3) .comment-avatar { background: #ffd5d1; }
+    .comment-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .comment-name { font-size: 8px; font-weight: 600; }
+    .comment-role, .comment-time { color: #748078; font-size: 7px; }
+    .comment-text { margin: 6px 0 0; color: #59645e; font-size: 9px; line-height: 1.5; }
+
+    .comment-actions, .edit-actions { display: flex; gap: 10px; margin-top: 6px; }
+    .comment-actions button, .edit-actions button { padding: 0; border: 0; background: none; color: var(--green); font-size: 8px; font-weight: 600; }
+    .comment-actions .delete-btn { color: #c0392b; }
+    .edit-actions .cancel-btn { color: #748078; }
+    .edit-box { width: 100%; min-height: 56px; margin-top: 6px; padding: 8px; border: 0; border-radius: 7px; outline: 1px solid #9acbbb; background: #f1f5f1; color: var(--ink); font-size: 9px; resize: vertical; }
+
+    .related { margin-top: 32px; padding: 22px 0 27px; background: var(--soft); }
+    .related-inner { max-width: 1152px; margin: 0 auto; padding: 0 24px; }
+    .related-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
+    .related-heading h2 { margin: 0; font-size: 10px; }
+    .related-heading a { color: var(--green); font-size: 8px; font-weight: 600; text-decoration: none; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .related-card { overflow: hidden; border: 1px solid #e9efea; border-radius: 9px; background: #fff; text-decoration: none; }
+    .related-card img { width: 100%; height: 115px; display: block; object-fit: cover; }
+    .related-copy { padding: 10px; }
+    .related-date { color: #748078; font-size: 7px; }
+    .related-copy h3 { margin: 5px 0; font-size: 9px; line-height: 1.4; }
+    .related-copy p { margin: 0; color: #65716a; font-size: 8px; line-height: 1.5; }
+    .related-foot { display: flex; justify-content: space-between; margin-top: 9px; color: #64716a; font-size: 7px; }
+    footer { background: #eef3ed; }
+    .footer-content { max-width: 1152px; display: grid; grid-template-columns: 1.2fr 1.2fr 1.2fr; gap: 40px; margin: 0 auto; padding: 28px 24px 22px; }
+    .footer-content h2 { margin: 0 0 7px; font-size: 10px; }
+    .footer-content p, .footer-content a { color: #536059; font-size: 8px; line-height: 1.6; }
+    .footer-content p { max-width: 280px; margin: 0; }
+    .footer-links { display: grid; justify-items: start; gap: 3px; }
+    .footer-links a { text-decoration: none; }
+    .copyright { padding: 12px; border-top: 1px solid #e4ebe4; color: #46514b; text-align: center; font-size: 8px; }
+
+    @media (max-width: 900px) {
+      .site-header { gap: 10px; padding-right: 16px; padding-left: 16px; }
+      .nav-links { overflow-x: auto; }
+      .nav-links a { padding-right: 7px; padding-left: 7px; }
+      .top-search { display: none; }
+      .breaking { padding-right: 16px; padding-left: 16px; }
+    }
+    @media (max-width: 600px) {
+      .site-header { height: 50px; }
+      .brand { min-width: auto; }
+      .nav-links a { font-size: 8px; }
+      .nav-links a:nth-child(n+4) { display: none; }
+      .article-hero { min-height: 280px; }
+      .hero-inner { padding: 165px 18px 14px; }
+      .hero-bottom { align-items: flex-start; flex-direction: column; }
+      .hero-actions { align-self: flex-end; margin-top: -38px; }
+      .article-column { width: calc(100% - 24px); }
+      .article-body { padding: 22px 18px; }
+      .article-figure img { height: 210px; }
+      .author-bio { padding: 15px; }
+      .related-inner { padding: 0 14px; }
+      .related-grid { grid-template-columns: 1fr; }
+      .related-card { display: grid; grid-template-columns: 38% 1fr; }
+      .related-card img { height: 100%; min-height: 130px; }
+      .footer-content { grid-template-columns: 1fr 1fr; gap: 20px; padding: 22px 16px; }
+      .footer-content > :first-child { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="NSBM NewsDesk home">
+      <span class="brand-mark"><img src="logo.png" alt="NSBM Logo"></span>
+      <span>NSBM NewsDesk</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a class="active" href="index.html">News</a>
+      <a href="#">Submit Article</a>
+      <a href="#">My Bookmarks</a>
+      <a href="#">My Submissions</a>
+      <a href="#">Admin Dashboard</a>
+    </nav>
+    <div class="header-actions">
+      <input class="top-search" type="search" aria-label="Search news" placeholder="⌕  Search news...">
+      
+    </div>
+  </header>
+  
+
+  <header class="article-hero">
+    <div class="hero-inner">
+      <div class="article-labels">
+        <span class="category">NOTICES</span>
+        <span class="article-meta">◷ &nbsp;Oct 28, 2026 &nbsp;•&nbsp; ◎ 1.8k views</span>
+      </div>
+      <h1>End Semester Examination Timetable Released for All Faculties</h1>
+      <div class="hero-bottom">
+        <div class="author">
+          <span class="author-avatar">EO</span>
+          <span><span class="author-name">Examinations Office</span><br><span class="author-role">NSBM Green University</span></span>
+        </div>
+        <div class="hero-actions">
+          <button id="save-article" type="button" aria-pressed="false">♧ &nbsp;Save</button>
+          <button id="share-article" type="button">↗ &nbsp;Share</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-column">
+    <article class="article-body">
+      <p class="lead">The Examinations Office has released the end semester examination timetable for all faculties. Students are advised to check their exam dates, times and venues carefully and to read the instructions below before the examinations begin.</p>
+
+      <h2>Timetable and Admission Details</h2>
+      <p>The examinations will begin on the first Monday of next month and continue for three weeks. Individual timetables are now available on the student portal under the Examinations section. Students must collect their admission cards from the portal and bring a printed copy, along with their student ID, to every exam. Students without a valid admission card or student ID will not be allowed into the examination hall.</p>
+      <p>"Please check your timetable early and report any clashes immediately," said an official from the Examinations Office. "Clashes reported after the deadline cannot be accepted."</p>
+      <blockquote>
+        <p>“Please check your timetable early and report any clashes immediately.”</p>
+        <cite>— Examinations Office, NSBM Green University</cite>
+      </blockquote>
+
+      <h2>Important Instructions for Students</h2>
+      <p>Students should arrive at the venue at least thirty minutes before the exam starts. Mobile phones, smart watches and any unauthorised material are strictly prohibited inside the hall. Students who need special arrangements or want to report a timetable clash must contact the Examinations Office through the student portal before the deadline. Students with pending fees or attendance issues should clear them with the relevant offices as soon as possible.</p>
+      <figure class="article-figure">
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&amp;fit=crop&amp;w=1200&amp;q=90" alt="A student studying and writing notes at a desk">
+        <figcaption>Students are advised to start their revision early and check the timetable on the portal.</figcaption>
+      </figure>
+      <p>The Examinations Office wishes all students the very best for their exams. Any further updates or changes will be announced on the student portal and on NSBM NewsDesk.</p>
+    </article>
+
+    <section class="author-bio" aria-label="About the author">
+      <span class="author-avatar">EO</span>
+      <div>
+        <h2>About the Examinations Office</h2>
+        <p>The Examinations Office at NSBM Green University manages the planning, scheduling and conduct of all university examinations, and handles results, re-corrections and student examination queries.</p>
+        <a href="#">View all notices from this office →</a>
+      </div>
+    </section>
+
+    <section class="discussion" aria-labelledby="discussion-title">
+      <h2 class="discussion-title" id="discussion-title">Discussion (<span id="comment-count">3</span> comments)</h2>
+      <form class="comment-form" id="comment-form">
+        <label for="comment-input">Leave a comment</label>
+        <textarea id="comment-input" placeholder="Share your thoughts or ask a question about this notice..." required></textarea>
+        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
+      </form>
+      <div class="comment-list" id="comment-list" aria-live="polite">
+        <article class="comment">
+          <span class="comment-avatar">HD</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Hiruni Dissanayake</span><br><span class="comment-role">Batch '23 Computing</span></span><time class="comment-time">1 hour ago</time></div>
+            <p class="comment-text">Thanks for the early notice. Can we download the admission card from the portal right now or will it open closer to the exam date?</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">MR</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Mr. Rajapaksha</span><br><span class="comment-role">Lecturer, Faculty of Computing</span></span><time class="comment-time">Yesterday</time></div>
+            <p class="comment-text">Reminder to all students: please check for any clashes this week. It is much easier to fix them before the deadline.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">TK</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Thilina Kumara</span><br><span class="comment-role">Business Student</span></span><time class="comment-time">2 days ago</time></div>
+            <p class="comment-text">Two of my exams seem to be on the same day. Who should I contact to report this clash?</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <section class="related" aria-labelledby="related-title">
+    <div class="related-inner">
+      <div class="related-heading"><h2 id="related-title">Related Articles</h2><a href="index.html">View all news →</a></div>
+      <div class="related-grid">
+        <a class="related-card" href="index.html">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&amp;fit=crop&amp;w=700&amp;q=85" alt="Students working with robotics in a lab">
+          <div class="related-copy"><span class="related-date">October 24, 2024</span><h3>Faculty of Computing Launches Advanced AI &amp; Robotics Research Lab</h3><p>A new facility with GPU clusters and robotic hardware opens for student research...</p><div class="related-foot"><span>By Prof. Silva</span><span>4 min read</span></div></div>
+        </a>
+        <a class="related-card" href="index.html">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&amp;fit=crop&amp;w=700&amp;q=85" alt="Students collaborating on a computing project">
+          <div class="related-copy"><span class="related-date">October 20, 2024</span><h3>Faculty of Computing Wins Inter-Faculty Hackathon 2024</h3><p>An exceptional display of coding prowess and algorithmic design secured the championship...</p><div class="related-foot"><span>By Editorial Board</span><span>3 min read</span></div></div>
+        </a>
+        <a class="related-card" href="index.html">
+          <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&amp;fit=crop&amp;w=700&amp;q=85" alt="Students walking through a green university campus">
+          <div class="related-copy"><span class="related-date">October 18, 2024</span><h3>Annual Green Walk 2024 Announced with Massive Student Participation</h3><p>The flagship sustainability event returns with tree-planting campaigns, eco-exhibitions, and cultural...</p><div class="related-foot"><span>By Student Council</span><span>4 min read</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <section><h2>NSBM NewsDesk</h2><p>The official campus news and club-boost portal for NSBM Green University, Sri Lanka. Keeping the academic community connected and informed.</p></section>
+      <section><h2>Quick Links</h2><div class="footer-links"><a href="index.html">Home</a><a href="index.html">Latest News</a><a href="#">Submit an Article</a><a href="#">Bookmarks</a></div></section>
+      <section><h2>Contact</h2><p>NSBM Green University, Pitipana, Homagama, Sri Lanka<br>Email: newsdesk@nsbm.ac.lk</p></section>
+    </div>
+    <div class="copyright">© 2026 NSBM NewsDesk. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const saveButton = document.querySelector("#save-article");
+    saveButton.addEventListener("click", () => {
+      const saved = saveButton.getAttribute("aria-pressed") !== "true";
+      saveButton.setAttribute("aria-pressed", String(saved));
+      saveButton.textContent = saved ? "♥ Saved" : "♧ Save";
+    });
+
+    document.querySelector("#share-article").addEventListener("click", async () => {
+      const shareData = { title: document.title, url: window.location.href };
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(shareData.url);
+        const button = document.querySelector("#share-article");
+        button.textContent = "✓ Link copied";
+        window.setTimeout(() => { button.textContent = "↗ Share"; }, 1800);
+      }
+    });
+
+    const commentList = document.querySelector("#comment-list");
+    const commentCount = document.querySelector("#comment-count");
+
+    function updateCount(change) {
+      commentCount.textContent = String(Number(commentCount.textContent) + change);
+    }
+
+    function makeButton(label, className) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = label;
+      button.className = className;
+      return button;
+    }
+
+    function addActions(comment) {
+      const content = comment.querySelector(".comment-text").parentElement;
+      const actions = document.createElement("div");
+      actions.className = "comment-actions";
+      actions.append(makeButton("Edit", "edit-btn"), makeButton("Delete", "delete-btn"));
+      content.append(actions);
+    }
+
+    function startEdit(comment) {
+      const textEl = comment.querySelector(".comment-text");
+      const actions = comment.querySelector(".comment-actions");
+
+      const box = document.createElement("textarea");
+      box.className = "edit-box";
+      box.value = textEl.textContent;
+
+      const editActions = document.createElement("div");
+      editActions.className = "edit-actions";
+      editActions.append(makeButton("Save", "save-btn"), makeButton("Cancel", "cancel-btn"));
+
+      textEl.style.display = "none";
+      actions.style.display = "none";
+      actions.before(box, editActions);
+      box.focus();
+    }
+
+    function finishEdit(comment, save) {
+      const textEl = comment.querySelector(".comment-text");
+      const actions = comment.querySelector(".comment-actions");
+      const box = comment.querySelector(".edit-box");
+      const editActions = comment.querySelector(".edit-actions");
+
+      if (save) {
+        const newText = box.value.trim();
+        if (!newText) return;
+        textEl.textContent = newText;
+        const time = comment.querySelector(".comment-time");
+        if (!time.textContent.includes("(edited)")) {
+          time.textContent += " (edited)";
+        }
+      }
+
+      box.remove();
+      editActions.remove();
+      textEl.style.display = "";
+      actions.style.display = "";
+    }
+
+    commentList.addEventListener("click", (event) => {
+      const comment = event.target.closest(".comment");
+      if (!comment) return;
+
+      if (event.target.classList.contains("delete-btn")) {
+        if (confirm("Delete this comment?")) {
+          comment.remove();
+          updateCount(-1);
+        }
+      } else if (event.target.classList.contains("edit-btn")) {
+        startEdit(comment);
+      } else if (event.target.classList.contains("save-btn")) {
+        finishEdit(comment, true);
+      } else if (event.target.classList.contains("cancel-btn")) {
+        finishEdit(comment, false);
+      }
+    });
+
+    document.querySelectorAll(".comment").forEach(addActions);
+
+    document.querySelector("#comment-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = document.querySelector("#comment-input");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const comment = document.createElement("article");
+      comment.className = "comment";
+      const avatar = document.createElement("span");
+      avatar.className = "comment-avatar";
+      avatar.textContent = "YO";
+      const content = document.createElement("div");
+      const heading = document.createElement("div");
+      heading.className = "comment-head";
+      const author = document.createElement("span");
+      const authorName = document.createElement("span");
+      authorName.className = "comment-name";
+      authorName.textContent = "You";
+      author.append(authorName);
+      const time = document.createElement("time");
+      time.className = "comment-time";
+      time.textContent = "Just now";
+      heading.append(author, time);
+      const message = document.createElement("p");
+      message.className = "comment-text";
+      message.textContent = text;
+      content.append(heading, message);
+      comment.append(avatar, content);
+      addActions(comment);
+      commentList.prepend(comment);
+
+      updateCount(1);
+      input.value = "";
+    });
+  </script>
+</body>
+</html>

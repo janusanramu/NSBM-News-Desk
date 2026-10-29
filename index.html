@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f8f4">
+  <title>NSBM NewsDesk — News Archive &amp; Publications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --green: #005b45;
+      --green-dark: #004d3b;
+      --ink: #202724;
+      --muted: #69736e;
+      --surface: #fff;
+      --page: #f5f8f4;
+      --line: #e8eeea;
+      font-family: "DM Sans", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--page);
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .site-header {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 0 24px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 133px;
+      color: #141a17;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e8f2eb;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      overflow: hidden;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .nav-links a {
+      padding: 7px 12px;
+      border-radius: 6px;
+      color: #3e4843;
+      font-size: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links a.active { background: var(--green); color: #fff; }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .top-search {
+      width: 320px;
+      padding: 8px 11px;
+      border: 0;
+      border-radius: 20px;
+      outline: none;
+      background: #f3f6f3;
+      color: var(--ink);
+      font-size: 9px;
+    }
+
+    .top-search::placeholder { color: #8c9690; }
+    .profile {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
+    }
+
+    .breaking {
+      min-height: 29px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      overflow: hidden;
+      padding: 0 24px;
+      background: #eef3ed;
+      color: #4d5751;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .breaking strong {
+      padding: 3px 7px;
+      border-radius: 3px;
+      background: var(--green);
+      color: #fff;
+      font-size: 8px;
+      letter-spacing: .3px;
+    }
+
+    main { max-width: 1200px; min-height: 725px; margin: 0 auto; padding: 27px 24px 35px; }
+    .eyebrow { margin: 0 0 4px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .45px; }
+    .intro { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+    h1 { margin: 0; font-size: clamp(23px, 3vw, 30px); letter-spacing: -.8px; line-height: 1.18; }
+    .intro p { margin: 5px 0 0; color: #52605a; font-size: 11px; }
+    .result-count { margin: 0 0 2px; color: #59645e; font-size: 9px; white-space: nowrap; }
+    .result-count strong { color: #29332e; }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 23px 0 36px;
+      padding: 10px;
+      border: 1px solid #edf1ee;
+      border-radius: 11px;
+      background: var(--surface);
+      box-shadow: 0 4px 14px rgb(29 56 42 / 4%);
+    }
+
+    .search-wrap { position: relative; flex: 1; min-width: 150px; }
+    .search-wrap span { position: absolute; top: 50%; left: 11px; color: #75817a; transform: translateY(-50%); }
+    .archive-search {
+      width: 100%;
+      height: 34px;
+      padding: 0 12px 0 31px;
+      border: 0;
+      border-radius: 7px;
+      outline: none;
+      background: #f3f6f3;
+      color: var(--ink);
+      font-size: 10px;
+    }
+    .archive-search::placeholder { color: #929d96; }
+    .filters { display: flex; align-items: center; gap: 5px; }
+    .filter {
+      display: inline-block;
+      padding: 8px 11px;
+      border: 0;
+      border-radius: 7px;
+      background: #f3f6f3;
+      color: #47524c;
+      font-size: 9px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .filter.active { background: var(--green); color: #fff; }
+
+    .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .news-card {
+      overflow: hidden;
+      border: 1px solid #edf1ee;
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: 0 4px 12px rgb(32 56 42 / 5%);
+    }
+
+    .card-image { position: relative; height: 155px; overflow: hidden; background: #dce6df; }
+    .card-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .25s ease; }
+    .card-image a.image-link { display: block; height: 100%; }
+    .news-card:hover .card-image img { transform: scale(1.025); }
+    .category {
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      background: #8de9bd;
+      color: #15392b;
+      font-size: 8px;
+      font-weight: 600;
+    }
+    a.category { text-decoration: none; }
+    .category.business { background: #9de8bb; }
+    .category.engineering { background: #ffd6d1; }
+    .category.clubs { background: #a4edc2; }
+    .category.sports { background: #94efc4; }
+    .category.notices { background: #ffc7c9; }
+    .bookmark {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border: 0;
+      border-radius: 50%;
+      background: rgb(255 255 255 / 90%);
+      color: #294238;
+      font-size: 14px;
+      line-height: 1;
+    }
+    .bookmark.saved { color: var(--green); }
+    .card-content { padding: 11px 12px 12px; }
+    .meta { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; color: #7b8680; font-size: 8px; }
+    .meta .dot { color: #a7b0aa; }
+    .card-content h2 { margin: 0 0 4px; font-size: 15px; font-weight: 600; line-height: 1.4; }
+    .card-content h2 a { color: inherit; text-decoration: none; }
+    .card-content h2 a:hover { color: var(--green); }
+    .description { min-height: 40px; margin: 0; color: #59645e; font-size: 10px; line-height: 1.5; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; font-size: 9px; }
+    .author, .views { display: flex; align-items: center; gap: 6px; }
+    .author { font-weight: 500; }
+    .avatar {
+      width: 19px;
+      height: 19px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e6eeea;
+      color: #315e4d;
+      font-size: 7px;
+      font-weight: 700;
+    }
+    .views { color: #758079; }
+    .empty-state { display: none; grid-column: 1 / -1; padding: 35px; color: var(--muted); text-align: center; font-size: 13px; }
+
+    .pagination { display: flex; justify-content: center; align-items: center; gap: 5px; margin: 24px 0 0; }
+    .pagination button {
+      min-width: 29px;
+      height: 29px;
+      border: 0;
+      border-radius: 8px;
+      background: #f0f4f0;
+      color: #4e5953;
+      font-size: 9px;
+    }
+    .pagination button.active { background: var(--green); color: #fff; }
+    .pagination .ellipsis { padding: 0 5px; color: #69736e; font-size: 10px; }
+
+    footer { background: #eef3ed; }
+    .footer-content {
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr 1.2fr;
+      gap: 40px;
+      margin: 0 auto;
+      padding: 29px 24px 24px;
+    }
+    .footer-content h2 { margin: 0 0 7px; font-size: 11px; }
+    .footer-content p, .footer-content a { color: #536059; font-size: 9px; line-height: 1.6; }
+    .footer-content p { max-width: 280px; margin: 0; }
+    .footer-links { display: grid; justify-items: start; gap: 3px; }
+    .footer-links a { text-decoration: none; }
+    .copyright { padding: 12px 20px; border-top: 1px solid #e4ebe4; color: #46514b; text-align: center; font-size: 9px; }
+
+    @media (min-width: 1100px) {
+      .site-header { padding-right: max(24px, calc((100vw - 1152px) / 2)); padding-left: max(24px, calc((100vw - 1152px) / 2)); }
+      .breaking { padding-right: max(24px, calc((100vw - 1152px) / 2)); padding-left: max(24px, calc((100vw - 1152px) / 2)); }
+    }
+    @media (max-width: 760px) {
+      .site-header { gap: 12px; padding: 0 16px; }
+      .brand { min-width: auto; }
+      .nav-links { justify-content: flex-start; overflow: auto; }
+      .nav-links a { padding: 7px 8px; }
+      .top-search { display: none; }
+      main { min-height: auto; padding: 24px 16px 35px; }
+      .toolbar { align-items: stretch; flex-direction: column; margin: 20px 0 24px; }
+      .filters { overflow-x: auto; padding-bottom: 1px; }
+      .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+      .card-image { height: 145px; }
+    }
+    @media (max-width: 520px) {
+      .site-header { height: 50px; }
+      .nav-links { gap: 0; }
+      .nav-links a { font-size: 9px; }
+      .profile { flex: 0 0 25px; }
+      .breaking { padding: 0 14px; }
+      .intro { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .news-grid { grid-template-columns: 1fr; }
+      .card-image { height: 190px; }
+      .description { min-height: 0; }
+      .footer-content { grid-template-columns: 1fr 1fr; gap: 22px; padding: 24px 16px; }
+      .footer-content > :first-child { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="NSBM NewsDesk home">
+      <span class="brand-mark"><img src="logo.png" alt="NSBM logo"></span>
+      <span>NSBM NewsDesk</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a class="active" href="index.html">News</a>
+      <a href="#news-grid" data-filter="computing">Computing</a>
+      <a href="#news-grid" data-filter="business">Business</a>
+      <a href="#news-grid" data-filter="engineering">Engineering</a>
+      <a href="#news-grid" data-filter="sports">Sports</a>
+      <a href="#news-grid" data-filter="Events">Events</a>
+    </nav>
+    <div class="header-actions">
+      <input class="top-search" type="search" aria-label="Search news" placeholder="⌕  Search news...">
+      <button class="profile" type="button" aria-label="Your profile">♙</button>
+    </div>
+  </header>
+
+  <div class="breaking">
+    <strong>BREAKING</strong>
+    <span>NSBM Unveils Model of Proposed Multibillion Medical and Research Hospital • Faculty of Computing wins the Inter-Faculty Hackathon 2026 •NSBM Opens Rs. 720 Million Civil Engineering Laboratory Complex</span>
+  </div>
+
+  <main>
+    <p class="eyebrow">NSBM REPOSITORY</p>
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">News Archive &amp; Publications</h1>
+        <p>Explore all official announcements, faculty breakthroughs, and student life highlights.</p>
+      </div>
+      <p class="result-count">Showing <strong id="shown-count">6</strong> of <strong>142</strong> articles</p>
+    </section>
+
+    <section class="toolbar" aria-label="Search and filter news">
+      <label class="search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input class="archive-search" id="archive-search" type="search" placeholder="Search by title, author, or keyword..." aria-label="Search by title, author, or keyword">
+      </label>
+      <div class="filters" role="group" aria-label="Filter by category">
+        <button class="filter active" type="button" data-filter="all">All</button>
+        <button class="filter" type="button" data-filter="computing">Computing</button>
+        <button class="filter" type="button" data-filter="business">Business</button>
+        <button class="filter" type="button" data-filter="engineering">Engineering</button>
+        <button class="filter" type="button" data-filter="Events">Events</button>
+        <button class="filter" type="button" data-filter="sports">Sports</button>
+        <button class="filter" type="button" data-filter="notices">Notices</button>
+      </div>
+    </section>
+
+    <section class="news-grid" id="news-grid" aria-label="News articles">
+      <article class="news-card" data-category="computing">
+        <div class="card-image">
+          <a class="image-link" href="computing.html"><img src="nsbm-computing-students-recreation-center-platform-3.jpg" alt="Students collaborating around computers in a campus workspace"></a>
+          <a class="category" href="computing.html">Computing</a>
+          <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false">♧</button>
+        </div>
+        <div class="card-content">
+          <div class="meta"><span>Oct 20, 2026</span><span class="dot">•</span><span>18 min read</span></div>
+          <h2><a href="computing.html">NSBM Computing Students Develop Digital Platform for Recreation Center Management</a></h2>
+          <p class="description">Three talented undergraduates from our Faculty of Computing took the initiative to design, develop, and deploy the NSBM Recreation Center Management Platform.</p>
+          <div class="card-footer"><span class="author"><span class="avatar">PS</span>Dr. Rasika Ranaweera</span><span class="views">◎ 1.4k</span></div>
+        </div>
+      </article>
+
+      <article class="news-card" data-category="business">
+        <div class="card-image">
+          <a class="image-link" href="business.html"><img src="nsbm-research-symposium-marketing-tourism-multimedia-7-1200x600.jpg" alt="Speaker presenting to a large business conference audience"></a>
+          <a class="category" href="business.html">Business</a>
+          <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false">♧</button>
+        </div>
+        <div class="card-content">
+          <div class="meta"><span>Oct 22, 2026</span><span class="dot">•</span><span>2 min read</span></div>
+          <h2><a href="business.html">NSBM 6th Student Research Symposium in Marketing, Tourism and Multimedia</a></h2>
+          <p class="description">NSBM Green University successfully hosted the 6th Student Research Symposium in Marketing, Tourism and Multimedia (SRSMTM 2026) on 8 October 2026</p>
+          <div class="card-footer"><span class="author"><span class="avatar">AS</span>Ms. Anne Pathiranage, Dean (Acting)</span><span class="views">◎ 950</span></div>
+        </div>
+      </article>
+
+      <article class="news-card" data-category="engineering">
+        <div class="card-image">
+          <a class="image-link" href="engineering.html"><img src="nsbm-civil-engineering-laboratory-complex-720-million-2.jpg" alt="Engineering students working together on a technical project"></a>
+          <a class="category" href="engineering.html">Engineering</a>
+          <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false">♧</button>
+        </div>
+        <div class="card-content">
+          <div class="meta"><span>Sep 28, 2026</span><span class="dot">•</span><span>48 min read</span></div>
+          <h2><a href="engineering.html"> Opens Rs. 720 Million Civil Engineering Laboratory Complex</a></h2>
+          <p class="description">NSBM Green University ceremonially opened its state-of-the-art Civil Engineering Laboratory Complex</p>
+          <div class="card-footer"><span class="author"><span class="avatar">KP</span>Dr.chandana perera</span><span class="views">◎ 820</span></div>
+        </div>
+      </article>
+
+      <article class="news-card" data-category="Events">
+        <div class="card-image">
+          <a class="image-link" href="Events.html"><img src="nsbm-green-university-10-years-excellence-national-impact-5-1037x600.jpg" alt="Student speaker addressing an audience at a campus event"></a>
+          <a class="category" href="Events.html">Events</a>
+          <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false">♧</button>
+        </div>
+        <div class="card-content">
+          <div class="meta"><span>Oct 26, 2026</span><span class="dot">•</span><span>5 days read</span></div>
+          <h2><a href="Events.html">NSBM Green University Celebrates 10 Years of Excellence and National Impact</a></h2>
+          <p class="description">NSBM Green University unveiled the architectural model of its proposed multibillion-rupee Medical and Research Hospital on 26 October 2026.</p>
+          <div class="card-footer"><span class="author"><span class="avatar">NM</span>Founder and Vice Chancellor Prof. E. A. Weerasinghe</span><span class="views">◎ 10k</span></div>
+        </div>
+      </article>
+
+      <article class="news-card" data-category="sports">
+        <div class="card-image">
+          <a class="image-link" href="sports.html"><img src="nsbm-cricket-kdu-t20-champions-2026-1200x600.jpg" alt="Cricket match underway on a green field"></a>
+          <a class="category" href="sports.html">Sports</a>
+          <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false">♧</button>
+        </div>
+        <div class="card-content">
+          <div class="meta"><span>Oct 5, 2026</span><span class="dot">•</span><span>6 days read</span></div>
+          <h2><a href="sports.html">NSBM Cricket Team Crowned Champions Again at KDU Inter-University T20 Championship 2026</a></h2>
+          <p class="description">NSBM Green University has once again made its mark in university cricket, with the NSBM Cricket Team securing the KDU Leaders’ Trophy Inter-University T20 Cricket Championship 2026</p>
+          <div class="card-footer"><span class="author"><span class="avatar">TF</span>T. Fernando</span><span class="views">◎ 1.5k</span></div>
+        </div>
+      </article>
+
+      <article class="news-card" data-category="notices">
+        <div class="card-image">
+          <a class="image-link" href="notices.html"><img src="NSBM-Reopen-11.jpg" alt="Students walking through a university campus"></a>
+          <a class="category" href="notices.html">Notices</a>
+          <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false">♧</button>
+        </div>
+        <div class="card-content">
+          <div class="meta"><span>Oct 26, 2026</span><span class="dot">•</span><span>2 min read</span></div>
+          <h2><a href="notices.html">Batch End Semester Examination Timetable Released for All Faculties</a></h2>
+          <p class="description">The end semester examination timetable has been released for all faculties at NSBM Green University. Please check the official website for the detailed schedule.</p>
+          <div class="card-footer"><span class="author"><span class="avatar">AR</span>Academic Registrar</span><span class="views">◎ 2.8k</span></div>
+        </div>
+      </article>
+      <p class="empty-state" id="empty-state">No articles match your search. Try another keyword or category.</p>
+    </section>
+
+    <nav class="pagination" aria-label="Pagination">
+      <button type="button" aria-label="Previous page">‹</button>
+      <button class="active" type="button" aria-current="page">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <span class="ellipsis">...</span>
+      <button type="button">12</button>
+      <button type="button" aria-label="Next page">›</button>
+    </nav>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <section>
+        <h2>NSBM NewsDesk</h2>
+        <p>The official campus news and club-boost portal for NSBM Green University, Sri Lanka. Keeping the academic community connected and informed.</p>
+      </section>
+      <section>
+        <h2>Quick Links</h2>
+        <div class="footer-links">
+          <a href="#">Home</a><a href="#">Latest News</a><a href="#">Submit an Article</a><a href="#">Bookmarks</a>
+        </div>
+      </section>
+      <section>
+        <h2>Contact</h2>
+        <p>NSBM Green University, Pitipana, Homagama, Sri Lanka<br>Email: newsdesk@nsbm.ac.lk</p>
+      </section>
+    </div>
+    <div class="copyright">© 2024 NSBM NewsDesk. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const searchInput = document.querySelector("#archive-search");
+    const cards = [...document.querySelectorAll(".news-card")];
+    const filterButtons = [...document.querySelectorAll(".filter")];
+    const navFilterLinks = [...document.querySelectorAll(".nav-links [data-filter]")];
+    const newsNavLink = [...document.querySelectorAll(".nav-links a")].find((link) => link.textContent.trim() === "News");
+    const shownCount = document.querySelector("#shown-count");
+    const emptyState = document.querySelector("#empty-state");
+    let activeCategory = "all";
+
+    function updateArticles() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
+        const matchesQuery = card.textContent.toLowerCase().includes(query);
+        const visible = matchesCategory && matchesQuery;
+        card.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+
+      shownCount.textContent = String(visibleCount);
+      emptyState.style.display = visibleCount ? "none" : "block";
+    }
+
+    function syncNavSelection(category) {
+      navFilterLinks.forEach((link) => {
+        link.classList.toggle("active", link.dataset.filter === category);
+      });
+
+      if (newsNavLink) {
+        newsNavLink.classList.toggle("active", category === "all");
+      }
+    }
+
+    searchInput.addEventListener("input", updateArticles);
+    document.querySelector(".top-search").addEventListener("input", (event) => {
+      searchInput.value = event.target.value;
+      updateArticles();
+    });
+
+    function selectCategory(category) {
+      activeCategory = category;
+      filterButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.filter === category);
+      });
+      syncNavSelection(category);
+      updateArticles();
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => selectCategory(button.dataset.filter));
+    });
+
+    navFilterLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        selectCategory(link.dataset.filter);
+        document.querySelector("#news-grid").scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    document.querySelectorAll(".bookmark").forEach((button) => {
+      button.addEventListener("click", () => {
+        const saved = button.getAttribute("aria-pressed") !== "true";
+        button.setAttribute("aria-pressed", String(saved));
+        button.classList.toggle("saved", saved);
+        button.textContent = saved ? "♥" : "♧";
+      });
+    });
+  </script>
+</body>
+</html>
