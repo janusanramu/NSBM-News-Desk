@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             id: "b1",
             category: "Campus Life",
-            image: "images/lecturehall.jpg",
+            image: "images/campus life.jpeg",
             meta: "Oct 24, 2026 · 4 min read",
             title: "Annual Green Walk 2026 Announced with Massive Student Participation",
             description: "Join the largest campus event of the year celebrating sustainability, unity, and student spirit across all faculties at NSBM Green University.",
@@ -13,20 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
             readUrl: "#"
             
         },
+        
         {
             id: "b2",
-            category: "Sports",
-            image: "images/sport.jpg",
-            meta: "March 24, 2026 · 4 min read",
-            title: "NSBM Sports Fiesta 2026",
-            description: "Students showcased their sporting talents across 20 sports, celebrating teamwork, unity, and sportsmanship.",
-            authorCode: "ST",
-            authorName: "Kavindu Perera",
+            category: "academic",
+            image: "images/lecturehall.jpg",
+            meta: "Oct 27, 2026 · 4min read",
+            title: "NSBM Green University Hosts Guest Lecture on the Importance of Surveying in Construction Projects",
+            description: "NSBM Green University hosted a guest lecture on construction surveying, where students gained valuable knowledge about modern surveying practices, construction planning and industry development",
+            authorCode: "AS",
+            authorName: "Tharindu Silva",
             readUrl: "#"
         },
         {
             id: "b3",
-            category: "Arts & Culture",
+            category: "Research",
+            image:"images/research.jpeg" ,
+            meta: "Oct 26, 2026 · 6 min read",
+            title: "NSBM Unveils Model of Proposed Multibillion Medical and Research Hospital",
+            description: "NSBM researchers are conducting research on AI-assisted medical image analysis to support the early detection of cervical precancerous conditions. This research highlights the role of artificial intelligence in improving healthcare technology.",
+            authorCode: "AS",
+            authorName: "Dineth kaveesha",
+            readUrl: "#"
+        },
+        {
+            id: "b4",
+            category: "Clubs & Societies",
             image: "images/culture.jpg",
             meta: "February 11, 2026 · 3 min read",
             title: "Harithabhinandana 2026 – A Celebration of Culture",
@@ -36,16 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
             readUrl: "#"
         },
         {
-            id: "b4",
-            category: "Technology",
-            image: "images/Engineering.jpg",
-            meta: "Oct 22, 2026 · 6 min read",
-            title: "NSBM FIT Programme Introduces Students to Generative AI",
-            description: "NSBM introduced Computing students to Generative AI, Agentic AI, and emerging technologies, exploring their applications in software engineering.",
-            authorCode: "AS",
-            authorName: "Tharindu Silva",
+            id: "b5",
+            category: "Sports",
+            image: "images/sport.jpg",
+            meta: "March 24, 2026 · 4 min read",
+            title: "NSBM Sports Fiesta 2026",
+            description: "Students showcased their sporting talents across 20 sports, celebrating teamwork, unity, and sportsmanship.",
+            authorCode: "ST",
+            authorName: "Kavindu Perera",
             readUrl: "#"
-        }
+        },
+        
+        
     ];
 
     let activeCategory = "All";
@@ -142,3 +156,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderArticles();
 });
+
