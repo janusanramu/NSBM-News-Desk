@@ -54,12 +54,26 @@
 
 <main class="container">
 
-    <section class="showcase" aria-label="Saved news carousel">
-      <div class="showcase-head"><div><p class="eyebrow">YOUR PERSONAL NEWS COLLECTION</p><h2>Explore your <em>bookmarks.</em></h2><p class="showcase-sub">Your favorite campus stories, all in one place. Swipe through the highlights.</p></div><div class="showcase-counter"><span id="visibleCount">05</span> SAVED STORIES</div></div>
-      <div class="carousel-window"><section class="article-grid" id="articleGrid" aria-live="polite"></section></div>
-      <div class="carousel-controls"><button id="prevSlide" aria-label="Previous stories">←</button><button id="nextSlide" aria-label="Next stories">→</button></div>
-      <div class="filters" id="categoryFilters"><button class="filter active" data-category="All">All (<span id="bookmarkCount">5</span>)</button><button class="filter" data-category="Campus Life">Campus Life</button><button class="filter" data-category="academic">Academic</button><button class="filter" data-category="Research">Research</button><button class="filter" data-category="Clubs & Societies">Clubs & Societies</button><button class="filter" data-category="Sports">Sports</button></div>
+    <div class="page-heading">
+        <div>
+            <p class="eyebrow">SAVED ARTICLES</p>
+            <h2>My Bookmarks</h2>
+        </div>
+
+        <div class="filters" id="categoryFilters">
+            <button class="filter active" data-category="All">All (<span id="bookmarkCount">4</span>)</button>
+            <button class="filter" data-category="Campus Life">Campus Life</button>
+            <button class="filter" data-category="Sports">Sports</button>
+            <button class="filter" data-category="Technology">Technology</button>
+            <button class="filter" data-category="Arts & Culture">Arts & Culture</button>
+        </div>
+    </div>
+
+    <!-- Article Grid -->
+    <section class="article-grid" id="articleGrid">
+        <!-- JavaScript renders cards here -->
     </section>
+
 
     <div id="noResults" class="empty-state hidden">
         <div style="font-size: 28px; color: #ef4444; margin-bottom: 12px;">🔖</div>

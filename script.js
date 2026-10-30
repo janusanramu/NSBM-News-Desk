@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             id: "b1",
             category: "Campus Life",
-            image: "images/campus life.jpeg",
+            image: "images/lecturehall.jpg",
             meta: "Oct 24, 2026 · 4 min read",
             title: "Annual Green Walk 2026 Announced with Massive Student Participation",
             description: "Join the largest campus event of the year celebrating sustainability, unity, and student spirit across all faculties at NSBM Green University.",
@@ -13,42 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
             readUrl: "#"
             
         },
-        
         {
             id: "b2",
-            category: "academic",
-            image: "images/lecturehall.jpg",
-            meta: "Oct 27, 2026 · 4min read",
-            title: "NSBM Green University Hosts Guest Lecture on the Importance of Surveying in Construction Projects",
-            description: "NSBM Green University hosted a guest lecture on construction surveying, where students gained valuable knowledge about modern surveying practices, construction planning and industry development",
-            authorCode: "AS",
-            authorName: "Tharindu Silva",
-            readUrl: "#"
-        },
-        {
-            id: "b3",
-            category: "Research",
-            image:"images/research.jpeg" ,
-            meta: "Oct 26, 2026 · 6 min read",
-            title: "NSBM Unveils Model of Proposed Multibillion Medical and Research Hospital",
-            description: "NSBM researchers are conducting research on AI-assisted medical image analysis to support the early detection of cervical precancerous conditions. This research highlights the role of artificial intelligence in improving healthcare technology.",
-            authorCode: "AS",
-            authorName: "Dineth kaveesha",
-            readUrl: "#"
-        },
-        {
-            id: "b4",
-            category: "Clubs & Societies",
-            image: "images/culture.jpg",
-            meta: "February 11, 2026 · 3 min read",
-            title: "Harithabhinandana 2026 – A Celebration of Culture",
-            description: "NSBM celebrated Sri Lankan culture and creativity through traditional performances, singing, drama, and student talent.",
-            authorCode: "CS",
-            authorName: "Anjal Mendis",
-            readUrl: "#"
-        },
-        {
-            id: "b5",
             category: "Sports",
             image: "images/sport.jpg",
             meta: "March 24, 2026 · 4 min read",
@@ -58,11 +24,30 @@ document.addEventListener("DOMContentLoaded", () => {
             authorName: "Kavindu Perera",
             readUrl: "#"
         },
-        
-        
+        {
+            id: "b3",
+            category: "Arts & Culture",
+            image: "images/culture.jpg",
+            meta: "February 11, 2026 · 3 min read",
+            title: "Harithabhinandana 2026 – A Celebration of Culture",
+            description: "NSBM celebrated Sri Lankan culture and creativity through traditional performances, singing, drama, and student talent.",
+            authorCode: "CS",
+            authorName: "Anjal Mendis",
+            readUrl: "#"
+        },
+        {
+            id: "b4",
+            category: "Technology",
+            image: "images/Engineering.jpg",
+            meta: "Oct 22, 2026 · 6 min read",
+            title: "NSBM FIT Programme Introduces Students to Generative AI",
+            description: "NSBM introduced Computing students to Generative AI, Agentic AI, and emerging technologies, exploring their applications in software engineering.",
+            authorCode: "AS",
+            authorName: "Tharindu Silva",
+            readUrl: "#"
+        }
     ];
 
-    let slideIndex = 0;
     let activeCategory = "All";
     const filterButtons = document.querySelectorAll(".filter");
     const searchInput = document.getElementById("searchInput");
@@ -73,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderArticles() {
         if (!articleGrid) return;
         articleGrid.innerHTML = "";
-        slideIndex = 0;
 
         const keyword = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
@@ -91,8 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
             bookmarkCountSpan.textContent = userBookmarks.length;
         }
 
-        const visibleCount = document.getElementById("visibleCount");
-        if (visibleCount) visibleCount.textContent = String(filtered.length).padStart(2,"0");
         if (filtered.length === 0) {
             articleGrid.classList.add("hidden");
             if (noResults) noResults.classList.remove("hidden");
@@ -100,10 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (noResults) noResults.classList.add("hidden");
             articleGrid.classList.remove("hidden");
 
-            filtered.forEach((article, index) => {
+            filtered.forEach(article => {
                 const card = document.createElement("article");
                 card.className = "article-card";
-                card.style.animationDelay = `${index * 85}ms`;
                 card.setAttribute("data-category", article.category);
                 const isTech = article.category === "Technology" ? " tech" : "";
 
@@ -142,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        positionCards();
         filterButtons.forEach(button => {
             const active = button.dataset.category === activeCategory;
             button.classList.toggle("active", active);
@@ -160,41 +140,5 @@ document.addEventListener("DOMContentLoaded", () => {
         searchInput.addEventListener("input", renderArticles);
     }
 
-    function positionCards() {
-        const cards = [...articleGrid.querySelectorAll(".article-card")];
-        const width = articleGrid.clientWidth || window.innerWidth;
-        const cardWidth = window.innerWidth < 650 ? 220 : 260;
-        const spacing = window.innerWidth < 650 ? 188 : Math.min(292, Math.max(210, width * .205));
-        const center = (cards.length - 1) / 2;
-        // A symmetric, shallow U-shaped arc around the actual page center.
-        cards.forEach((card, i) => {
-            const relative = i - center - slideIndex;
-            const angle = Math.max(-15, Math.min(15, relative * 5.1));
-            const drop = Math.pow(relative, 2) * 20;
-            card.style.setProperty('--x', `${relative * spacing}px`);
-            card.style.setProperty('--y', `${drop}px`);
-            card.style.setProperty('--angle', `${angle}deg`);
-            card.style.zIndex = String(100 - Math.abs(relative) * 5);
-            card.style.opacity = Math.abs(relative) > 4 ? '0' : '1';
-            card.style.pointerEvents = Math.abs(relative) > 4 ? 'none' : 'auto';
-        });
-        const prev = document.getElementById('prevSlide');
-        const next = document.getElementById('nextSlide');
-        if(prev) prev.disabled = slideIndex <= -center;
-        if(next) next.disabled = slideIndex >= center;
-    }
-    function moveSlide(direction) {
-        const count = articleGrid.querySelectorAll('.article-card').length;
-        const limit = (count - 1) / 2;
-        slideIndex = Math.max(-limit, Math.min(limit, slideIndex + direction));
-        positionCards();
-    }
-    window.addEventListener('resize', positionCards);
-    document.getElementById("prevSlide")?.addEventListener("click", () => moveSlide(-1));
-    document.getElementById("nextSlide")?.addEventListener("click", () => moveSlide(1));
-    let touchX = 0;
-    articleGrid.addEventListener("touchstart", e => {touchX=e.touches[0].clientX},{passive:true});
-    articleGrid.addEventListener("touchend", e => {const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45)moveSlide(dx<0?1:-1)},{passive:true});
     renderArticles();
 });
-
