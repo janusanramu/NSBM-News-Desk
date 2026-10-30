@@ -22,11 +22,11 @@ $firstName = explode(' ', $trimmedName)[0] ?? '';
 $lastName = trim(substr($trimmedName, strlen($firstName)));
 
 $categories = [
-    'Campus Headlines' => 'category.php?cat=campus-headlines',
-    'Computing Faculty News' => 'category.php?cat=computing',
-    'Business & Innovation' => 'category.php?cat=business',
-    'Engineering Research' => 'category.php?cat=engineering',
-    'Clubs & Event Calendars' => 'category.php?cat=clubs',
+    'Campus Life' => 'category.php?cat=campus-life',
+    'Academics' => 'category.php?cat=academics',
+    'Research' => 'category.php?cat=research',
+    'Clubs & Societies' => 'category.php?cat=clubs-societies',
+    'Sports' => 'category.php?cat=sports',
 ];
 
 $categoryLinks = '';

@@ -212,7 +212,11 @@ a { text-decoration: none; color: inherit; }
 }
 .dropdown-menu.dropdown-right { left: auto; right: 0; }
 .dropdown.open .dropdown-menu { display: block; }
+.main-nav .dropdown:hover .dropdown-menu,
+.main-nav .dropdown:focus-within .dropdown-menu { display: block; }
 .dropdown.open .chevron { transform: rotate(180deg); }
+.main-nav .dropdown:hover .chevron,
+.main-nav .dropdown:focus-within .chevron { transform: rotate(180deg); }
 
 .dropdown-menu a {
     display: flex;

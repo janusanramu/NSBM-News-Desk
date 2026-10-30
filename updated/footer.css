@@ -13,9 +13,9 @@
     padding: 64px 0 56px;
 }
 
-/* Guest version has 3 columns */
+/* Guest version has four columns */
 .footer-inner:not(:has(.footer-workspace)) {
-    grid-template-columns: 1.6fr 1fr 1.2fr;
+    grid-template-columns: 1.6fr 1fr 1.1fr 1.2fr;
 }
 
 .footer-col h4 {
