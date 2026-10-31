@@ -194,6 +194,9 @@
       box-shadow: 0 4px 12px rgb(32 56 42 / 5%);
     }
 
+    .news-card[hidden] { display: none; }
+    .news-card:not([hidden]) { display: block; }
+
     .card-image { position: relative; height: 155px; overflow: hidden; background: #dce6df; }
     .card-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .25s ease; }
     .card-image a.image-link { display: block; height: 100%; }
@@ -322,11 +325,11 @@
     <nav class="nav-links" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a class="active" href="index.html">News</a>
-      <a href="#news-grid" data-filter="computing">Computing</a>
-      <a href="#news-grid" data-filter="business">Business</a>
-      <a href="#news-grid" data-filter="engineering">Engineering</a>
+      <a href="#news-grid" data-filter="Events">Campus Life</a>
+      <a href="#news-grid" data-filter="computing,business,engineering">Academics</a>
+      <a href="#news-grid" data-filter="business">Research</a>
+      <a href="#news-grid" data-filter="Events,notices">Clubs &amp; Societies</a>
       <a href="#news-grid" data-filter="sports">Sports</a>
-      <a href="#news-grid" data-filter="Events">Events</a>
     </nav>
     <div class="header-actions">
       <input class="top-search" type="search" aria-label="Search news" placeholder="⌕  Search news...">
@@ -356,12 +359,11 @@
       </label>
       <div class="filters" role="group" aria-label="Filter by category">
         <button class="filter active" type="button" data-filter="all">All</button>
-        <button class="filter" type="button" data-filter="computing">Computing</button>
-        <button class="filter" type="button" data-filter="business">Business</button>
-        <button class="filter" type="button" data-filter="engineering">Engineering</button>
-        <button class="filter" type="button" data-filter="Events">Events</button>
+        <button class="filter" type="button" data-filter="Events">Campus Life</button>
+        <button class="filter" type="button" data-filter="computing,business,engineering">Academics</button>
+        <button class="filter" type="button" data-filter="business">Research</button>
+        <button class="filter" type="button" data-filter="Events,notices">Clubs &amp; Societies</button>
         <button class="filter" type="button" data-filter="sports">Sports</button>
-        <button class="filter" type="button" data-filter="notices">Notices</button>
       </div>
     </section>
 
@@ -491,32 +493,23 @@
     const newsNavLink = [...document.querySelectorAll(".nav-links a")].find((link) => link.textContent.trim() === "News");
     const shownCount = document.querySelector("#shown-count");
     const emptyState = document.querySelector("#empty-state");
-    let activeCategory = "all";
+    let activeCategory = ["all"];
 
     function updateArticles() {
       const query = searchInput.value.trim().toLowerCase();
       let visibleCount = 0;
 
       cards.forEach((card) => {
-        const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
+        const matchesCategory = activeCategory.includes("all") || activeCategory.includes(card.dataset.category);
         const matchesQuery = card.textContent.toLowerCase().includes(query);
         const visible = matchesCategory && matchesQuery;
         card.hidden = !visible;
+        card.style.display = visible ? "block" : "none";
         if (visible) visibleCount += 1;
       });
 
       shownCount.textContent = String(visibleCount);
       emptyState.style.display = visibleCount ? "none" : "block";
-    }
-
-    function syncNavSelection(category) {
-      navFilterLinks.forEach((link) => {
-        link.classList.toggle("active", link.dataset.filter === category);
-      });
-
-      if (newsNavLink) {
-        newsNavLink.classList.toggle("active", category === "all");
-      }
     }
 
     searchInput.addEventListener("input", updateArticles);
@@ -525,23 +518,28 @@
       updateArticles();
     });
 
-    function selectCategory(category) {
-      activeCategory = category;
+    function selectCategory(category, label) {
+      activeCategory = category.split(",");
       filterButtons.forEach((button) => {
-        button.classList.toggle("active", button.dataset.filter === category);
+        button.classList.toggle("active", button.textContent.trim() === label);
       });
-      syncNavSelection(category);
+      navFilterLinks.forEach((link) => {
+        link.classList.toggle("active", link.textContent.trim() === label);
+      });
+      if (newsNavLink) {
+        newsNavLink.classList.toggle("active", label === "All");
+      }
       updateArticles();
     }
 
     filterButtons.forEach((button) => {
-      button.addEventListener("click", () => selectCategory(button.dataset.filter));
+      button.addEventListener("click", () => selectCategory(button.dataset.filter, button.textContent.trim()));
     });
 
     navFilterLinks.forEach((link) => {
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        selectCategory(link.dataset.filter);
+        selectCategory(link.dataset.filter, link.textContent.trim());
         document.querySelector("#news-grid").scrollIntoView({ behavior: "smooth" });
       });
     });
