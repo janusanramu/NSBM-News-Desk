@@ -7,10 +7,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="register.css">
 <title>Register | NSBM NewsDesk</title>
 </head>
-<body>
+<body class="theme-dark">
 
 <header class="site-header">
   <a href="index.html" class="brand">
@@ -29,6 +29,8 @@
     <span class="material-symbols-outlined">search</span>
     <input type="text" placeholder="Search news...">
   </div>
+  <button type="button" class="theme-toggle" aria-label="Switch to light theme" title="Toggle theme"><span class="material-symbols-outlined">light_mode</span></button>
+  <button type="button" class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span class="material-symbols-outlined">menu</span></button>
   <a href="login.html" class="avatar-btn" aria-label="Account">
     <span class="material-symbols-outlined">person</span>
   </a>
@@ -42,8 +44,21 @@
 </div>
 
 <main class="auth-hero register">
-  <section class="glass-card">
-    <div class="logo-tile"><span class="material-symbols-outlined">school</span></div>
+  <div class="login-shell">
+    <aside class="login-feature" aria-label="Join NSBM NewsDesk">
+      <div class="feature-top"><span class="material-symbols-outlined">auto_stories</span> NSBM NEWSDESK</div>
+      <div class="feature-art feature-video" aria-label="NSBM campus logo animation">
+        <video class="mouse-scrub-video" autoplay loop muted playsinline preload="metadata" aria-label="Animated NSBM logo">
+          <source src="videos/NSBM_Logo_Transparent.webm" type="video/webm">
+        </video>
+      </div>
+      <div class="feature-copy"><span class="feature-kicker">YOUR STORY STARTS HERE.</span>
+        <h2>CONNECT.<br>SHARE. GROW.</h2>
+        <p>Create your campus account, share your stories, and be part of the NSBM community.</p>
+      </div>
+    </aside>
+  <section class="glass-card login-panel">
+    <div class="logo-tile"><span class="material-symbols-outlined">newspaper</span></div>
     <h1>Join NSBM NewsDesk</h1>
     <p class="sub">Create an account to submit stories, bookmark articles,<br>and join community discussions</p>
 
@@ -52,13 +67,13 @@
         <label for="fullname">Full Name</label>
         <div class="input-wrap">
           <span class="material-symbols-outlined">person</span>
-          <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+          <input type="text" id="fullname" name="fullname" placeholder="Shagilan Jeyaraj" required>
         </div>
         <div class="error-msg"></div>
       </div>
 
       <div class="field">
-        <label for="email">Campus Email</label>
+        <label for="email">Outlook Email</label>
         <div class="input-wrap">
           <span class="material-symbols-outlined">mail</span>
           <input type="email" id="email" name="email" placeholder="username@nsbm.ac.lk" required>
@@ -88,22 +103,25 @@
         <label for="password">Password</label>
         <div class="input-wrap">
           <span class="material-symbols-outlined">lock</span>
-          <input type="password" id="password" name="password" placeholder="••••••••" required>
+          <input type="password" id="password" name="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+          <button type="button" class="toggle-pass" data-target="password" aria-label="Show password"><span class="material-symbols-outlined">visibility</span></button>
         </div>
         <div class="error-msg"></div>
+        <div class="strength" aria-live="polite"><div class="strength-track"><span id="strengthBar"></span></div><small id="strengthLabel">Use 8+ characters with upper/lowercase, numbers and symbols.</small></div>
       </div>
 
       <div class="field">
         <label for="confirm">Confirm Password</label>
         <div class="input-wrap">
           <span class="material-symbols-outlined">lock_reset</span>
-          <input type="password" id="confirm" name="confirm" placeholder="••••••••" required>
+          <input type="password" id="confirm" name="confirm" placeholder="Confirm your password" autocomplete="new-password" required>
+          <button type="button" class="toggle-pass" data-target="confirm" aria-label="Show password"><span class="material-symbols-outlined">visibility</span></button>
         </div>
         <div class="error-msg"></div>
       </div>
 
       <label class="check terms">
-        <input type="checkbox" id="terms" name="terms">
+        <input type="checkbox" id="terms" name="terms" required>
         <span>I agree to the <a href="guidelines.html">Community Guidelines</a> and <a href="terms.html">Terms of Service</a> for NSBM NewsDesk.</span>
       </label>
       <div class="field has-error" id="termsField" style="margin:-10px 0 14px"><div class="error-msg"></div></div>
@@ -111,8 +129,9 @@
       <button type="submit" class="btn-primary">Create Account <span class="material-symbols-outlined">arrow_forward</span></button>
     </form>
 
-    <p class="switch-line">Already have an account? <a href="login.html">Sign in here</a></p>
+    <p class="switch-line">Already have an account? <a href="login.html">Login here</a></p>
   </section>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -136,9 +155,9 @@
       <p>Email: newsdesk@nsbm.ac.lk</p>
     </div>
   </div>
-  <div class="footer-bottom">&copy; 2024 NSBM NewsDesk. All rights reserved.</div>
+  <div class="footer-bottom">&copy; 2026 NSBM NewsDesk. All rights reserved.</div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="js/register.js" defer></script>
 </body>
 </html>

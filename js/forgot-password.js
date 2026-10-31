@@ -1,0 +1,2 @@
+// Basic client-side validation; the form still submits to the existing PHP endpoint.
+document.addEventListener('DOMContentLoaded',()=>{const form=document.getElementById('forgotPasswordForm');const email=document.getElementById('email');const error=document.getElementById('forgotEmailError');form?.addEventListener('submit',event=>{if(!email?.checkValidity()){event.preventDefault();if(error){error.textContent='Please enter a valid email address.';error.style.display='block';}email?.focus();}else if(error){error.textContent='';error.style.display='none';}});});
