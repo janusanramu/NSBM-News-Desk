@@ -1,242 +1,626 @@
+/* ==========================================
+   NSBM NEWSDESK - STUDENT PORTAL
+   PART 1: SEARCH, CATEGORY FILTER & LOAD MORE
+========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const categoryButtons = document.querySelectorAll(".cat-btn");
-  const newsGrid = document.querySelector(".card-grid");
-  const searchInput = document.querySelector(
-    '.search-box input[type="search"]'
-  );
-  const loadMoreButton = document.querySelector(".btn-load-more");
-  const noticeCards = Array.from(document.querySelectorAll(".notice"));
-  const newsCards = newsGrid
-    ? Array.from(newsGrid.querySelectorAll(".card"))
-    : [];
 
-  const noResults = document.createElement("p");
-  noResults.className = "search-no-results";
-  noResults.textContent = "No matching news or announcements found.";
-  noResults.hidden = true;
+    const categoryButtons = document.querySelectorAll(".cat-btn");
+    const searchInput = document.querySelector(
+        '.search-box input[type="search"]'
+    );
 
-  const contentGrid = document.querySelector(".content-grid");
-  if (contentGrid?.parentNode) {
-    contentGrid.parentNode.insertBefore(noResults, contentGrid);
-  }
+    const newsGrid = document.querySelector(".card-grid");
+    const newsCards = newsGrid
+        ? Array.from(newsGrid.querySelectorAll(".card"))
+        : [];
 
-  let selectedCategory = "all news";
-  let visibleCount = 4;
-  const batchSize = 4;
+    const loadMoreButton = document.querySelector(".btn-load-more");
+    const contentGrid = document.querySelector(".content-grid");
 
-  // Search and category filtering
-  function updateArticles() {
-    const term = searchInput?.value.trim().toLowerCase() || "";
-    const noticesCategory = selectedCategory === "notices";
-    let matchCount = 0;
+    // Category mapping
+    const categoryMap = {
+        "all news": ["all"],
+        "campus life": ["events"],
+        "academics": ["computing", "engineering"],
+        "research": ["business"],
+        "clubs & societies": ["events", "notices"],
+        "clubs and societies": ["events", "notices"],
+        "sports": ["sports"]
+    };
 
-    newsCards.forEach((card, index) => {
-      const tag =
-        card.querySelector(".tag")?.textContent.trim().toLowerCase() || "";
+    // Get category from article link
+    function getArticleCategory(card) {
 
-      const matchesCategory =
-        !noticesCategory &&
-        (selectedCategory === "all news" || tag === selectedCategory);
+        const link = card.querySelector(".card-body h3 a");
+        const href = (link?.getAttribute("href") || "").toLowerCase();
 
-      const matchesSearch = card.textContent.toLowerCase().includes(term);
-      const show = matchesCategory && matchesSearch && index < visibleCount;
+        if (href.includes("computing")) return "computing";
+        if (href.includes("business")) return "business";
+        if (href.includes("engineering")) return "engineering";
+        if (href.includes("events")) return "events";
+        if (href.includes("sports")) return "sports";
+        if (href.includes("notices")) return "notices";
 
-      card.hidden = !show;
+        return (card.dataset.category || "").toLowerCase();
+    }
 
-      if (matchesCategory && matchesSearch) matchCount++;
+    // Store categories
+    newsCards.forEach(card => {
+        card.dataset.category = getArticleCategory(card);
     });
 
-    noticeCards.forEach((notice) => {
-      const matchesSearch = notice.textContent.toLowerCase().includes(term);
-      const show = matchesSearch && (noticesCategory || selectedCategory === "all news");
+    let selectedCategory = "all news";
+    let visibleCount = 4;
+    const batchSize = 4;
 
-      notice.hidden = !show;
+    // No results message
+    const noResults = document.createElement("p");
 
-      if (show) matchCount++;
+    noResults.className = "search-no-results";
+    noResults.textContent =
+        "No matching news found. Try another category or keyword.";
+
+    noResults.hidden = true;
+
+    if (contentGrid?.parentNode) {
+        contentGrid.parentNode.insertBefore(noResults, contentGrid);
+    }
+
+    // Update news articles
+    function updateArticles() {
+
+        const searchTerm = searchInput?.value.trim().toLowerCase() || "";
+
+        const allowedCategories =
+            categoryMap[selectedCategory] || [selectedCategory];
+
+        const matchingCards = newsCards.filter(card => {
+
+            const articleCategory = card.dataset.category;
+
+            const matchesCategory =
+                allowedCategories.includes("all") ||
+                allowedCategories.includes(articleCategory);
+
+            const matchesSearch =
+                card.textContent.toLowerCase().includes(searchTerm);
+
+            return matchesCategory && matchesSearch;
+        });
+
+        const limit = searchTerm ? matchingCards.length : visibleCount;
+
+        newsCards.forEach(card => {
+            card.hidden = true;
+            card.style.display = "none";
+        });
+
+        matchingCards.forEach((card, index) => {
+
+            if (index < limit) {
+                card.hidden = false;
+                card.style.display = "";
+            }
+
+        });
+
+        noResults.hidden = matchingCards.length !== 0;
+
+        if (loadMoreButton) {
+            loadMoreButton.hidden =
+                searchTerm.length > 0 ||
+                matchingCards.length <= visibleCount;
+        }
+    }
+
+    // Category button events
+    categoryButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            categoryButtons.forEach(item =>
+                item.classList.remove("active")
+            );
+
+            button.classList.add("active");
+
+            selectedCategory =
+                button.textContent.trim().toLowerCase();
+
+            visibleCount = 4;
+
+            updateArticles();
+        });
+
     });
 
-    noResults.hidden = !(term && matchCount === 0);
+    // Search event
+    searchInput?.addEventListener("input", () => {
 
-    if (loadMoreButton) {
-      const hasMore = newsCards.some((card, index) => {
-        const tag =
-          card.querySelector(".tag")?.textContent.trim().toLowerCase() || "";
+        visibleCount = 4;
+        updateArticles();
+
+    });
+
+    // Load more event
+    loadMoreButton?.addEventListener("click", () => {
+
+        visibleCount += batchSize;
+        updateArticles();
+
+    });
+
+    // Initial display
+    updateArticles();
+
+    /* ==========================================
+   PART 2: BOOKMARKS, PROFILE & LOGOUT
+========================================== */
+
+    // Student profile dropdown
+    const profileToggle = document.getElementById("profileToggle");
+    const profileDropdown = document.getElementById("profileDropdown");
+
+    if (profileToggle && profileDropdown) {
+
+        profileDropdown.hidden = true;
+
+        profileToggle.setAttribute("aria-expanded", "false");
+
+        profileToggle.addEventListener("click", event => {
+
+            event.stopPropagation();
+
+            const isOpen = profileDropdown.hidden;
+
+            profileDropdown.hidden = !isOpen;
+
+            profileToggle.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+        });
+
+        profileDropdown.addEventListener("click", event => {
+            event.stopPropagation();
+        });
+
+        document.addEventListener("click", event => {
+
+            if (!event.target.closest(".profile-menu")) {
+
+                profileDropdown.hidden = true;
+
+                profileToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        });
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key === "Escape") {
+
+                profileDropdown.hidden = true;
+
+                profileToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    // Logout confirmation
+    document.getElementById("logoutBtn")?.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            if (confirm("Are you sure you want to log out?")) {
+                window.location.href = "index.html";
+            }
+
+        }
+    );
+
+
+    // BOOKMARK SYSTEM
+    const storageKey = "nsbmNewsDeskBookmarks";
+
+    // Read saved bookmarks
+    function readBookmarks() {
+
+        try {
+
+            const saved = JSON.parse(
+                localStorage.getItem(storageKey) || "[]"
+            );
+
+            return Array.isArray(saved) ? saved : [];
+
+        } catch (error) {
+
+            console.error("Bookmark loading error:", error);
+
+            return [];
+
+        }
+
+    }
+
+
+    // Get unique article title
+    function articleKey(card) {
 
         return (
-          index >= visibleCount &&
-          selectedCategory !== "notices" &&
-          (selectedCategory === "all news" || tag === selectedCategory) &&
-          card.textContent.toLowerCase().includes(term)
+            card.querySelector(".card-body h3")
+                ?.textContent.trim() ||
+            card.querySelector(".hero-title")
+                ?.textContent.trim() ||
+            ""
         );
-      });
 
-      loadMoreButton.hidden = !hasMore;
     }
-  }
 
-  categoryButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      categoryButtons.forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
 
-      const category = button.textContent.trim().toLowerCase();
-      selectedCategory = category.includes("all") ? "all news" : category;
+    // Update bookmark button appearance
+    function setBookmark(button, saved) {
 
-      visibleCount = 4;
-      updateArticles();
-    });
-  });
+        button.classList.toggle("active", saved);
+        button.classList.toggle("saved", saved);
 
-  searchInput?.addEventListener("input", updateArticles);
+        button.setAttribute("aria-pressed", String(saved));
 
-  loadMoreButton?.addEventListener("click", () => {
-    visibleCount = Math.min(visibleCount + batchSize, newsCards.length);
-    updateArticles();
-  });
+        button.style.backgroundColor = saved
+            ? "#026838"
+            : "#f1f5f9";
 
-  // Student profile dropdown
-  const profileToggle = document.getElementById("profileToggle");
-  const profileDropdown = document.getElementById("profileDropdown");
+        button.style.color = saved
+            ? "#ffffff"
+            : "#64748b";
 
-  if (profileToggle && profileDropdown) {
-    profileDropdown.hidden = true;
-    profileToggle.setAttribute("aria-expanded", "false");
+        button.setAttribute(
+            "aria-label",
+            saved ? "Remove bookmark" : "Bookmark article"
+        );
 
-    profileToggle.addEventListener("click", (event) => {
-      event.stopPropagation();
+        button.title = saved
+            ? "Remove bookmark"
+            : "Bookmark article";
 
-      const open = profileDropdown.hidden;
-      profileDropdown.hidden = !open;
-      profileToggle.setAttribute("aria-expanded", String(open));
-    });
-
-    profileDropdown.addEventListener("click", (event) => {
-      event.stopPropagation();
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!event.target.closest(".profile-menu")) {
-        profileDropdown.hidden = true;
-        profileToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        profileDropdown.hidden = true;
-        profileToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  // Logout confirmation
-  document.getElementById("logoutBtn")?.addEventListener("click", (event) => {
-    event.preventDefault();
-
-    if (confirm("Are you sure you want to log out?")) {
-      window.location.href = "index.html";
     }
-  });
 
-  // Save bookmarks in this browser
-  const storageKey = "nsbmNewsDeskBookmarks";
 
-  function readBookmarks() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
-      return Array.isArray(saved) ? saved : [];
-    } catch {
-      return [];
-    }
-  }
+    // Collect news card bookmark buttons
+    const bookmarkItems = newsCards.map(card => ({
 
-  function articleKey(card) {
-    return (
-      card.querySelector(".card-body h3")?.textContent.trim() ||
-      card.querySelector(".hero-title")?.textContent.trim() ||
-      ""
+        card: card,
+
+        button: card.querySelector(".bookmark-btn"),
+
+        key: articleKey(card)
+
+    }));
+
+
+    // Featured story bookmark
+    const heroBookmark = document.querySelector(
+        ".hero-actions .btn-secondary"
     );
-  }
 
-  function setBookmark(button, saved) {
-    button.classList.toggle("active", saved);
-    button.setAttribute("aria-pressed", String(saved));
-    button.style.backgroundColor = saved ? "#026838" : "#f1f5f9";
-    button.style.color = saved ? "#ffffff" : "#64748b";
-    button.setAttribute(
-      "aria-label",
-      saved ? "Remove bookmark" : "Bookmark article"
-    );
-  }
+    if (heroBookmark) {
 
-  const bookmarkItems = [
-    ...newsCards.map((card) => ({
-      card,
-      button: card.querySelector(".bookmark-btn"),
-      key: articleKey(card)
-    }))
-  ];
+        bookmarkItems.push({
 
-  const heroBookmark = document.querySelector(".hero-actions .btn-secondary");
+            card: heroBookmark.closest(".hero-feature"),
 
-  if (heroBookmark) {
-    bookmarkItems.push({
-      card: heroBookmark.closest(".hero-feature"),
-      button: heroBookmark,
-      key:
-        heroBookmark.closest(".hero-feature")
-          ?.querySelector(".hero-title")?.textContent.trim() || ""
-    });
-  }
+            button: heroBookmark,
 
-  function syncBookmarks() {
-    const saved = readBookmarks();
+            key: heroBookmark.closest(".hero-feature")
+                ?.querySelector(".hero-title")
+                ?.textContent.trim() || ""
 
+        });
+
+    }
+
+
+    // Synchronize saved bookmark status
+    function syncBookmarks() {
+
+        const saved = readBookmarks();
+
+        bookmarkItems.forEach(({ button, key }) => {
+
+            if (button && key) {
+
+                setBookmark(button, saved.includes(key));
+
+            }
+
+        });
+
+    }
+
+
+    // Bookmark button click events
     bookmarkItems.forEach(({ button, key }) => {
-      if (button && key) setBookmark(button, saved.includes(key));
+
+        if (!button || !key) return;
+
+        button.addEventListener("click", event => {
+
+            event.preventDefault();
+
+            let saved = readBookmarks();
+
+            const alreadySaved = saved.includes(key);
+
+            if (alreadySaved) {
+
+                saved = saved.filter(item => item !== key);
+
+            } else {
+
+                saved.push(key);
+
+            }
+
+            try {
+
+                localStorage.setItem(
+                    storageKey,
+                    JSON.stringify(saved)
+                );
+
+                syncBookmarks();
+
+            } catch (error) {
+
+                alert("Bookmarks could not be saved in this browser.");
+
+                console.error(error);
+
+            }
+
+        });
+
     });
-  }
 
-  bookmarkItems.forEach(({ button, key }) => {
-    if (!button || !key) return;
 
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
+    // Initial bookmark status
+    syncBookmarks();
 
-      const saved = readBookmarks();
-      const isSaved = saved.includes(key);
-      const updated = isSaved
-        ? saved.filter((item) => item !== key)
-        : [...saved, key];
+    /* ==========================================
+   PART 3: SUBSCRIBE ALERTS
+========================================== */
 
-      try {
-        localStorage.setItem(storageKey, JSON.stringify(updated));
-        syncBookmarks();
-      } catch {
-        alert("Bookmarks could not be saved in this browser.");
-      }
-    });
-  });
+    const modal = document.getElementById("subscriptionModal");
 
-  // Subscribe Feed: visual toggle only, not a real notification service.
-  const subscribeButton = document.querySelector(".subscribe-btn");
+    if (modal) {
 
-  if (subscribeButton) {
-    subscribeButton.setAttribute("aria-pressed", "false");
+        const openButton =
+            document.getElementById("subscribeAlertsBtn") ||
+            document.getElementById("subscribeFeedBtn");
 
-    subscribeButton.addEventListener("click", () => {
-      const enabled =
-        subscribeButton.getAttribute("aria-pressed") !== "true";
+        const optionsContainer =
+            document.getElementById("subscriptionOptions");
 
-      subscribeButton.setAttribute("aria-pressed", String(enabled));
-      subscribeButton.classList.toggle("alerts-enabled", enabled);
-      subscribeButton.lastChild.textContent = enabled
-        ? " Feed Subscribed"
-        : " Subscribe Feed";
-    });
-  }
+        const feedback =
+            document.getElementById("subscriptionFeedback");
 
-  syncBookmarks();
-  updateArticles();
-});
+        const saveButton =
+            document.getElementById("saveSubscription");
+
+        const closeButton =
+            document.getElementById("closeSubscriptionModal");
+
+        const cancelButton =
+            document.getElementById("cancelSubscription");
+
+        const subscriptionStorageKey =
+            "nsbmNewsDeskSubscriptions";
+
+        let categories = [];
+
+        try {
+
+            categories = JSON.parse(
+                modal.dataset.categories || "[]"
+            );
+
+        } catch (error) {
+
+            categories = [];
+
+        }
+
+
+        // Get saved preferences
+        function getSavedCategories() {
+
+            try {
+
+                const saved = JSON.parse(
+                    localStorage.getItem(subscriptionStorageKey) || "[]"
+                );
+
+                return Array.isArray(saved) ? saved : [];
+
+            } catch (error) {
+
+                return [];
+
+            }
+
+        }
+
+
+        // Display category options
+        function renderOptions() {
+
+            if (!optionsContainer) return;
+
+            const saved = getSavedCategories();
+
+            optionsContainer.innerHTML = "";
+
+            categories.forEach((category, index) => {
+
+                const label = document.createElement("label");
+
+                label.className = "subscription-option";
+
+                const checkbox = document.createElement("input");
+
+                checkbox.type = "checkbox";
+                checkbox.name = "subscriptionCategory";
+                checkbox.value = category;
+                checkbox.checked = saved.includes(category);
+
+                checkbox.id = `subscription-category-${index}`;
+
+                const text = document.createElement("span");
+
+                text.textContent = category;
+
+                label.append(checkbox, text);
+
+                optionsContainer.appendChild(label);
+
+            });
+
+        }
+
+
+        // Open modal
+        function openModal() {
+
+            renderOptions();
+
+            if (feedback) {
+                feedback.textContent = "";
+            }
+
+            modal.hidden = false;
+
+            document.body.classList.add("subscription-open");
+
+            closeButton?.focus();
+
+        }
+
+
+        // Close modal
+        function closeModal() {
+
+            modal.hidden = true;
+
+            document.body.classList.remove("subscription-open");
+
+            openButton?.focus();
+
+        }
+
+
+        // Open and close events
+        openButton?.addEventListener("click", openModal);
+
+        closeButton?.addEventListener("click", closeModal);
+
+        cancelButton?.addEventListener("click", closeModal);
+
+
+        modal.addEventListener("click", event => {
+
+            if (event.target === modal) {
+                closeModal();
+            }
+
+        });
+
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key === "Escape" && !modal.hidden) {
+                closeModal();
+            }
+
+        });
+
+
+        // Save preferences
+        saveButton?.addEventListener("click", () => {
+
+            const selected = Array.from(
+                optionsContainer.querySelectorAll(
+                    'input[name="subscriptionCategory"]:checked'
+                )
+            ).map(checkbox => checkbox.value);
+
+
+            if (selected.length === 0) {
+
+                if (feedback) {
+                    feedback.textContent =
+                        "Please select at least one category.";
+                }
+
+                return;
+
+            }
+
+
+            try {
+
+                localStorage.setItem(
+                    subscriptionStorageKey,
+                    JSON.stringify(selected)
+                );
+
+                if (feedback) {
+
+                    feedback.textContent =
+                        "Your subscription preferences have been saved!";
+
+                }
+
+                window.setTimeout(() => {
+
+                    if (!modal.hidden) {
+                        closeModal();
+                    }
+
+                }, 1000);
+
+            } catch (error) {
+
+                if (feedback) {
+                    feedback.textContent =
+                        "Unable to save preferences. Please try again.";
+                }
+
+            }
+
+        });
+
+    }
+
+
+    // Initial page setup
+    updateArticles();
+
+    syncBookmarks();
+
+}); // END DOMContentLoaded
