@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (error) error.textContent = message;
   }
   function checkInput(input) {
-    const value = input.value.trim();
+    const value = ['password', 'confirm'].includes(input.id) ? input.value : input.value.trim();
     let message = '';
     if (!value) message = 'This field is required.';
     else if (input.id === 'fullname' && value.length < 2) message = 'Enter your full name.';
-    else if (input.id === 'email' && !/^[^\s@]+@nsbm\.ac\.lk$/i.test(value)) message = 'Use a valid @nsbm.ac.lk email address.';
-    else if (input.id === 'password' && value.length < 8) message = 'Password must contain at least 8 characters.';
+    else if (input.id === 'email' && !/^[^\s@]+@(?:[a-z0-9-]+\.)*nsbm\.ac\.lk$/i.test(value)) message = 'Use a valid NSBM student or staff email address.';
+    else if (input.id === 'password' && (value.length < 8 || new TextEncoder().encode(value).length > 72)) message = 'Password must contain 8 to 72 bytes.';
     else if (input.id === 'confirm' && value !== password.value) message = 'Passwords do not match.';
     showError(input, message);
     return !message;
