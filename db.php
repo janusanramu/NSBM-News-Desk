@@ -1,6 +1,6 @@
 <?php
 $databaseHost = getenv('DB_HOST') ?: '127.0.0.1';
-$databaseName = getenv('DB_NAME') ?: 'nsbm-admindashboard';
+$databaseName = getenv('DB_NAME') ?: 'nsbm_newsdesk';
 $databaseUser = getenv('DB_USER') ?: 'root';
 $databasePassword = getenv('DB_PASSWORD') ?: '';
 
