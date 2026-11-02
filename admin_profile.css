@@ -1,0 +1,334 @@
+.admin-profile .profile-banner { align-items: center; }
+.admin-profile .admin-avatar {
+ display: grid;
+ place-items: center;
+ background: linear-gradient(135deg, #007f57, #00543d);
+ color: #fff;
+ font-size: 30px;
+ font-weight: 800;
+ }
+.admin-profile .profile-banner:after { display: none; }
+.admin-profile .profile-details {
+display: grid;
+gap: 12px;
+margin: 24px 0 0;
+ }
+.admin-profile .profile-details div {
+display: grid;
+grid-template-columns: minmax(110px, .7fr) 1.3fr;
+gap: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e8eee9;
+        }
+        .admin-profile .profile-details div:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+        .admin-profile .profile-details dt {
+            color: #718479;
+            font-size: 13px;
+        }
+        .admin-profile .profile-details dd {
+            margin: 0;
+            overflow-wrap: anywhere;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .admin-profile .security-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .admin-profile .security-indicator::before {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #d89624;
+            content: "";
+        }
+        .admin-profile .security-indicator.is-enabled::before {
+            background: #16834a;
+        }
+        .admin-profile .profile-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .admin-profile .profile-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 16px;
+            border: 1px solid #dce9e0;
+            border-radius: 11px;
+            background: #fff;
+            color: #006b4f;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .admin-profile .profile-link.primary {
+            border-color: #006c4d;
+            background: linear-gradient(125deg, #007f57, #00543d);
+            color: #fff;
+        }
+        .admin-profile .activity-empty {
+            margin: 22px 0 0;
+            color: #718479;
+            font-size: 13px;
+        }
+        @media (max-width: 520px) {
+            .admin-profile .profile-details div {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+        }
+
+.admin-settings .settings-banner {
+    padding: 32px 38px;
+    border: 1px solid #ffffffc7;
+    border-radius: 22px;
+    background: linear-gradient(112deg, #e3f2e9, #cce9da);
+    box-shadow: 0 12px 32px #124d3020;
+}
+.admin-settings .settings-eyebrow {
+    color: #007b55;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+.admin-settings .settings-banner h1 {
+    margin-top: 8px;
+}
+.admin-settings .settings-banner p {
+    margin: 8px 0 0;
+    color: #53675c;
+    font-size: 14px;
+}
+.admin-settings .settings-stack {
+    display: grid;
+    gap: 20px;
+    animation: rise .8s .14s both;
+}
+.admin-settings .settings-message {
+    margin: 0;
+    padding: 14px 18px;
+    border: 1px solid;
+    border-radius: 12px;
+    font-size: 13px;
+}
+.admin-settings .settings-message.is-success {
+    border-color: #b9e2ca;
+    background: #eaf8ef;
+    color: #17653d;
+}
+.admin-settings .settings-message.is-error {
+    border-color: #efc5c0;
+    background: #fff1ef;
+    color: #8c3027;
+}
+.admin-settings .photo-settings-content {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+.admin-settings .settings-photo-preview {
+    width: 104px;
+    height: 104px;
+    flex: none;
+    object-fit: cover;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 5px 16px #124d3024;
+}
+.admin-settings .photo-settings-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+.admin-settings .photo-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+.admin-settings .photo-choose-button {
+    cursor: pointer;
+}
+.admin-settings .photo-file-input:focus-visible + .photo-file-name {
+    outline: 3px solid #00875d55;
+    outline-offset: 3px;
+}
+.admin-settings .photo-file-name,
+.admin-settings .photo-upload-feedback {
+    color: #718479;
+    font-size: 12px;
+}
+.admin-settings .photo-upload-feedback {
+    flex-basis: 100%;
+    margin: 0;
+}
+.admin-settings .photo-settings-controls form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+.admin-settings .photo-remove-button {
+    cursor: pointer;
+}
+.admin-settings .settings-preferences {
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1px solid #e8eee9;
+}
+.admin-settings .settings-preferences .settings-card-heading {
+    margin-bottom: 0;
+}
+.admin-settings .settings-preferences .settings-preference {
+    border-top: 0;
+}
+.admin-settings .settings-card {
+    min-height: 0;
+}
+.admin-settings .settings-card:hover {
+    transform: none;
+}
+.admin-settings .settings-card-heading {
+    margin-bottom: 22px;
+}
+.admin-settings .settings-card-heading h2 {
+    margin: 0;
+    font-size: 18px;
+}
+.admin-settings .settings-card-heading p {
+    margin: 5px 0 0;
+    color: #718479;
+    font-size: 13px;
+}
+.admin-settings .settings-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+.admin-settings .settings-field {
+    display: grid;
+    align-content: start;
+    gap: 7px;
+}
+.admin-settings .settings-field label {
+    color: #36483d;
+    font-size: 13px;
+    font-weight: 700;
+}
+.admin-settings .settings-field input,
+.admin-settings .settings-field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #dce8df;
+    border-radius: 10px;
+    background: #fff;
+    color: #20392c;
+    font: inherit;
+    font-size: 14px;
+}
+.admin-settings .settings-field input:focus,
+.admin-settings .settings-field select:focus {
+    outline: 3px solid #00875d2e;
+    border-color: #00875d;
+}
+.admin-settings .settings-field input:disabled {
+    background: #f2f6f3;
+    color: #68786e;
+}
+.admin-settings .settings-field small,
+.admin-settings .settings-preference small,
+.admin-settings .settings-security-status small {
+    color: #718479;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.admin-settings .settings-preference,
+.admin-settings .settings-security-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px solid #e8eee9;
+}
+.admin-settings .settings-preference span,
+.admin-settings .settings-security-status span:first-child {
+    display: grid;
+    gap: 4px;
+}
+.admin-settings .settings-preference strong,
+.admin-settings .settings-security-status strong {
+    color: #263b2f;
+    font-size: 14px;
+}
+.admin-settings .settings-preference input {
+    width: 18px;
+    height: 18px;
+    accent-color: #007f57;
+}
+.admin-settings .settings-theme-field {
+    max-width: 360px;
+    margin-top: 12px;
+}
+.admin-settings .settings-security-status {
+    margin-top: 22px;
+    border-bottom: 1px solid #e8eee9;
+}
+.admin-settings .settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.admin-settings .settings-actions button {
+    font: inherit;
+    cursor: not-allowed;
+    opacity: .6;
+}
+.admin-settings .settings-actions button:not(:disabled) {
+    cursor: pointer;
+    opacity: 1;
+}
+.admin-settings .settings-feedback {
+    margin: -8px 0 0;
+    color: #8b5b13;
+    font-size: 13px;
+    text-align: right;
+}
+.admin-settings .settings-feedback:empty {
+    display: none;
+}
+.admin-settings .settings-preview-note {
+    margin: -8px 0 0;
+    color: #718479;
+    font-size: 12px;
+    text-align: right;
+}
+@media (max-width: 600px) {
+    .admin-settings .settings-banner {
+        padding: 24px;
+    }
+    .admin-settings .settings-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .admin-settings .settings-security-status {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .admin-settings .photo-settings-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

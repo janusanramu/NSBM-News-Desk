@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#00563f">
+    <title>Admin Account Settings | NSBM NewsDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin_profile.css">
+    <script src="admin_profile_photo.js" defer></script>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
+</head>
+<body>
+<main class="dashboard admin-profile admin-settings">
+    <header class="settings-banner">
+        <span class="settings-eyebrow">ADMINISTRATION</span>
+        <h1>Account Settings</h1>
+        <p>Manage your personal information, security and preferences.</p>
+    </header>
+
+    <nav class="tabs" aria-label="Administrator navigation">
+        <a class="tab" href="admin_profile.html">
+            <span class="tab-icon">▦</span> Profile Overview
+        </a>
+        <a class="tab active" aria-current="page" href="admin_account_settings.html">
+            <span class="tab-icon">⚙</span> Account Settings
+        </a>
+        <a class="tab" href="index.php">
+            <span class="tab-icon">▤</span> Dashboard
+        </a>
+    </nav>
+
+    <div class="settings-stack">
+        <section class="card settings-card photo-settings-card">
+            <header class="settings-card-heading">
+                <h2>Profile Photo</h2>
+                <p>Preview a JPEG, PNG, or WebP image (maximum 2 MB).</p>
+            </header>
+            <div class="photo-settings-content">
+                <img class="settings-photo-preview" src="assets/profile.png" alt="Profile photo preview" id="profilePhotoPreview">
+                <div class="photo-settings-controls">
+                    <label class="profile-link photo-choose-button" for="profile_photo">Choose photo</label>
+                    <input id="profile_photo" class="photo-file-input" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photoFileName photoUploadFeedback">
+                    <span class="photo-file-name" id="photoFileName">No file selected</span>
+                    <p class="photo-upload-feedback" id="photoUploadFeedback" role="status" aria-live="polite"></p>
+                    <a class="profile-link primary" href="admin_account_settings.php">Save photo on account</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="card settings-card">
+            <header class="settings-card-heading">
+                <h2>Personal Information</h2>
+                <p>Update your administrator contact details.</p>
+            </header>
+            <div class="settings-form-grid">
+                <div class="settings-field">
+                    <label for="full_name">Full name</label>
+                    <input id="full_name" name="full_name" type="text" maxlength="120" value="Admin Name" autocomplete="name">
+                </div>
+                <div class="settings-field">
+                    <label for="email">Email address</label>
+                    <input id="email" name="email" type="email" maxlength="190" value="admin@example.com" autocomplete="email">
+                </div>
+                <div class="settings-field">
+                    <label for="contact_number">Contact number</label>
+                    <input id="contact_number" name="contact_number" type="tel" maxlength="30" placeholder="Enter contact number" autocomplete="tel">
+                </div>
+                <div class="settings-field">
+                    <label for="role">Role</label>
+                    <input id="role" type="text" value="Administrator" disabled>
+                    <small>Your role can only be changed by an authorized system administrator.</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="card settings-card">
+            <header class="settings-card-heading">
+                <h2>Account Preferences</h2>
+                <p>Choose how you want to use NewsDesk.</p>
+            </header>
+            <label class="settings-preference" for="email_notifications">
+                <span>
+                    <strong>Email notifications</strong>
+                    <small>Receive important admin updates by email.</small>
+                </span>
+                <input id="email_notifications" name="email_notifications" type="checkbox" checked>
+            </label>
+            <div class="settings-field settings-theme-field">
+                <label for="theme">Interface theme</label>
+                <select id="theme" name="theme">
+                    <option value="light" selected>Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <small>The theme preference is shown for preview; this page does not save or apply it.</small>
+            </div>
+        </section>
+
+        <section class="card settings-card">
+            <header class="settings-card-heading">
+                <h2>Security</h2>
+                <p>Change your password to help protect your account.</p>
+            </header>
+            <div class="settings-form-grid">
+                <div class="settings-field">
+                    <label for="current_password">Current password</label>
+                    <input id="current_password" name="current_password" type="password" autocomplete="current-password">
+                </div>
+                <div class="settings-field">
+                    <label for="new_password">New password</label>
+                    <input id="new_password" name="new_password" type="password" minlength="12" autocomplete="new-password">
+                    <small>Use at least 12 characters.</small>
+                </div>
+                <div class="settings-field">
+                    <label for="confirm_password">Confirm new password</label>
+                    <input id="confirm_password" name="confirm_password" type="password" minlength="12" autocomplete="new-password">
+                </div>
+            </div>
+            <div class="settings-security-status">
+                <span>
+                    <strong>Two-factor authentication (2FA)</strong>
+                    <small>Not enabled. Setting up 2FA requires a verified authenticator or one-time-code flow.</small>
+                </span>
+                <span class="security-indicator">Not enabled</span>
+            </div>
+        </section>
+
+        <div class="settings-actions">
+            <a class="profile-link" href="admin_profile.html">Cancel</a>
+            <button class="profile-link primary" type="button" disabled>Save Changes</button>
+        </div>
+        <p class="settings-preview-note" role="note">This is a static HTML preview. Changes are not saved. Use the <a href="admin_account_settings.php">PHP account settings page</a> to update your account.</p>
+    </div>
+</main>
+</body>
+</html>

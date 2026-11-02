@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#00563f">
+    <title>Admin Profile | NSBM NewsDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin_profile.css">
+    <script src="admin_profile.js" defer></script>
+</head>
+<body>
+<main class="dashboard admin-profile">
+    <section class="profile-banner" aria-label="Administrator profile">
+        <div class="profile-identity">
+            <div class="avatar-wrap">
+                <img class="avatar" src="assets/profile.png" alt="Admin profile picture">
+                <span class="verified" aria-label="Administrator account">✓</span>
+            </div>
+            <div class="profile-copy">
+                <div class="name-row">
+                    <h1>Admin Name</h1>
+                    <span class="role">Administrator</span>
+                </div>
+                <p class="faculty">admin@example.com</p>
+                <p class="membership">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                    Last login not available
+                </p>
+            </div>
+        </div>
+        <div class="stats" aria-label="Administrator account summary">
+            <div class="stat"><strong>0</strong><span>ACTIVITY LOGS</span></div>
+            <div class="stat"><strong>Off</strong><span>TWO-FACTOR</span></div>
+            <div class="stat"><strong>On</strong><span>EMAIL ALERTS</span></div>
+        </div>
+    </section>
+
+    <nav class="tabs" aria-label="Administrator navigation">
+        <a class="tab active" aria-current="page" href="admin_profile.html">
+            <span class="tab-icon">▦</span> Profile Overview
+        </a>
+        <a class="tab" href="admin_account_settings.html">
+            <span class="tab-icon">⚙</span> Account Settings
+        </a>
+        <a class="tab" href="index.php">
+            <span class="tab-icon">▤</span> Dashboard
+        </a>
+    </nav>
+
+    <div class="dashboard-grid">
+        <section class="card activity-card">
+            <header class="card-header">
+                <h2><span class="heading-icon">◴</span> Recent Admin Activity</h2>
+                <span class="period">Latest 0</span>
+            </header>
+            <p class="activity-empty">No activity has been recorded for this account yet.</p>
+        </section>
+
+        <section class="card engagement-card">
+            <header class="card-header">
+                <h2><span class="heading-icon">♙</span> Account Details</h2>
+            </header>
+            <dl class="profile-details">
+                <div><dt>Full name</dt><dd>Admin Name</dd></div>
+                <div><dt>Email address</dt><dd>admin@example.com</dd></div>
+                <div><dt>Contact number</dt><dd>Not provided</dd></div>
+                <div><dt>Role</dt><dd>Administrator</dd></div>
+                <div>
+                    <dt>Two-factor authentication</dt>
+                    <dd><span class="security-indicator">Not enabled</span></dd>
+                </div>
+            </dl>
+            <div class="profile-actions">
+                <a class="profile-link primary" href="admin_account_settings.html">
+                    Edit Account
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>

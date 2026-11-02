@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <title>Account Settings | NSBM NewsDesk</title>
+
+     <link rel="stylesheet" href="user_account_settings.css">
+     <link rel="stylesheet" href="header.css">
+     <link rel="stylesheet" href="footer.css">
+     
+  </head>
+
+  <body>
+
+
+   <header class="site-header">
+     <div class="header-inner">
+        <a href="#" class="brand">
+            <img src="nsbm-logo.png" alt="NSBM Green University logo" class="brand-logo">
+            <span class="brand-text">
+                <span class="brand-title">NSBM <span class="accent">NewsDesk</span></span>
+                <span class="brand-sub">NSBM Green University</span>
+            </span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <nav class="main-nav" id="mainNav">
+            <a href="#" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#" class="nav-link">Latest News</a>
+            <div class="dropdown">
+                <button class="nav-link dropdown-toggle" type="button" aria-haspopup="true">
+                    Categories <i class="fa-solid fa-chevron-down chevron"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#">Campus Headlines</a>
+                    <a href="#">Computing Faculty News</a>
+                    <a href="#">Business &amp; Innovation</a>
+                    <a href="#">Engineering Research</a>
+                    <a href="#">Clubs &amp; Event Calendars</a>
+                </div>
+            </div>
+        </nav>
+        <form class="search-box" action="#">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" name="q" placeholder="Search news..." aria-label="Search">
+        </form>
+        <div class="header-actions">
+            <a href="#" class="btn btn-green"><i class="fa-solid fa-plus"></i> Submit Article</a>
+            <button class="icon-btn" type="button" aria-label="Notifications">
+                <i class="fa-regular fa-bell"></i><span class="notif-dot"></span>
+            </button>
+            <span class="divider"></span>
+            <div class="dropdown user-dropdown">
+                <button class="user-toggle" type="button" aria-haspopup="true">
+                    <span class="avatar">CP<span class="status-dot"></span></span>
+                    <span class="user-name"><span>Chamath</span><span>Perera</span></span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </button>
+                <div class="dropdown-menu dropdown-right">
+                    <a href="#"><i class="fa-regular fa-user"></i> User Profile</a>
+                    <a href="#"><i class="fa-regular fa-file-lines"></i> My Submissions</a>
+                    <a href="#"><i class="fa-regular fa-bookmark"></i> Saved Bookmarks</a>
+                    <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+     </div>
+     
+   </header>
+
+
+
+    <div class="breaking-news">
+      <span class="breaking-label">NEWS</span>
+      <p>Stay connected with the latest news from NSBM.</p>
+    </div>
+
+
+
+    <main class="container">
+
+    
+     <section class="page-heading">
+         <div>
+            <h1>Account Settings</h1>
+            <p>Manage your profile, security and news preferences.</p>
+         </div>
+        
+
+         <a href="index.html" class="back-button">
+            ← Back to Profile
+         </a>
+     </section>
+
+
+     <!-- SETTINGS NAVIGATION -->
+     <nav class="settings-tabs">
+         <a href="#personal" class="tab active">Personal Information</a>
+         <a href="#security" class="tab">Security</a>
+         <a href="#preferences" class="tab">News Preferences</a>
+         <a href="#notifications" class="tab">Notifications</a>
+     </nav>
+      <!-- PROFILE PHOTO SETTINGS -->
+     <section class="settings-card" id="profile-photo">
+
+       <div class="card-heading">
+          <div class="heading-icon">◎</div>
+
+          <div>
+             <h2>Profile Photo</h2>
+             <p>Upload or update the photo shown on your profile.</p>
+          </div>
+        </div>
+
+        <form action="update-photo.php"
+             method="post"
+             enctype="multipart/form-data"
+             class="photo-form">
+
+          <div class="photo-preview">
+            <img
+                src="assets/profile.png"
+                alt="Your current profile photo"
+                class="settings-avatar"
+                id="photoPreview">
+          </div>
+
+         <div class="photo-controls">
+
+            <label for="profilePhoto">Choose a new photo</label>
+
+            <input
+                type="file"
+                id="profilePhoto"
+                name="profile_photo"
+                accept="image/jpeg,image/png,image/webp">
+
+             <small>
+                JPEG, PNG or WebP. Maximum file size: 2 MB.
+             </small>
+
+            <input type="hidden" name="csrf_token"
+                   value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+
+            <button type="submit" name="action" value="upload"
+                    class="save-button">
+                Upload Photo
+            </button>
+
+            <button type="submit" name="action" value="remove"
+                    class="remove-button"
+                    formnovalidate
+                    onclick="return confirm('Remove your profile photo?')">
+                Remove Photo
+            </button>
+
+          </div>
+        </form>
+
+     </section>
+
+
+   
+    <form action="#" method="post" class="settings-form">
+
+
+
+        
+        <section class="settings-card" id="personal">
+
+            <div class="card-heading">
+                <div class="heading-icon">♙</div>
+
+                <div>
+                    <h2>Personal Information</h2>
+                    <p>Update your basic student account details.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text"
+                           id="fullName"
+                           name="fullName"
+                           value="Student Name"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text"
+                           id="studentId"
+                           name="studentId"
+                           value="00000"
+                           readonly>
+
+                    <small>Contact the administration to change your student ID.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           value="student@nsbm.ac.lk"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="faculty">Faculty</label>
+                    <select id="faculty" name="faculty" required>
+                        <option>Faculty of Computing</option>
+                        <option>Faculty of Business</option>
+                        <option>Faculty of Engineering</option>
+                        <option>Faculty of Science</option>
+                        <Option>Faculty of Postgraduate & Professional Advancement</Option>
+                    </select>
+                           
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="degree">Degree Programme</label>
+                    <select id="degree" name="degree" required disabled>
+                        <option value="">Select your faculty first</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="batchYear">Batch Year</label>
+                  <select id="batchYear" name="batchYear" required>
+                      <option value="">Select your batch year</option>
+                  </select>
+               </div>
+
+            </div>
+
+        </section>
+
+
+        
+        <section class="settings-card" id="security">
+
+            <div class="card-heading">
+                <div class="heading-icon">♧</div>
+
+                <div>
+                    <h2>Change Password</h2>
+                    <p>Use a strong password to protect your account.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label for="currentPassword">Current Password</label>
+
+                    <input type="password"
+                           id="currentPassword"
+                           name="currentPassword"
+                           placeholder="Enter current password"
+                           autocomplete="current-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+
+                    <input type="password"
+                           id="newPassword"
+                           name="newPassword"
+                           placeholder="Enter new password"
+                           minlength="8"
+                           autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+
+                    <input type="password"
+                           id="confirmPassword"
+                           name="confirmPassword"
+                           placeholder="Re-enter new password"
+                           minlength="8"
+                           autocomplete="new-password">
+                </div>
+
+            </div>
+
+            <p class="help-text">
+                Leave the password fields empty if you do not want to change
+                your password.
+            </p>
+
+        </section>
+
+
+       
+        <section class="settings-card" id="preferences">
+
+            <div class="card-heading">
+                <div class="heading-icon">▤</div>
+
+                <div>
+                    <h2>News Preferences</h2>
+                    <p>Select the categories you are interested in.</p>
+                </div>
+            </div>
+
+            <div class="preference-list">
+
+                <label class="preference-item">
+                    <span>
+                        <strong>Academic</strong>
+                        <small>Exams, academic updates and university notices</small>
+                    </span>
+
+                    <input type="checkbox"
+                           name="categories[]"
+                           value="academic"
+                           checked>
+                </label>
+
+                <label class="preference-item">
+                    <span>
+                        <strong>Events</strong>
+                        <small>Campus events, workshops and competitions</small>
+                    </span>
+
+                    <input type="checkbox"
+                           name="categories[]"
+                           value="events"
+                           checked>
+                </label>
+
+                <label class="preference-item">
+                    <span>
+                        <strong>Sports</strong>
+                        <small>Sports news, matches and student achievements</small>
+                    </span>
+
+                    <input type="checkbox"
+                           name="categories[]"
+                           value="sports">
+                </label>
+
+                <label class="preference-item">
+                    <span>
+                        <strong>General News</strong>
+                        <small>Other news and updates from NSBM</small>
+                    </span>
+
+                    <input type="checkbox"
+                           name="categories[]"
+                           value="general"
+                           checked>
+                </label>
+
+            </div>
+
+        </section>
+
+
+       
+        <section class="settings-card" id="notifications">
+
+            <div class="card-heading">
+                <div class="heading-icon">♧</div>
+
+                <div>
+                    <h2>Notification Settings</h2>
+                    <p>Choose which email updates you want to receive.</p>
+                </div>
+            </div>
+
+            <div class="preference-list">
+
+                <label class="preference-item">
+                    <span>
+                        <strong>News Updates</strong>
+                        <small>Receive updates about your selected categories.</small>
+                    </span>
+
+                    <input type="checkbox"
+                           name="newsNotifications"
+                           value="yes"
+                           checked>
+                </label>
+
+                <label class="preference-item">
+                    <span>
+                        <strong>Article Submission Updates</strong>
+                        <small>Know when your submitted articles are approved or rejected.</small>
+                    </span>
+
+                    <input type="checkbox"
+                           name="submissionNotifications"
+                           value="yes"
+                           checked>
+                </label>
+
+                <label class="preference-item">
+                    <span>
+                        <strong>Comment Notifications</strong>
+                        <small>Receive updates about activity on your articles.</small>
+                    </span>
+
+                    <input type="checkbox"
+                           name="commentNotifications"
+                           value="yes">
+                </label>
+
+            </div>
+
+        </section>
+
+
+        
+        <div class="form-actions">
+
+            <a href="index.html" class="cancel-button">
+                Cancel
+            </a>
+
+            <button type="submit" class="save-button">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+
+    
+ 
+</main>
+   <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-col footer-brand">
+            <a href="#" class="footer-logo">
+                <img src="nsbm-logo.png" alt="NSBM Green University logo">
+                <span class="footer-logo-text">
+                    <span class="footer-logo-title">NSBM <span class="accent">NewsDesk</span></span>
+                    <span class="footer-logo-sub">NSBM Green University</span>
+                </span>
+            </a>
+            <p class="footer-desc">The official campus news, events, and club publication repository of NSBM Green University, Sri Lanka.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Content Feeds</h4>
+            <ul>
+                <li><a href="#">Campus Headlines</a></li>
+                <li><a href="#">Computing Faculty News</a></li>
+                <li><a href="#">Business &amp; Innovation</a></li>
+                <li><a href="#">Engineering Research</a></li>
+                <li><a href="#">Clubs &amp; Event Calendars</a></li>
+            </ul>
+        </div>
+        <div class="footer-col footer-workspace">
+            <h4>My Workspace</h4>
+            <ul>
+                <li><a href="#">User Profile</a><i class="fa-solid fa-user"></i></li>
+                <li><a href="#">My Submissions (14)</a></li>
+                <li><a href="#">Saved Bookmarks (38)</a><i class="fa-regular fa-bookmark"></i></li>
+                <li><a href="#" class="highlight">Submit New Story</a><i class="fa-solid fa-plus highlight"></i></li>
+                <li><a href="#">Notification Preferences</a></li>
+                <li><a href="#" class="logout" id="logoutLink">Log Out Session</a></li>
+            </ul>
+        </div>
+        <div class="footer-col footer-contact">
+            <h4>Campus Contact</h4>
+            <ul>
+                <li><i class="fa-solid fa-location-dot"></i><span>NSBM Green University, Pitipana,<br>Homagama, Sri Lanka</span></li>
+                <li><i class="fa-solid fa-envelope"></i><a href="mailto:newsdesk@nsbm.ac.lk">newsdesk@nsbm.ac.lk</a></li>
+                <li><i class="fa-solid fa-phone"></i><a href="tel:+94115445000">+94 11 544 5000</a></li>
+            </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+         <p>&copy; <span id="footerYear"></span> NSBM NewsDesk &bull; NSBM Green University.</p>
+         <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Publication</a></div>
+      </div>
+    </footer>
+    <script src="user_account_settings.js"></script>
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
+
+</body>
+</html>
+
