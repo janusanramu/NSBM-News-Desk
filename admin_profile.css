@@ -17,73 +17,73 @@ margin: 24px 0 0;
 display: grid;
 grid-template-columns: minmax(110px, .7fr) 1.3fr;
 gap: 14px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e8eee9;
-        }
-        .admin-profile .profile-details div:last-child {
-            padding-bottom: 0;
-            border-bottom: 0;
-        }
-        .admin-profile .profile-details dt {
-            color: #718479;
-            font-size: 13px;
-        }
-        .admin-profile .profile-details dd {
-            margin: 0;
-            overflow-wrap: anywhere;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .admin-profile .security-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .admin-profile .security-indicator::before {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: #d89624;
-            content: "";
-        }
-        .admin-profile .security-indicator.is-enabled::before {
-            background: #16834a;
-        }
-        .admin-profile .profile-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .admin-profile .profile-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 11px 16px;
-            border: 1px solid #dce9e0;
-            border-radius: 11px;
-            background: #fff;
-            color: #006b4f;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-        .admin-profile .profile-link.primary {
-            border-color: #006c4d;
-            background: linear-gradient(125deg, #007f57, #00543d);
-            color: #fff;
-        }
-        .admin-profile .activity-empty {
-            margin: 22px 0 0;
-            color: #718479;
-            font-size: 13px;
-        }
-        @media (max-width: 520px) {
-            .admin-profile .profile-details div {
-                grid-template-columns: 1fr;
-                gap: 5px;
-            }
-        }
+padding-bottom: 12px;
+border-bottom: 1px solid #e8eee9;
+}
+.admin-profile .profile-details div:last-child {
+padding-bottom: 0;
+border-bottom: 0;
+}
+.admin-profile .profile-details dt {
+color: #718479;
+font-size: 13px;
+}
+.admin-profile .profile-details dd {
+margin: 0;
+overflow-wrap: anywhere;
+font-size: 13px;
+font-weight: 600;
+}
+.admin-profile .security-indicator {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+ }
+.admin-profile .security-indicator::before {
+width: 9px;
+height: 9px;
+border-radius: 50%;
+background: #d89624;
+content: "";
+}
+.admin-profile .security-indicator.is-enabled::before {
+background: #16834a;
+}
+.admin-profile .profile-actions {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: 20px;
+}
+.admin-profile .profile-link {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 11px 16px;
+border: 1px solid #dce9e0;
+border-radius: 11px;
+background: #fff;
+color: #006b4f;
+font-size: 13px;
+font-weight: 700;
+text-decoration: none;
+}
+.admin-profile .profile-link.primary {
+border-color: #006c4d;
+background: linear-gradient(125deg, #007f57, #00543d);
+color: #fff;
+}
+.admin-profile .activity-empty {
+ margin: 22px 0 0;
+color: #718479;
+font-size: 13px;
+}
+@media (max-width: 520px) {
+.admin-profile .profile-details div {
+grid-template-columns: 1fr;
+gap: 5px;
+}
+}
 
 .admin-settings .settings-banner {
     padding: 32px 38px;

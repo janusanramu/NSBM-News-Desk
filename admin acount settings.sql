@@ -29,8 +29,4 @@ CREATE TABLE IF NOT EXISTS admin_activity_logs (
         ON DELETE CASCADE
 );
 
--- Do not use a real password in this sample.
--- Create an administrator through a secure setup script using password_hash().
--- Example activity rows can be inserted after creating an admin:
--- INSERT INTO admin_activity_logs (admin_id, action, description)
--- VALUES (1, 'Article approved', 'Approved article: Campus News Update');
+
