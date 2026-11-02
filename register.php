@@ -1,0 +1,226 @@
+<?php
+require_once __DIR__ . '/includes/bootstrap.php';
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+    require_post();
+    verify_csrf();
+    $name = trim(posted_string('fullname'));
+    $email = strtolower(trim(posted_string('email')));
+    $faculty = trim(posted_string('faculty'));
+    $password = posted_string('password');
+    $confirm = posted_string('confirm');
+    $faculties = [
+        'Faculty of Business',
+        'Faculty of Computing',
+        'Faculty of Engineering',
+        'Faculty of Science',
+        'Staff',
+    ];
+
+    if (
+        preg_match('/\A.{1,120}\z/us', $name) !== 1 ||
+        !is_nsbm_email($email) ||
+        !in_array($faculty, $faculties, true) ||
+        strlen($password) < 8 || strlen($password) > 72 ||
+        $password !== $confirm ||
+        posted_string('terms') !== 'on'
+    ) {
+        redirect('register.php?error=invalid');
+    }
+
+    try {
+        $query = database()->prepare(
+            'INSERT INTO users (full_name, email, faculty, password_hash, terms_accepted_at)
+             VALUES (:full_name, :email, :faculty, :password_hash, CURRENT_TIMESTAMP)'
+        );
+        $query->execute([
+            'full_name' => $name,
+            'email' => $email,
+            'faculty' => $faculty,
+            'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+        ]);
+        redirect('login.php?status=registered');
+    } catch (PDOException $exception) {
+        if ($exception->getCode() === '23000') {
+            redirect('register.php?error=email');
+        }
+        error_log('NewsDesk registration database error: ' . $exception->getMessage());
+        redirect('register.php?error=unavailable');
+    } catch (RuntimeException $exception) {
+        error_log('NewsDesk registration configuration error: ' . $exception->getMessage());
+        redirect('register.php?error=unavailable');
+    }
+}
+
+$notice = match ($_GET['error'] ?? '') {
+    'email' => 'That email address is already registered.',
+    'invalid' => 'Please check your details and try again.',
+    'unavailable' => 'Registration is temporarily unavailable. Please try again later.',
+    default => '',
+};
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0" rel="stylesheet">
+<link rel="stylesheet" href="register.css">
+<title>Register | NSBM NewsDesk</title>
+</head>
+<body class="theme-dark">
+
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <img src="images/logo.png" alt="NSBM Green University">
+    <span>NSBM NewsDesk</span>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="submit-article.html">Submit Article</a>
+    <a href="bookmarks.html">My Bookmarks</a>
+    <a href="submissions.html">My Submissions</a>
+    <a href="admin.html">Admin Dashboard</a>
+  </nav>
+  <div class="search-box">
+    <span class="material-symbols-outlined">search</span>
+    <input type="text" placeholder="Search news...">
+  </div>
+  <button type="button" class="theme-toggle" aria-label="Switch to light theme" title="Toggle theme"><span class="material-symbols-outlined">light_mode</span></button>
+  <button type="button" class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span class="material-symbols-outlined">menu</span></button>
+  <a href="login.php" class="avatar-btn" aria-label="Account">
+    <span class="material-symbols-outlined">person</span>
+  </a>
+</header>
+
+<div class="ticker">
+  <span class="badge">BREAKING</span>
+  <div class="ticker-track">
+    <div class="ticker-inner" id="tickerInner"></div>
+  </div>
+</div>
+
+<main class="auth-hero register">
+  <div class="login-shell">
+    <aside class="login-feature" aria-label="Join NSBM NewsDesk">
+      <div class="feature-top"><span class="material-symbols-outlined">auto_stories</span> NSBM NEWSDESK</div>
+      <div class="feature-art feature-video" aria-label="NSBM campus logo animation">
+        <video class="mouse-scrub-video" autoplay loop muted playsinline preload="metadata" aria-label="Animated NSBM logo">
+          <source src="videos/NSBM_Logo_Transparent.webm" type="video/webm">
+        </video>
+      </div>
+      <div class="feature-copy"><span class="feature-kicker">YOUR STORY STARTS HERE.</span>
+        <h2>CONNECT.<br>SHARE. GROW.</h2>
+        <p>Create your campus account, share your stories, and be part of the NSBM community.</p>
+      </div>
+    </aside>
+  <section class="glass-card login-panel">
+    <div class="logo-tile"><span class="material-symbols-outlined">newspaper</span></div>
+    <h1>Join NSBM NewsDesk</h1>
+    <p class="sub">Create an account to submit stories, bookmark articles,<br>and join community discussions</p>
+
+    <?php if ($notice !== ''): ?><p role="alert" style="color:#ffb4b4;margin:0 0 16px"><?= e($notice) ?></p><?php endif; ?>
+    <form id="registerForm" action="register.php" method="POST" novalidate>
+      <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+      <div class="field">
+        <label for="fullname">Full Name</label>
+        <div class="input-wrap">
+          <span class="material-symbols-outlined">person</span>
+          <input type="text" id="fullname" name="fullname" placeholder="Shagilan Jeyaraj" required>
+        </div>
+        <div class="error-msg"></div>
+      </div>
+
+      <div class="field">
+        <label for="email">Outlook Email</label>
+        <div class="input-wrap">
+          <span class="material-symbols-outlined">mail</span>
+          <input type="email" id="email" name="email" placeholder="username@nsbm.ac.lk" required>
+        </div>
+        <p class="hint">Use a valid NSBM student or staff email address (for example, @students.nsbm.ac.lk).</p>
+        <div class="error-msg"></div>
+      </div>
+
+      <div class="field">
+        <label for="faculty">Faculty / Batch</label>
+        <div class="input-wrap">
+          <span class="material-symbols-outlined">school</span>
+          <select id="faculty" name="faculty" required>
+            <option value="" selected disabled>Select your faculty</option>
+            <option>Faculty of Business</option>
+            <option>Faculty of Computing</option>
+            <option>Faculty of Engineering</option>
+            <option>Faculty of Science</option>
+            <option>Staff</option>
+          </select>
+          <span class="material-symbols-outlined chevron">expand_more</span>
+        </div>
+        <div class="error-msg"></div>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="material-symbols-outlined">lock</span>
+          <input type="password" id="password" name="password" maxlength="72" placeholder="8–72 characters" autocomplete="new-password" required>
+          <button type="button" class="toggle-pass" data-target="password" aria-label="Show password"><span class="material-symbols-outlined">visibility</span></button>
+        </div>
+        <div class="error-msg"></div>
+        <div class="strength" aria-live="polite"><div class="strength-track"><span id="strengthBar"></span></div><small id="strengthLabel">Use 8+ characters with upper/lowercase, numbers and symbols.</small></div>
+      </div>
+
+      <div class="field">
+        <label for="confirm">Confirm Password</label>
+        <div class="input-wrap">
+          <span class="material-symbols-outlined">lock_reset</span>
+          <input type="password" id="confirm" name="confirm" maxlength="72" placeholder="Confirm your password" autocomplete="new-password" required>
+          <button type="button" class="toggle-pass" data-target="confirm" aria-label="Show password"><span class="material-symbols-outlined">visibility</span></button>
+        </div>
+        <div class="error-msg"></div>
+      </div>
+
+      <label class="check terms">
+        <input type="checkbox" id="terms" name="terms" required>
+        <span>I agree to the <a href="guidelines.html">Community Guidelines</a> and <a href="terms.html">Terms of Service</a> for NSBM NewsDesk.</span>
+      </label>
+      <div class="field has-error" id="termsField" style="margin:-10px 0 14px"><div class="error-msg"></div></div>
+
+      <button type="submit" class="btn-primary">Create Account <span class="material-symbols-outlined">arrow_forward</span></button>
+    </form>
+
+    <p class="switch-line">Already have an account? <a href="login.php">Login here</a></p>
+  </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h3>NSBM NewsDesk</h3>
+      <p>The official campus news and club-post portal for NSBM Green University, Sri Lanka. Keeping the academic community connected and informed.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">Latest News</a></li>
+        <li><a href="submit-article.html">Submit an Article</a></li>
+        <li><a href="bookmarks.html">Bookmarks</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>NSBM Green University, Pitipana, Homagama, Sri Lanka</p>
+      <p>Email: newsdesk@nsbm.ac.lk</p>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 NSBM NewsDesk. All rights reserved.</div>
+</footer>
+
+<script src="js/register.js" defer></script>
+</body>
+</html>
