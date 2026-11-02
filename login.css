@@ -135,7 +135,7 @@ button { cursor: pointer; }
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 116px);
+  min-height: 100vh;
   padding: 65px 24px;
   background:
     radial-gradient(circle at 12% 22%, #31b87730, transparent 35%),

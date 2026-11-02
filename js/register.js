@@ -3,30 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('registerForm');
   if (!form) return;
 
-  // 01. Breaking-news ticker placeholder (replace with real headlines later)
-  const ticker = document.getElementById('tickerInner');
-  if (ticker) ticker.textContent = 'Welcome to NSBM NewsDesk  •  Campus news and stories  •  Share your voice  •  Join the community  •';
-
-  // 02. Mobile navigation
-  const menu = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.main-nav');
-  menu?.addEventListener('click', () => {
-    const opened = nav?.classList.toggle('is-open') ?? false;
-    menu.setAttribute('aria-expanded', String(opened));
-    menu.setAttribute('aria-label', opened ? 'Close navigation' : 'Open navigation');
-  });
-
-  // 03. Theme toggle
-  const theme = document.querySelector('.theme-toggle');
-  theme?.addEventListener('click', () => {
-    const light = document.body.classList.toggle('theme-light');
-    document.body.classList.toggle('theme-dark', !light);
-    const icon = theme.querySelector('.material-symbols-outlined');
-    if (icon) icon.textContent = light ? 'dark_mode' : 'light_mode';
-    theme.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
-  });
-
-  // 04. Show / hide passwords
+  // Show / hide passwords
   document.querySelectorAll('#registerForm .toggle-pass').forEach(button => {
     button.addEventListener('click', () => {
       const input = document.getElementById(button.dataset.target);
@@ -39,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 05. Password strength meter
+  // Password strength meter
   const password = document.getElementById('password');
   const strengthBar = document.getElementById('strengthBar');
   const strengthLabel = document.getElementById('strengthLabel');
@@ -56,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (strengthLabel) strengthLabel.textContent = !value ? 'Use 8+ characters with upper/lowercase, numbers and symbols.' : score <= 2 ? 'Weak password' : score <= 3 ? 'Fair password' : score === 4 ? 'Good password' : 'Strong password';
   });
 
-  // 06. Form validation; successful submissions continue to register.php
+  // Form validation; successful submissions continue to register.php
   function showError(input, message) {
     const field = input.closest('.field');
     if (!field) return;

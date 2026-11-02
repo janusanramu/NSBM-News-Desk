@@ -1,21 +1,6 @@
 /* NSBM NewsDesk — standalone login page interactions */
 document.addEventListener('DOMContentLoaded', () => {
   const $ = (selector) => document.querySelector(selector);
-  const menu = $('.menu-toggle');
-  const nav = $('.main-nav');
-  menu?.addEventListener('click', () => {
-    const open = nav?.classList.toggle('is-open') ?? false;
-    menu.setAttribute('aria-expanded', String(open));
-  });
-
-  const themeButton = $('.theme-toggle');
-  themeButton?.addEventListener('click', () => {
-    const light = document.body.classList.toggle('theme-light');
-    document.body.classList.toggle('theme-dark', !light);
-    themeButton.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
-    const icon = themeButton.querySelector('.material-symbols-outlined');
-    if (icon) icon.textContent = light ? 'dark_mode' : 'light_mode';
-  });
 
   const email = $('#email');
   const password = $('#password');
@@ -53,11 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!valid) { event.preventDefault(); form.querySelector('[aria-invalid="true"]')?.focus(); }
     // Valid forms submit to the existing login.php backend; no fake login is performed.
   });
-
-  const ticker = $('#tickerInner');
-  if (ticker && !ticker.textContent.trim()) {
-    ticker.textContent = 'Welcome to NSBM NewsDesk  •  Your campus. Your voice.  •  Discover stories and stay connected.';
-  }
 
   // Continuous logo playback with gentle pointer-responsive movement.
   const video = document.querySelector('.mouse-scrub-video');
