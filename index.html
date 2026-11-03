@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
+    /* ===== HOME styles (scoped to #home) ===== */
+#home{
       color-scheme: light;
       --green: #005b45;
       --green-dark: #004d3b;
@@ -22,13 +23,11 @@
       color: var(--ink);
       background: var(--page);
     }
-
-    * { box-sizing: border-box; }
-    body { margin: 0; min-width: 320px; }
-    button, input { font: inherit; }
-    button { cursor: pointer; }
-
-    .site-header {
+#home *{ box-sizing: border-box; }
+#home{ margin: 0; min-width: 320px; }
+#home button,#home input{ font: inherit; }
+#home button{ cursor: pointer; }
+#home .site-header{
       height: 52px;
       display: flex;
       align-items: center;
@@ -37,8 +36,7 @@
       background: #fff;
       border-bottom: 1px solid var(--line);
     }
-
-    .brand {
+#home .brand{
       display: flex;
       align-items: center;
       gap: 9px;
@@ -49,8 +47,7 @@
       text-decoration: none;
       white-space: nowrap;
     }
-
-    .brand-mark {
+#home .brand-mark{
       width: 28px;
       height: 28px;
       display: grid;
@@ -63,24 +60,21 @@
       letter-spacing: -1px;
       overflow: hidden;
     }
-
-    .brand-mark img {
+#home .brand-mark img{
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 50%;
       display: block;
     }
-
-    .nav-links {
+#home .nav-links{
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 5px;
       flex: 1;
     }
-
-    .nav-links a {
+#home .nav-links a{
       padding: 7px 12px;
       border-radius: 6px;
       color: #3e4843;
@@ -88,10 +82,9 @@
       text-decoration: none;
       white-space: nowrap;
     }
-
-    .nav-links a.active { background: var(--green); color: #fff; }
-    .header-actions { display: flex; align-items: center; gap: 12px; }
-    .top-search {
+#home .nav-links a.active{ background: var(--green); color: #fff; }
+#home .header-actions{ display: flex; align-items: center; gap: 12px; }
+#home .top-search{
       width: 320px;
       padding: 8px 11px;
       border: 0;
@@ -101,9 +94,8 @@
       color: var(--ink);
       font-size: 9px;
     }
-
-    .top-search::placeholder { color: #8c9690; }
-    .profile {
+#home .top-search::placeholder{ color: #8c9690; }
+#home .profile{
       width: 25px;
       height: 25px;
       display: grid;
@@ -114,8 +106,7 @@
       color: #fff;
       font-size: 11px;
     }
-
-    .breaking {
+#home .breaking{
       min-height: 29px;
       display: flex;
       align-items: center;
@@ -127,8 +118,7 @@
       font-size: 12px;
       white-space: nowrap;
     }
-
-    .breaking strong {
+#home .breaking strong{
       padding: 3px 7px;
       border-radius: 3px;
       background: var(--green);
@@ -136,16 +126,14 @@
       font-size: 8px;
       letter-spacing: .3px;
     }
-
-    main { max-width: 1200px; min-height: 725px; margin: 0 auto; padding: 27px 24px 35px; }
-    .eyebrow { margin: 0 0 4px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .45px; }
-    .intro { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
-    h1 { margin: 0; font-size: clamp(23px, 3vw, 30px); letter-spacing: -.8px; line-height: 1.18; }
-    .intro p { margin: 5px 0 0; color: #52605a; font-size: 11px; }
-    .result-count { margin: 0 0 2px; color: #59645e; font-size: 9px; white-space: nowrap; }
-    .result-count strong { color: #29332e; }
-
-    .toolbar {
+#home main{ max-width: 1200px; min-height: 725px; margin: 0 auto; padding: 27px 24px 35px; }
+#home .eyebrow{ margin: 0 0 4px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .45px; }
+#home .intro{ display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+#home h1{ margin: 0; font-size: clamp(23px, 3vw, 30px); letter-spacing: -.8px; line-height: 1.18; }
+#home .intro p{ margin: 5px 0 0; color: #52605a; font-size: 11px; }
+#home .result-count{ margin: 0 0 2px; color: #59645e; font-size: 9px; white-space: nowrap; }
+#home .result-count strong{ color: #29332e; }
+#home .toolbar{
       display: flex;
       align-items: center;
       gap: 9px;
@@ -156,10 +144,9 @@
       background: var(--surface);
       box-shadow: 0 4px 14px rgb(29 56 42 / 4%);
     }
-
-    .search-wrap { position: relative; flex: 1; min-width: 150px; }
-    .search-wrap span { position: absolute; top: 50%; left: 11px; color: #75817a; transform: translateY(-50%); }
-    .archive-search {
+#home .search-wrap{ position: relative; flex: 1; min-width: 150px; }
+#home .search-wrap span{ position: absolute; top: 50%; left: 11px; color: #75817a; transform: translateY(-50%); }
+#home .archive-search{
       width: 100%;
       height: 34px;
       padding: 0 12px 0 31px;
@@ -170,9 +157,9 @@
       color: var(--ink);
       font-size: 10px;
     }
-    .archive-search::placeholder { color: #929d96; }
-    .filters { display: flex; align-items: center; gap: 5px; }
-    .filter {
+#home .archive-search::placeholder{ color: #929d96; }
+#home .filters{ display: flex; align-items: center; gap: 5px; }
+#home .filter{
       display: inline-block;
       padding: 8px 11px;
       border: 0;
@@ -183,25 +170,22 @@
       text-decoration: none;
       white-space: nowrap;
     }
-    .filter.active { background: var(--green); color: #fff; }
-
-    .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-    .news-card {
+#home .filter.active{ background: var(--green); color: #fff; }
+#home .news-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+#home .news-card{
       overflow: hidden;
       border: 1px solid #edf1ee;
       border-radius: 10px;
       background: var(--surface);
       box-shadow: 0 4px 12px rgb(32 56 42 / 5%);
     }
-
-    .news-card[hidden] { display: none; }
-    .news-card:not([hidden]) { display: block; }
-
-    .card-image { position: relative; height: 155px; overflow: hidden; background: #dce6df; }
-    .card-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .25s ease; }
-    .card-image a.image-link { display: block; height: 100%; }
-    .news-card:hover .card-image img { transform: scale(1.025); }
-    .category {
+#home .news-card[hidden]{ display: none; }
+#home .news-card:not([hidden]){ display: block; }
+#home .card-image{ position: relative; height: 155px; overflow: hidden; background: #dce6df; }
+#home .card-image img{ width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .25s ease; }
+#home .card-image a.image-link{ display: block; height: 100%; }
+#home .news-card:hover .card-image img{ transform: scale(1.025); }
+#home .category{
       position: absolute;
       top: 9px;
       left: 9px;
@@ -212,13 +196,13 @@
       font-size: 8px;
       font-weight: 600;
     }
-    a.category { text-decoration: none; }
-    .category.business { background: #9de8bb; }
-    .category.engineering { background: #ffd6d1; }
-    .category.clubs { background: #a4edc2; }
-    .category.sports { background: #94efc4; }
-    .category.notices { background: #ffc7c9; }
-    .bookmark {
+#home a.category{ text-decoration: none; }
+#home .category.business{ background: #9de8bb; }
+#home .category.engineering{ background: #ffd6d1; }
+#home .category.clubs{ background: #a4edc2; }
+#home .category.sports{ background: #94efc4; }
+#home .category.notices{ background: #ffc7c9; }
+#home .bookmark{
       position: absolute;
       top: 8px;
       right: 8px;
@@ -231,20 +215,20 @@
       background: rgb(255 255 255 / 90%);
       color: #294238;
     }
-    .bookmark svg { width: 20px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
-    .bookmark.saved { color: var(--green); }
-    .bookmark.saved svg { fill: currentColor; }
-    .card-content { padding: 11px 12px 12px; }
-    .meta { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; color: #7b8680; font-size: 8px; }
-    .meta .dot { color: #a7b0aa; }
-    .card-content h2 { margin: 0 0 4px; font-size: 15px; font-weight: 600; line-height: 1.4; }
-    .card-content h2 a { color: inherit; text-decoration: none; }
-    .card-content h2 a:hover { color: var(--green); }
-    .description { min-height: 40px; margin: 0; color: #59645e; font-size: 10px; line-height: 1.5; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; font-size: 9px; }
-    .author, .views { display: flex; align-items: center; gap: 6px; }
-    .author { font-weight: 500; }
-    .avatar {
+#home .bookmark svg{ width: 20px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#home .bookmark.saved{ color: var(--green); }
+#home .bookmark.saved svg{ fill: currentColor; }
+#home .card-content{ padding: 11px 12px 12px; }
+#home .meta{ display: flex; align-items: center; gap: 7px; margin-bottom: 5px; color: #7b8680; font-size: 8px; }
+#home .meta .dot{ color: #a7b0aa; }
+#home .card-content h2{ margin: 0 0 4px; font-size: 15px; font-weight: 600; line-height: 1.4; }
+#home .card-content h2 a{ color: inherit; text-decoration: none; }
+#home .card-content h2 a:hover{ color: var(--green); }
+#home .description{ min-height: 40px; margin: 0; color: #59645e; font-size: 10px; line-height: 1.5; }
+#home .card-footer{ display: flex; align-items: center; justify-content: space-between; margin-top: 10px; font-size: 9px; }
+#home .author,#home .views{ display: flex; align-items: center; gap: 6px; }
+#home .author{ font-weight: 500; }
+#home .avatar{
       width: 19px;
       height: 19px;
       display: grid;
@@ -255,11 +239,10 @@
       font-size: 7px;
       font-weight: 700;
     }
-    .views { color: #758079; }
-    .empty-state { display: none; grid-column: 1 / -1; padding: 35px; color: var(--muted); text-align: center; font-size: 13px; }
-
-    .pagination { display: flex; justify-content: center; align-items: center; gap: 5px; margin: 24px 0 0; }
-    .pagination button {
+#home .views{ color: #758079; }
+#home .empty-state{ display: none; grid-column: 1 / -1; padding: 35px; color: var(--muted); text-align: center; font-size: 13px; }
+#home .pagination{ display: flex; justify-content: center; align-items: center; gap: 5px; margin: 24px 0 0; }
+#home .pagination button{
       min-width: 29px;
       height: 29px;
       border: 0;
@@ -268,11 +251,10 @@
       color: #4e5953;
       font-size: 9px;
     }
-    .pagination button.active { background: var(--green); color: #fff; }
-    .pagination .ellipsis { padding: 0 5px; color: #69736e; font-size: 10px; }
-
-    footer { background: #eef3ed; }
-    .footer-content {
+#home .pagination button.active{ background: var(--green); color: #fff; }
+#home .pagination .ellipsis{ padding: 0 5px; color: #69736e; font-size: 10px; }
+#home footer{ background: #eef3ed; }
+#home .footer-content{
       max-width: 1200px;
       display: grid;
       grid-template-columns: 1.2fr 1.2fr 1.2fr;
@@ -280,48 +262,222 @@
       margin: 0 auto;
       padding: 29px 24px 24px;
     }
-    .footer-content h2 { margin: 0 0 7px; font-size: 11px; }
-    .footer-content p, .footer-content a { color: #536059; font-size: 9px; line-height: 1.6; }
-    .footer-content p { max-width: 280px; margin: 0; }
-    .footer-links { display: grid; justify-items: start; gap: 3px; }
-    .footer-links a { text-decoration: none; }
-    .copyright { padding: 12px 20px; border-top: 1px solid #e4ebe4; color: #46514b; text-align: center; font-size: 9px; }
+#home .footer-content h2{ margin: 0 0 7px; font-size: 11px; }
+#home .footer-content p,#home .footer-content a{ color: #536059; font-size: 9px; line-height: 1.6; }
+#home .footer-content p{ max-width: 280px; margin: 0; }
+#home .footer-links{ display: grid; justify-items: start; gap: 3px; }
+#home .footer-links a{ text-decoration: none; }
+#home .copyright{ padding: 12px 20px; border-top: 1px solid #e4ebe4; color: #46514b; text-align: center; font-size: 9px; }
+@media (min-width: 1100px){#home .site-header{ padding-right: max(24px, calc((100vw - 1152px) / 2)); padding-left: max(24px, calc((100vw - 1152px) / 2)); }
+#home .breaking{ padding-right: max(24px, calc((100vw - 1152px) / 2)); padding-left: max(24px, calc((100vw - 1152px) / 2)); }}
+@media (max-width: 760px){#home .site-header{ gap: 12px; padding: 0 16px; }
+#home .brand{ min-width: auto; }
+#home .nav-links{ justify-content: flex-start; overflow: auto; }
+#home .nav-links a{ padding: 7px 8px; }
+#home .top-search{ display: none; }
+#home main{ min-height: auto; padding: 24px 16px 35px; }
+#home .toolbar{ align-items: stretch; flex-direction: column; margin: 20px 0 24px; }
+#home .filters{ overflow-x: auto; padding-bottom: 1px; }
+#home .news-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+#home .card-image{ height: 145px; }}
+@media (max-width: 520px){#home .site-header{ height: 50px; }
+#home .nav-links{ gap: 0; }
+#home .nav-links a{ font-size: 9px; }
+#home .profile{ flex: 0 0 25px; }
+#home .breaking{ padding: 0 14px; }
+#home .intro{ align-items: flex-start; flex-direction: column; gap: 10px; }
+#home .news-grid{ grid-template-columns: 1fr; }
+#home .card-image{ height: 190px; }
+#home .description{ min-height: 0; }
+#home .footer-content{ grid-template-columns: 1fr 1fr; gap: 22px; padding: 24px 16px; }
+#home .footer-content > :first-child{ grid-column: 1 / -1; }}
 
-    @media (min-width: 1100px) {
-      .site-header { padding-right: max(24px, calc((100vw - 1152px) / 2)); padding-left: max(24px, calc((100vw - 1152px) / 2)); }
-      .breaking { padding-right: max(24px, calc((100vw - 1152px) / 2)); padding-left: max(24px, calc((100vw - 1152px) / 2)); }
+    /* ===== ARTICLE styles (shared by all 6 article views, scoped to .article-page) ===== */
+.article-page{
+      --green: #005b45;
+      --ink: #202724;
+      --muted: #65716a;
+      --page: #f5f8f4;
+      --soft: #eef3ed;
+      --line: #e8eeea;
+      font-family: "DM Sans", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--page);
     }
-    @media (max-width: 760px) {
-      .site-header { gap: 12px; padding: 0 16px; }
-      .brand { min-width: auto; }
-      .nav-links { justify-content: flex-start; overflow: auto; }
-      .nav-links a { padding: 7px 8px; }
-      .top-search { display: none; }
-      main { min-height: auto; padding: 24px 16px 35px; }
-      .toolbar { align-items: stretch; flex-direction: column; margin: 20px 0 24px; }
-      .filters { overflow-x: auto; padding-bottom: 1px; }
-      .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
-      .card-image { height: 145px; }
+.article-page *{ box-sizing: border-box; }
+.article-page{ min-width: 320px; margin: 0; }
+.article-page button,.article-page textarea{ font: inherit; }
+.article-page button{ cursor: pointer; }
+.article-page a{ color: inherit; }
+.article-page .site-header{ height: 52px; display: flex; align-items: center; gap: 24px; padding: 0 max(24px, calc((100vw - 1152px) / 2)); background: #fff; border-bottom: 1px solid var(--line); }
+.article-page .brand{ display: flex; align-items: center; gap: 8px; min-width: 125px; color: #18201c; font-size: 10px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.article-page .brand-mark{ width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #e8f2eb; overflow: hidden; }
+.article-page .brand-mark img{ width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+.article-page .nav-links{ display: flex; align-items: center; gap: 3px; flex: 1; }
+.article-page .nav-links a{ padding: 7px 9px; border-radius: 6px; color: #3e4843; font-size: 9px; text-decoration: none; white-space: nowrap; }
+.article-page .nav-links a.active{ background: var(--green); color: #fff; }
+.article-page .header-actions{ display: flex; align-items: center; gap: 10px; }
+.article-page .top-search{ width: 280; padding: 8px 11px; border: 0; border-radius: 20px; outline-color: #9acbbb; background: #f3f6f3; font-size: 9px; }
+.article-page .profile{ width: 24px; height: 24px; border: 0; border-radius: 50%; background: var(--green); color: #fff; }
+.article-page .breaking{ min-height: 28px; display: flex; align-items: center; gap: 10px; overflow: hidden; padding: 0 max(24px, calc((100vw - 1152px) / 2)); background: var(--soft); color: #4d5751; font-size: 8px; white-space: nowrap; }
+.article-page .breaking strong{ padding: 3px 7px; border-radius: 3px; background: var(--green); color: #fff; font-size: 8px; }
+.article-page .article-hero{
+      position: relative;
+      min-height: 275px;
+      background:
+        linear-gradient(0deg, var(--page) 0%, rgb(245 248 244 / 92%) 9%, rgb(245 248 244 / 22%) 70%),
+        linear-gradient(90deg, rgb(245 248 244 / 25%), rgb(245 248 244 / 5%)),
+        var(--hero-img) center 42% / cover;
     }
-    @media (max-width: 520px) {
-      .site-header { height: 50px; }
-      .nav-links { gap: 0; }
-      .nav-links a { font-size: 9px; }
-      .profile { flex: 0 0 25px; }
-      .breaking { padding: 0 14px; }
-      .intro { align-items: flex-start; flex-direction: column; gap: 10px; }
-      .news-grid { grid-template-columns: 1fr; }
-      .card-image { height: 190px; }
-      .description { min-height: 0; }
-      .footer-content { grid-template-columns: 1fr 1fr; gap: 22px; padding: 24px 16px; }
-      .footer-content > :first-child { grid-column: 1 / -1; }
+.article-page .hero-inner{ max-width: 860px; margin: 0 auto; padding: 177px 24px 14px; }
+.article-page .article-labels{ display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
+.article-page .category{ padding: 4px 8px; border-radius: 12px; background: #8de9bd; color: #15392b; font-size: 8px; font-weight: 700; }
+.article-page .article-meta{ color: #34423a; font-size: 10px; font-weight: 600; }
+.article-page h1{ max-width: 650px; margin: 0 0 10px; font-size: clamp(21px, 3.2vw, 30px); line-height: 1.22; letter-spacing: -.55px; }
+.article-page .hero-bottom{ display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.article-page .author{ display: flex; align-items: center; gap: 9px; }
+.article-page .author-avatar{ width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: #fff; font-size: 10px; font-weight: 600; }
+.article-page .author-name{ font-size: 10px; font-weight: 600; }
+.article-page .author-role{ margin-top: 2px; color: #65716a; font-size: 8px; }
+.article-page .hero-actions{ display: flex; gap: 7px; }
+.article-page .hero-actions button{ padding: 7px 10px; border: 0; border-radius: 7px; background: rgb(255 255 255 / 85%); color: #334039; font-size: 9px; }
+.article-page .hero-actions button[aria-pressed="true"]{ color: var(--green); }
+.article-page .hero-actions button.save-article{ display: inline-flex; align-items: center; gap: 6px; }
+.article-page .share-wrap{ position: relative; }
+.article-page .share-menu{
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 20;
+      min-width: 130px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 5px 16px rgb(29 56 42 / 14%);
     }
+.article-page .share-menu[hidden]{ display: none; }
+.article-page .hero-actions .share-menu a,.article-page .hero-actions .share-menu button{
+      display: block;
+      width: 100%;
+      padding: 7px 8px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--ink);
+      font-size: 10px;
+      text-align: left;
+      text-decoration: none;
+    }
+.article-page .hero-actions .share-menu a:hover,.article-page .hero-actions .share-menu button:hover{ background: var(--page); }
+.article-page .bookmark-icon{ width: 15px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.article-page .save-article.saved .bookmark-icon{ fill: currentColor; }
+.article-page .article-column{ width: min(100% - 32px, 780px); margin: 13px auto 0; }
+.article-page .article-body{ padding: 30px 32px; border: 1px solid #edf1ee; border-radius: 12px; background: #fff; box-shadow: 0 4px 14px rgb(29 56 42 / 4%); }
+.article-page .article-body p{ margin: 0 0 13px; color: #59645e; font-size: 13px; line-height: 1.65; }
+.article-page .article-body .lead{ margin-bottom: 20px; color: #1f2723; font-size: 16px; font-weight: 500; line-height: 1.65; }
+.article-page .article-body h2{ margin: 21px 0 7px; font-size: 14px; font-weight: 600; }
+.article-page blockquote{ position: relative; margin: 19px 0; padding: 18px 22px; border-radius: 9px; background: #f0f5f0; color: var(--green); }
+.article-page blockquote p{ margin: 0 0 5px !important; color: var(--green) !important; font-size: 12px !important; font-weight: 600; }
+.article-page blockquote cite{ color: #64716a; font-size: 8px; font-style: normal; }
+.article-page .article-figure{ overflow: hidden; margin: 12px 0; border-radius: 8px; background: #f0f5f0; }
+.article-page .article-figure img{ width: 100%; height: 260px; display: block; object-fit: cover; }
+.article-page .article-figure figcaption{ padding: 8px; color: #58645d; text-align: center; font-size: 8px; }
+.article-page .author-bio{ display: flex; align-items: center; gap: 14px; margin: 18px 0 22px; padding: 20px; border-radius: 11px; background: var(--soft); }
+.article-page .author-bio .author-avatar{ width: 48px; height: 48px; flex: 0 0 48px; }
+.article-page .author-bio h2{ margin: 0 0 4px; font-size: 12px; }
+.article-page .author-bio p{ margin: 0 0 5px; color: #59645e; font-size: 10px; line-height: 1.5; }
+.article-page .discussion-title{ margin: 0 0 11px; font-size: 14px; }
+.article-page .comment-form,.article-page .comment{ padding: 14px; border: 1px solid #edf1ee; border-radius: 10px; background: #fff; }
+.article-page .comment-form{ margin-bottom: 11px; }
+.article-page .comment-form label{ display: block; margin-bottom: 6px; font-size: 11px; font-weight: 600; }
+.article-page .comment-form textarea{ width: 100%; min-height: 72px; resize: vertical; padding: 10px; border: 0; border-radius: 7px; outline: 1px solid transparent; background: #f1f5f1; color: var(--ink); font-size: 12px; }
+.article-page .comment-form textarea:focus{ outline-color: #9acbbb; }
+.article-page .comment-form textarea::placeholder{ color: #929d96; }
+.article-page .form-footer{ display: flex; justify-content: flex-end; margin-top: 8px; }
+.article-page .submit-comment{ padding: 8px 13px; border: 0; border-radius: 7px; background: var(--green); color: #fff; font-size: 11px; }
+.article-page .comment-list{ display: grid; gap: 9px; }
+.article-page .comment{ display: grid; grid-template-columns: 21px 1fr; gap: 8px; padding: 12px; }
+.article-page .comment-avatar{ width: 21px; height: 21px; display: grid; place-items: center; border-radius: 50%; background: #93f1bf; font-size: 9px; font-weight: 700; }
+.article-page .comment:nth-child(2) .comment-avatar{ background: #e1e7e2; }
+.article-page .comment:nth-child(3) .comment-avatar{ background: #ffd5d1; }
+.article-page .comment-head{ display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.article-page .comment-name{ font-size: 10px; font-weight: 600; }
+.article-page .comment-role,.article-page .comment-time{ color: #748078; font-size: 9px; }
+.article-page .comment-text{ margin: 6px 0 0; color: #59645e; font-size: 12px; line-height: 1.5; }
+.article-page .related{ margin-top: 32px; padding: 22px 0 27px; background: var(--soft); }
+.article-page .related-inner{ max-width: 1152px; margin: 0 auto; padding: 0 24px; }
+.article-page .related-heading{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
+.article-page .related-heading h2{ margin: 0; font-size: 10px; }
+.article-page .related-heading a{ color: var(--green); font-size: 8px; font-weight: 600; text-decoration: none; }
+.article-page .related-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.article-page .related-card{ overflow: hidden; border: 1px solid #e9efea; border-radius: 9px; background: #fff; text-decoration: none; }
+.article-page .related-card img{ width: 100%; height: 115px; display: block; object-fit: cover; }
+.article-page .related-copy{ padding: 10px; }
+.article-page .related-date{ color: #748078; font-size: 7px; }
+.article-page .related-copy h3{ margin: 5px 0; font-size: 9px; line-height: 1.4; }
+.article-page .related-copy p{ margin: 0; color: #65716a; font-size: 8px; line-height: 1.5; }
+.article-page .related-foot{ display: flex; justify-content: space-between; margin-top: 9px; color: #64716a; font-size: 7px; }
+.article-page footer{ background: #eef3ed; }
+.article-page .footer-content{ max-width: 1152px; display: grid; grid-template-columns: 1.2fr 1.2fr 1.2fr; gap: 40px; margin: 0 auto; padding: 28px 24px 22px; }
+.article-page .footer-content h2{ margin: 0 0 7px; font-size: 10px; }
+.article-page .footer-content p,.article-page .footer-content a{ color: #536059; font-size: 8px; line-height: 1.6; }
+.article-page .footer-content p{ max-width: 280px; margin: 0; }
+.article-page .footer-links{ display: grid; justify-items: start; gap: 3px; }
+.article-page .footer-links a{ text-decoration: none; }
+.article-page .copyright{ padding: 12px; border-top: 1px solid #e4ebe4; color: #46514b; text-align: center; font-size: 8px; }
+@media (max-width: 900px){.article-page .site-header{ gap: 10px; padding-right: 16px; padding-left: 16px; }
+.article-page .nav-links{ overflow-x: auto; }
+.article-page .nav-links a{ padding-right: 7px; padding-left: 7px; }
+.article-page .top-search{ display: none; }
+.article-page .breaking{ padding-right: 16px; padding-left: 16px; }}
+@media (max-width: 600px){.article-page .site-header{ height: 50px; }
+.article-page .brand{ min-width: auto; }
+.article-page .nav-links a{ font-size: 8px; }
+.article-page .nav-links a:nth-child(n+4){ display: none; }
+.article-page .article-hero{ min-height: 280px; }
+.article-page .hero-inner{ padding: 165px 18px 14px; }
+.article-page .hero-bottom{ align-items: flex-start; flex-direction: column; }
+.article-page .hero-actions{ align-self: flex-end; margin-top: -38px; }
+.article-page .article-column{ width: calc(100% - 24px); }
+.article-page .article-body{ padding: 22px 18px; }
+.article-page .article-figure img{ height: 210px; }
+.article-page .author-bio{ padding: 15px; }
+.article-page .related-inner{ padding: 0 14px; }
+.article-page .related-grid{ grid-template-columns: 1fr; }
+.article-page .related-card{ display: grid; grid-template-columns: 38% 1fr; }
+.article-page .related-card img{ height: 100%; min-height: 130px; }
+.article-page .footer-content{ grid-template-columns: 1fr 1fr; gap: 20px; padding: 22px 16px; }
+.article-page .footer-content > :first-child{ grid-column: 1 / -1; }}
+
+    /* ---- merged single-page shell ---- */
+    html { scroll-behavior: auto; }
+    body { margin: 0; min-width: 320px; background: #f5f8f4; }
+    .page { min-height: 100vh; }
+    .page[hidden] { display: none !important; }
+    .article-page .article-hero { position: relative; }
+    .article-page .back-link {
+      position: absolute;
+      top: 14px;
+      left: max(24px, calc((100vw - 1152px) / 2));
+      z-index: 5;
+      padding: 7px 12px;
+      border-radius: 7px;
+      background: rgb(255 255 255 / 88%);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .article-page .back-link:hover { background: #fff; }
+
   </style>
 </head>
 <body>
-  
 
-  <div class="breaking">
+  <!-- ================= HOME (old index.html) ================= -->
+  <div class="page" id="home">
+<div class="breaking">
     <strong>BREAKING</strong>
     <span>NSBM Unveils Model of Proposed Multibillion Medical and Research Hospital • Faculty of Computing wins the Inter-Faculty Hackathon 2026 •NSBM Opens Rs. 720 Million Civil Engineering Laboratory Complex</span>
   </div>
@@ -354,13 +510,13 @@
     <section class="news-grid" id="news-grid" aria-label="News articles">
       <article class="news-card" data-category="computing">
         <div class="card-image">
-          <a class="image-link" href="pages/computing.html"><img src="assets/images/nsbm-computing-students-recreation-center-platform-3.jpg" alt="Students collaborating around computers in a campus workspace"></a>
-          <a class="category" href="pages/computing.html">Computing</a>
+          <a class="image-link" href="#computing"><img src="assets/images/nsbm-computing-students-recreation-center-platform-3.jpg" alt="Students collaborating around computers in a campus workspace"></a>
+          <a class="category" href="#computing">Computing</a>
           <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg></button>
         </div>
         <div class="card-content">
           <div class="meta"><span>Oct 20, 2026</span><span class="dot">•</span><span>18 min read</span></div>
-          <h2><a href="pages/computing.html">NSBM Computing Students Develop Digital Platform for Recreation Center Management</a></h2>
+          <h2><a href="#computing">NSBM Computing Students Develop Digital Platform for Recreation Center Management</a></h2>
           <p class="description">Three talented undergraduates from our Faculty of Computing took the initiative to design, develop, and deploy the NSBM Recreation Center Management Platform.</p>
           <div class="card-footer"><span class="author"><span class="avatar">PS</span>Dr. Rasika Ranaweera</span><span class="views">◎ 1.4k</span></div>
         </div>
@@ -368,13 +524,13 @@
 
       <article class="news-card" data-category="business">
         <div class="card-image">
-          <a class="image-link" href="pages/business.html"><img src="assets/images/nsbm-research-symposium-marketing-tourism-multimedia-7-1200x600.jpg" alt="Speaker presenting to a large business conference audience"></a>
-          <a class="category" href="pages/business.html">Business</a>
+          <a class="image-link" href="#business"><img src="assets/images/nsbm-research-symposium-marketing-tourism-multimedia-7-1200x600.jpg" alt="Speaker presenting to a large business conference audience"></a>
+          <a class="category" href="#business">Business</a>
           <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg></button>
         </div>
         <div class="card-content">
           <div class="meta"><span>Oct 22, 2026</span><span class="dot">•</span><span>2 min read</span></div>
-          <h2><a href="pages/business.html">NSBM 6th Student Research Symposium in Marketing, Tourism and Multimedia</a></h2>
+          <h2><a href="#business">NSBM 6th Student Research Symposium in Marketing, Tourism and Multimedia</a></h2>
           <p class="description">NSBM Green University successfully hosted the 6th Student Research Symposium in Marketing, Tourism and Multimedia (SRSMTM 2026) on 8 October 2026</p>
           <div class="card-footer"><span class="author"><span class="avatar">AS</span>Ms. Anne Pathiranage, Dean (Acting)</span><span class="views">◎ 950</span></div>
         </div>
@@ -382,13 +538,13 @@
 
       <article class="news-card" data-category="engineering">
         <div class="card-image">
-          <a class="image-link" href="pages/engineering.html"><img src="assets/images/nsbm-civil-engineering-laboratory-complex-720-million-2.jpg" alt="Engineering students working together on a technical project"></a>
-          <a class="category" href="pages/engineering.html">Engineering</a>
+          <a class="image-link" href="#engineering"><img src="assets/images/nsbm-civil-engineering-laboratory-complex-720-million-2.jpg" alt="Engineering students working together on a technical project"></a>
+          <a class="category" href="#engineering">Engineering</a>
           <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg></button>
         </div>
         <div class="card-content">
           <div class="meta"><span>Sep 28, 2026</span><span class="dot">•</span><span>48 min read</span></div>
-          <h2><a href="pages/engineering.html"> Opens Rs. 720 Million Civil Engineering Laboratory Complex</a></h2>
+          <h2><a href="#engineering"> Opens Rs. 720 Million Civil Engineering Laboratory Complex</a></h2>
           <p class="description">NSBM Green University ceremonially opened its state-of-the-art Civil Engineering Laboratory Complex</p>
           <div class="card-footer"><span class="author"><span class="avatar">KP</span>Dr.chandana perera</span><span class="views">◎ 820</span></div>
         </div>
@@ -396,13 +552,13 @@
 
       <article class="news-card" data-category="Events">
         <div class="card-image">
-          <a class="image-link" href="pages/Events.html"><img src="assets/images/nsbm-green-university-10-years-excellence-national-impact-5-1037x600.jpg" alt="Student speaker addressing an audience at a campus event"></a>
-          <a class="category" href="pages/Events.html">Events</a>
+          <a class="image-link" href="#events"><img src="assets/images/nsbm-green-university-10-years-excellence-national-impact-5-1037x600.jpg" alt="Student speaker addressing an audience at a campus event"></a>
+          <a class="category" href="#events">Events</a>
           <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg></button>
         </div>
         <div class="card-content">
           <div class="meta"><span>Oct 26, 2026</span><span class="dot">•</span><span>5 days read</span></div>
-          <h2><a href="pages/Events.html">NSBM Green University Celebrates 10 Years of Excellence and National Impact</a></h2>
+          <h2><a href="#events">NSBM Green University Celebrates 10 Years of Excellence and National Impact</a></h2>
           <p class="description">NSBM Green University unveiled the architectural model of its proposed multibillion-rupee Medical and Research Hospital on 26 October 2026.</p>
           <div class="card-footer"><span class="author"><span class="avatar">NM</span>Founder and Vice Chancellor Prof. E. A. Weerasinghe</span><span class="views">◎ 10k</span></div>
         </div>
@@ -410,13 +566,13 @@
 
       <article class="news-card" data-category="sports">
         <div class="card-image">
-          <a class="image-link" href="pages/sports.html"><img src="assets/images/nsbm-cricket-kdu-t20-champions-2026-1200x600.jpg" alt="Cricket match underway on a green field"></a>
-          <a class="category" href="pages/sports.html">Sports</a>
+          <a class="image-link" href="#sports"><img src="assets/images/nsbm-cricket-kdu-t20-champions-2026-1200x600.jpg" alt="Cricket match underway on a green field"></a>
+          <a class="category" href="#sports">Sports</a>
           <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg></button>
         </div>
         <div class="card-content">
           <div class="meta"><span>Oct 5, 2026</span><span class="dot">•</span><span>6 days read</span></div>
-          <h2><a href="pages/sports.html">NSBM Cricket Team Crowned Champions Again at KDU Inter-University T20 Championship 2026</a></h2>
+          <h2><a href="#sports">NSBM Cricket Team Crowned Champions Again at KDU Inter-University T20 Championship 2026</a></h2>
           <p class="description">NSBM Green University has once again made its mark in university cricket, with the NSBM Cricket Team securing the KDU Leaders’ Trophy Inter-University T20 Cricket Championship 2026</p>
           <div class="card-footer"><span class="author"><span class="avatar">TF</span>T. Fernando</span><span class="views">◎ 1.5k</span></div>
         </div>
@@ -424,13 +580,13 @@
 
       <article class="news-card" data-category="notices">
         <div class="card-image">
-          <a class="image-link" href="pages/Notices.html"><img src="assets/images/NSBM-Reopen-11.jpg" alt="Students walking through a university campus"></a>
-          <a class="category" href="pages/Notices.html">Notices</a>
+          <a class="image-link" href="#notices"><img src="assets/images/NSBM-Reopen-11.jpg" alt="Students walking through a university campus"></a>
+          <a class="category" href="#notices">Notices</a>
           <button class="bookmark" type="button" aria-label="Bookmark article" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg></button>
         </div>
         <div class="card-content">
           <div class="meta"><span>Oct 26, 2026</span><span class="dot">•</span><span>2 min read</span></div>
-          <h2><a href="pages/Notices.html">Batch End Semester Examination Timetable Released for All Faculties</a></h2>
+          <h2><a href="#notices">Batch End Semester Examination Timetable Released for All Faculties</a></h2>
           <p class="description">The end semester examination timetable has been released for all faculties at NSBM Green University. Please check the official website for the detailed schedule.</p>
           <div class="card-footer"><span class="author"><span class="avatar">AR</span>Academic Registrar</span><span class="views">◎ 2.8k</span></div>
         </div>
@@ -448,10 +604,532 @@
       <button type="button" aria-label="Next page">›</button>
     </nav>
   </main>
+  </div>
 
-  
+  <!-- ================= ARTICLES (old pages/*.html) ================= -->
+<div class="page article-page" id="computing" hidden>
+<header class="article-hero" style="--hero-img:url('assets/images/nsbm%20computing.jpg')">
+    <a class="back-link" href="#home">&larr; Back to News Archive</a>
+    <div class="hero-inner">
+      <div class="article-labels">
+        <span class="category">COMPUTING</span>
+        <span class="article-meta">◷ &nbsp;Oct 24, 2024 &nbsp;•&nbsp; ◎ 1.4k views</span>
+      </div>
+      <h1>NSBM Computing Students Develop Digital Platform for Recreation Center Management</h1>
+      <div class="hero-bottom">
+        <div class="author">
+          <span class="author-avatar">PS</span>
+          <span><span class="author-name">Dr. Rasika Ranaweera</span><br><span class="author-role">Dean, Faculty of Computing</span></span>
+        </div>
+        <div class="hero-actions">
+          <button class="save-article" type="button" aria-label="Save article" aria-pressed="false"><svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg><span class="save-label">Save</span></button>
+          <button class="share-button" type="button">↗ &nbsp;Share</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-column">
+    <article class="article-body">
+      <p class="lead">Three talented undergraduates from our Faculty of Computing took the initiative to design, develop, and deploy the NSBM Recreation Center Management Platform; a digital solution created to streamline the management of the Recreation Center’s activities and resources.</p>
+
+      <h2>Digital Platform for Recreation Center</h2>
+      <p>The platform brings key operations of the NSBM Recreation Centre into one unified system. It enables the efficient management of campus sports, student and staff athletic records, achievements, and inventory, helping keep essential information organised and accessible.
+ </p>
+      <p>"The project was developed by three undergraduates from the Department of Software Engineering and Computer Security, Faculty of Computing — Radin Reanula, Chamindu Rathnayaka, and Poojana Fernando — under the guidance of Lecturer of the faculty, Ms. Nimesha Hewawasam.
+ 
+"</p>
+      <blockquote>
+        <p>“
+The platform is now live and officially handed over to Ms. Shanika Sewwandi, Executive – Sports and Physical Education. The occasion was graced by Dr. Rasika Ranaweera, Head of the Department of Software Engineering and Computer Security.”</p>
+        <cite>— Dr. Rasika Ranaweera, Faculty of Computing</cite>
+      </blockquote>
+
+      <h2>Features and Benefits</h2>
+      <p>The platform offers a range of features, including:</p>
+      <figure class="article-figure">
+        <img src="assets/images/nsbm%20computing.jpg" alt="Students collaborating on a robotics project in a university laboratory">
+        <figcaption>NSBM Computing Students showcasing their Recreation Center Management Platform</figcaption>
+      </figure>
+      
+    </article>
+
+    <section class="author-bio" aria-label="About the author">
+      <span class="author-avatar">PS</span>
+      <div>
+        <h2>About Dr. Ranaweera</h2>
+        <p>Dr. Ranaweera is the Head of the Department of Software Engineering and Computer Security at NSBM Green University. With over 20 years of experience in distributed systems and artificial intelligence research, she has authored numerous international publications and led multiple national tech initiatives.</p>
+        
+      </div>
+    </section>
+
+    <section class="discussion" aria-labelledby="discussion-title-computing">
+      <h2 class="discussion-title" id="discussion-title-computing">Discussion (<span class="comment-count">3</span> comments)</h2>
+      <form class="comment-form">
+        <label for="comment-input-computing">Leave a comment</label>
+        <textarea class="comment-input" id="comment-input-computing" placeholder="Share your thoughts or ask a question about this research lab..." required></textarea>
+        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
+      </form>
+      <div class="comment-list" aria-live="polite">
+        <article class="comment">
+          <span class="comment-avatar">KA</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Kavishka Amarakoon</span><br><span class="comment-role">Batch '22 Software Engineering</span></span><time class="comment-time">2 hours ago</time></div>
+            <p class="comment-text">Well done to the team! It’s great to see students applying what they learned in class to a real-world problem. Keep it up.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">DR</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Dr. Ramanachandran</span><br><span class="comment-role">Senior Lecturer, Faculty of Computing</span></span><time class="comment-time">Yesterday</time></div>
+            <p class="comment-text">Congratulations to everyone involved. Building a working platform is no easy task, and I hope this encourages other students to take on real projects too.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">NP</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Nimesha Perera</span><br><span class="comment-role">Data Science Student</span></span><time class="comment-time">2 days ago</time></div>
+            <p class="comment-text">Nice work guys! Proud to see our batch building actual stuff like this 👏</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="page article-page" id="business" hidden>
+<header class="article-hero" style="--hero-img:url('assets/images/nsbm-research-symposium-marketing-tourism-multimedia-7-1200x600.jpg')">
+    <a class="back-link" href="#home">&larr; Back to News Archive</a>
+    <div class="hero-inner">
+      <div class="article-labels">
+        <span class="category">BUSINESS</span>
+        <span class="article-meta">◷ &nbsp;Oct 28, 2026 &nbsp;•&nbsp; ◎ 720 views</span>
+      </div>
+      <h1>NSBM 6th Student Research Symposium in Marketing, Tourism and Multimedia</h1>
+      <div class="hero-bottom">
+        <div class="author">
+          <span class="author-avatar">PP</span>
+          <span><span class="author-name">Ms. Anne Pathiranage, Dean (Acting)</span><br><span class="author-role">Dean, Faculty of Business</span></span>
+        </div>
+        <div class="hero-actions">
+          <button class="save-article" type="button" aria-label="Save article" aria-pressed="false"><svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg><span class="save-label">Save</span></button>
+          <button class="share-button" type="button">↗ &nbsp;Share</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-column">
+    <article class="article-body">
+      <p class="lead">NSBM Green University successfully hosted the 6th Student Research Symposium in Marketing, Tourism and Multimedia (SRSMTM 2026) on 8 October 2026, organised by the Department of Marketing and Tourism Management, Faculty of Business. The event brought together academic staff and undergraduates to celebrate research, innovation, and knowledge sharing.</p>
+
+      <h2>A Place to Turn Ideas into Startups</h2>
+      <p>Held under the theme “Intelligent Futures: Integrating Creativity, Communication, Marketing and Experience in the AI Age,” the symposium explored the evolving role of artificial intelligence in shaping marketing, tourism, communication, and multimedia practices.</p>
+      <p>"The symposium featured more than 20 undergraduate research papers, showcasing the research interests, analytical capabilities, and innovative perspectives of NSBM undergraduates. A keynote address by Prof. Ravi Dissanayake of the University of Kelaniya further enriched the academic programme, offering valuable insights into the symposium’s central theme."</p>
+      <blockquote>
+        <p>“We want our students to start their own ventures, not only look for jobs after graduation.”</p>
+        <cite>— Ms. Anne Pathiranage, Dean (Acting), Faculty of Business</cite>
+      </blockquote>
+
+      <h2>Mentoring, Funding and Industry Support</h2>
+      <p>SRSMTM 2026 provided a platform for students to present their research, exchange ideas, and engage with contemporary developments across their fields of study. The event also reinforced the Faculty of Business’s commitment to fostering research engagement and encouraging students to explore emerging trends and challenges in an increasingly technology-driven world.</p>
+      <figure class="article-figure">
+        <img src="assets/images/nsbm-research-symposium-marketing-tourism-multimedia-8.jpg" alt="Students discussing their startup ideas during the hub's launch day">
+        <figcaption>Student researchers presenting their work at the symposium.</figcaption>
+      </figure>
+      <p>The faculty is also talking with local companies and startup networks about internships and joint projects, which could help students build real industry contacts early.</p>
+    </article>
+
+    <section class="author-bio" aria-label="About the author">
+      <span class="author-avatar">PP</span>
+      <div>
+        <h2>About Ms. Anne Pathiranage</h2>
+        <p>Ms. Anne Pathiranage is the Dean (Acting) of the Faculty of Business at NSBM Green University, with over 9 years of experience in management education, entrepreneurship and business consulting.</p>
+        
+      </div>
+    </section>
+
+    <section class="discussion" aria-labelledby="discussion-title-business">
+      <h2 class="discussion-title" id="discussion-title-business">Discussion (<span class="comment-count">3</span> comments)</h2>
+      <form class="comment-form">
+        <label for="comment-input-business">Leave a comment</label>
+        <textarea class="comment-input" id="comment-input-business" placeholder="Share your thoughts or ask a question about this hub..." required></textarea>
+        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
+      </form>
+      <div class="comment-list" aria-live="polite">
+        <article class="comment">
+          <span class="comment-avatar">NS</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Nadeesha Silva</span><br><span class="comment-role">Batch '22 Business Management</span></span><time class="comment-time">2 hours ago</time></div>
+            <p class="comment-text">Proud of everyone who took part! Hope to present at the next one 🙌</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">MK</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Ms. Kumari</span><br><span class="comment-role">Senior Lecturer, Faculty of Business</span></span><time class="comment-time">Yesterday</time></div>
+            <p class="comment-text">Congratulations to the organizers and all the participants. Research symposiums like this help students build confidence in presenting their ideas and engaging with academic work.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">RF</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Rizwan Fazil</span><br><span class="comment-role">Marketing Student</span></span><time class="comment-time">2 days ago</time></div>
+            <p class="comment-text">Great event! It's inspiring to see so many students passionate about research and innovation.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="page article-page" id="engineering" hidden>
+<header class="article-hero" style="--hero-img:url('assets/images/nsbm-civil-engineering-laboratory-complex-720-million-6.jpg')">
+    <a class="back-link" href="#home">&larr; Back to News Archive</a>
+    <div class="hero-inner">
+      <div class="article-labels">
+        <span class="category">ENGINEERING</span>
+        <span class="article-meta">◷ &nbsp;Oct 27, 2026 &nbsp;•&nbsp; ◎ 860 views</span>
+      </div>
+      <h1>NSBM Opens Rs. 720 Million Civil Engineering Laboratory Complex</h1>
+      <div class="hero-bottom">
+        <div class="author">
+          <span class="author-avatar">PF</span>
+          <span><span class="author-name">Dr. Chandana Perera</span><br><span class="author-role">Dean, Faculty of Engineering</span></span>
+        </div>
+        <div class="hero-actions">
+          <button class="save-article" type="button" aria-label="Save article" aria-pressed="false"><svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg><span class="save-label">Save</span></button>
+          <button class="share-button" type="button">↗ &nbsp;Share</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-column">
+    <article class="article-body">
+      <p class="lead">NSBM Green University ceremonially opened its state-of-the-art Civil Engineering Laboratory Complex, representing a significant Rs. 720 million self-financed investment in engineering education, on 26 October 2026 as part of its 10th anniversary celebrations.
+Located within the university’s Phase II development at Pitipana, Homagama, the new complex marks an important milestone in NSBM’s continued investment in modern academic infrastructure and practical engineering education. Equipped with modern infrastructure, high-tech laboratories and advanced learning facilities, the complex is designed to strengthen students’ practical learning experiences and support the development of industry-relevant engineering skills.</p>
+
+      <h2>Hands-on Learning with Industrial Automation</h2>
+      <p>The complex was ceremonially declared open by the Attorney General of Sri Lanka, Hon. K. A. Parinda Ranasinghe Jr., PC, in the distinguished presence of NSBM Founder and Vice-Chancellor Prof. E. A. Weerasinghe; Prof. Richard Davies, Vice-Chancellor and CEO of the University of Plymouth, United Kingdom; Prof. Tyrone Carlin, Vice-Chancellor and President of Southern Cross University, Australia; and Prof. Li Lu, Vice-Chancellor and President of Zhejiang Shuren University, China.</p>
+      <blockquote>
+        <p>“We want our students to build things, break things and fix them here, so they are ready for industry on day one.”</p>
+        <cite>— Dr. Chandana Perera, Faculty of Engineering</cite>
+      </blockquote>
+
+      <h2>Built for Student Projects and Industry Links</h2>
+      <p>The Rs. 720 million investment reflects NSBM’s commitment to providing students with an academic environment that connects theoretical knowledge with practical application. By strengthening its engineering facilities, the university aims to equip future engineers with the technical knowledge, practical experience and competencies required to meet the evolving demands of the profession</p>
+      <figure class="article-figure">
+        <img src="assets/images/nsbm-civil-engineering-laboratory-complex-720-million-6.jpg" alt="Students working on an automation project in an engineering laboratory">
+        <figcaption>Students working on an automation project in the new Civil Engineering Laboratory Complex.</figcaption>
+      </figure>
+      
+    </article>
+
+    <section class="author-bio" aria-label="About the author">
+      <span class="author-avatar">PF</span>
+      <div>
+        <h2>About Dr. Chandana Perera</h2>
+        <p>Dr. Chandana Perera is the Dean of the Faculty of Engineering at NSBM Green University, with over 20 years of experience in industrial automation and mechatronics.</p>
+        
+      </div>
+    </section>
+
+    <section class="discussion" aria-labelledby="discussion-title-engineering">
+      <h2 class="discussion-title" id="discussion-title-engineering">Discussion (<span class="comment-count">3</span> comments)</h2>
+      <form class="comment-form">
+        <label for="comment-input-engineering">Leave a comment</label>
+        <textarea class="comment-input" id="comment-input-engineering" placeholder="Share your thoughts or ask a question about this lab..." required></textarea>
+        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
+      </form>
+      <div class="comment-list" aria-live="polite">
+        <article class="comment">
+          <span class="comment-avatar">SW</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Sahan Weerasinghe</span><br><span class="comment-role">Batch '22 Mechatronics</span></span><time class="comment-time">3 hours ago</time></div>
+            <p class="comment-text">Finally a proper lab for automation. Being able to practice with real PLC units will really help with our final year project.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">EJ</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Eng. Jayawardena</span><br><span class="comment-role">Senior Lecturer, Faculty of Engineering</span></span><time class="comment-time">Yesterday</time></div>
+            <p class="comment-text">Congratulations to NSBM and everyone who worked on this. Modern labs like these help students understand concepts through practice, which is what engineering education needs.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">TP</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Tharushi Pathirana</span><br><span class="comment-role">Electrical Engineering Student</span></span><time class="comment-time">2 days ago</time></div>
+            <p class="comment-text">Will the workshops for first and second year students be announced soon? I would like to join one.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="page article-page" id="events" hidden>
+<header class="article-hero" style="--hero-img:url('assets/images/nsbm-green-university-10-years-excellence-national-impact-5-1037x600.jpg')">
+    <a class="back-link" href="#home">&larr; Back to News Archive</a>
+    <div class="hero-inner">
+      <div class="article-labels">
+        <span class="category">EVENTS</span>
+        <span class="article-meta">◷ &nbsp;Oct 28, 2026 &nbsp;•&nbsp; ◎ 12k views</span>
+      </div>
+      <h1>NSBM Green University Celebrates 10 Years of Excellence and National Impact</h1>
+      <div class="hero-bottom">
+        <div class="author">
+          <span class="author-avatar">MW</span>
+          <span><span class="author-name">Founder and Vice Chancellor Prof. E. A. Weerasinghe</span><br><span class="author-role">Head, Student Affairs</span></span>
+        </div>
+        <div class="hero-actions">
+          <button class="save-article" type="button" aria-label="Save article" aria-pressed="false"><svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg><span class="save-label">Save</span></button>
+          <button class="share-button" type="button">↗ &nbsp;Share</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-column">
+    <article class="article-body">
+      <p class="lead">NSBM Green University celebrated its 10th anniversary on 26 October 2026 with a grand ceremony at the NSBM Auditorium in Homagama, marking a decade of achievements, growth and contributions to Sri Lankan higher education.
+Held at the invitation of Founder and Vice Chancellor Prof. E. A. Weerasinghe and the Board of Directors, the ceremony brought together distinguished local and international guests, including diplomatic representatives, government officials, industry partners, alumni and leaders from NSBM’s international university partnerships.<br><br>Among the distinguished guests were the Vice-Chancellors of the University of Plymouth, United Kingdom, and Southern Cross University, Australia; the Executive President of Zhejiang Shuren University, China; and Assoc. Prof. Ranjith Ihalanayake, Dean and Head of Programme at the Business School of Victoria University, Australia.
+A key highlight of the celebration was the formal exchange of a Memorandum of Understanding (MoU) between NSBM Green University and Zhejiang Shuren University, China, marking another step towards strengthening international academic collaboration and expanding opportunities for global engagement.</p>
+
+      <h2>NSBM Unveils Model of Proposed Multibillion Medical and Research Hospital</h2>
+      <p>NSBM Green University unveiled the architectural model of its proposed multibillion-rupee Medical and Research Hospital on 26 October 2026, marking a significant milestone in the university’s 10th anniversary celebrations and its strategic expansion into healthcare and medical research.<br><br>Planned for a 20-acre site opposite the NSBM Green University premises in Pitipana, Homagama, the proposed hospital is a flagship development under Phase III of the university’s expansion programme. The initiative reflects NSBM’s ambition to extend its contribution beyond higher education into healthcare, medical research and interdisciplinary innovation as it embarks on its next decade under NSBM NEXT.</p>
+      <p>"The proposed multispecialty hospital is envisioned as a modern healthcare facility serving both local and international communities. Its planned scope encompasses advanced inpatient care, outpatient care, advanced diagnostic services, wellness services, research-based healthcare, international patient services and smart healthcare technologies.<br><br>
+By bringing healthcare services and research together, the proposed development aims to create opportunities for collaboration across healthcare, science, technology and education. It also represents a significant step in NSBM’s broader vision of exploring new avenues for national development through strategic investment and innovation.<br><br>
+The unveiling of the architectural model during the university’s tenth anniversary celebrations offered a glimpse into this future development, highlighting NSBM’s long-term plans to diversify its institutional footprint and contribute to an evolving healthcare landscape in Sri Lanka.
+As NSBM moves into its next decade, the proposed Medical and Research Hospital stands as a key component of its future vision under NSBM NEXT, reflecting its ambition to create new opportunities, strengthen research capabilities and broaden its contribution to the country and the wider international community."</p>
+      <blockquote>
+        <p>“The proposed multispecialty hospital is envisioned as a modern healthcare facility serving both local and international communities.”</p>
+        <cite>— Founder and Vice Chancellor Prof. E. A. Weerasinghe</cite>
+      </blockquote>
+
+      <h2>New Members and Upcoming Activities</h2>
+      <p></p>
+      <figure class="article-figure">
+        <img src="assets/images/nsbm-proposed-medical-research-hospital-model-2-1037x600.jpg" alt="Students gathered around club stalls during a campus event">
+        <figcaption>NSBM Green University unveiled the architectural model of its proposed multibillion-rupee Medical and Research Hospital on 26 October 2026</figcaption>
+      </figure>
+      <p>NSBM Healthcare Limited is currently in the process of developing a state-of-the-art, multi-speciality hospital in Pitipana, Homagama. The hospital is designed to meet the medical and clinical needs of both local and international patients, offering advanced diagnostic, therapeutic, and surgical care across a wide range of specialities. It will also function as a teaching and research hospital, providing essential clinical training for students of NSBM’s proposed Faculty of Medicine and allied health programs, while fostering an environment for innovative medical research</p>
+    </article>
+
+    <section class="author-bio" aria-label="About the author">
+      <span class="author-avatar">MW</span>
+      <div>
+        <h2>About Founder and Vice Chancellor Prof. E. A. Weerasinghe</h2>
+        <p>Founder and Vice Chancellor Prof. E. A. Weerasinghe is the visionary leader of NSBM Green University, with over 30 years of experience in student development and campus activities.</p>
+        
+      </div>
+    </section>
+
+    <section class="discussion" aria-labelledby="discussion-title-events">
+      <h2 class="discussion-title" id="discussion-title-events">Discussion (<span class="comment-count">3</span> comments)</h2>
+      <form class="comment-form">
+        <label for="comment-input-events">Leave a comment</label>
+        <textarea class="comment-input" id="comment-input-events" placeholder="Share your thoughts or ask a question about the clubs..." required></textarea>
+        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
+      </form>
+      <div class="comment-list" aria-live="polite">
+        <article class="comment">
+          <span class="comment-avatar">LP</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Lakshan Prabodha</span><br><span class="comment-role">Batch '24 Computing</span></span><time class="comment-time">2 hours ago</time></div>
+            <p class="comment-text">Proud to be part of NSBM! Excited to see how this grows 🙌</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">SF</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Ms. Fernando</span><br><span class="comment-role">Lecturer, Faculty of Business</span></span><time class="comment-time">Yesterday</time></div>
+            <p class="comment-text">Congratulations to NSBM on this ambitious step. A hospital linked with research will give our students valuable exposure and strengthen healthcare education in the country.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">IK</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Ishara Kumari</span><br><span class="comment-role">Engineering Student</span></span><time class="comment-time">2 days ago</time></div>
+            <p class="comment-text">Wow, a multibillion hospital! 🔥 Big step for NSBM, congrats to everyone involved!</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="page article-page" id="sports" hidden>
+<header class="article-hero" style="--hero-img:url('assets/images/cricket-club3.jpg')">
+    <a class="back-link" href="#home">&larr; Back to News Archive</a>
+    <div class="hero-inner">
+      <div class="article-labels">
+        <span class="category">SPORTS</span>
+        <span class="article-meta">◷ &nbsp;Oct 28, 2026 &nbsp;•&nbsp; ◎ 2k views</span>
+      </div>
+      <h1>NSBM Cricket Team Crowned Champions Again at KDU Inter-University T20 Championship 2026</h1>
+      <div class="hero-bottom">
+        <div class="author">
+          <span class="author-avatar">CD</span>
+          <span><span class="author-name">Coach Dias</span><br><span class="author-role">Director, Sports Council</span></span>
+        </div>
+        <div class="hero-actions">
+          <button class="save-article" type="button" aria-label="Save article" aria-pressed="false"><svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg><span class="save-label">Save</span></button>
+          <button class="share-button" type="button">↗ &nbsp;Share</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-column">
+    <article class="article-body">
+      <p class="lead">NSBM Green University has once again made its mark in university cricket, with the NSBM Cricket Team securing the KDU Leaders’ Trophy Inter-University T20 Cricket Championship 2026, marking its second consecutive Inter-University Cricket Championship following its historic championship victory last year.</p>
+
+      <h2>A Strong Show Across Many Events</h2>
+      <p>Maintaining an exceptional run throughout the tournament, NSBM emerged as the only unbeaten team, demonstrating remarkable consistency, discipline and determination across the competition.
+In the final against SLIIT, NSBM delivered a commanding all-round performance. An outstanding bowling display, led by Punsara Rajakaruna, who claimed 3 wickets for 23 runs, restricted SLIIT to 130/9 in their allotted 20 overs.</p>
+      <blockquote>
+        <p>“These students trained before lectures and after lectures for months, and today all that effort has paid off.”</p>
+        <cite>— Coach Dias, Sports Council</cite>
+      </blockquote>
+
+      <h2>Support for Student Athletes</h2>
+      <p>The Cricket Council said the university will continue to support its players with better training facilities, nutrition guidance and flexible exam schedules during match season. Selections for the next season will be open to all students, including first year students who have not played for the university before.</p>
+      <figure class="article-figure">
+        <img src="assets/images/cricket-club3.jpg" alt="NSBM cricket team celebrating their victory">
+        <figcaption>NSBM cricket team celebrating their victory in the KDU Leaders’ Trophy Inter-University T20 Championship 2026.</figcaption>
+      </figure>
+      <p>The team will now start preparing for the national level tournaments later this year, and the Cricket Council has asked interested students to register for the training camps through the student portal.</p>
+    </article>
+
+    <section class="author-bio" aria-label="About the author">
+      <span class="author-avatar">CD</span>
+      <div>
+        <h2>About Coach Dias</h2>
+        <p>Coach Dias is the Director of the Cricket Council at NSBM Green University, with over 15 years of experience in cricket coaching and university sports management.</p>
+        
+      </div>
+    </section>
+
+    <section class="discussion" aria-labelledby="discussion-title-sports">
+      <h2 class="discussion-title" id="discussion-title-sports">Discussion (<span class="comment-count">3</span> comments)</h2>
+      <form class="comment-form">
+        <label for="comment-input-sports">Leave a comment</label>
+        <textarea class="comment-input" id="comment-input-sports" placeholder="Share your thoughts or congratulate the team..." required></textarea>
+        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
+      </form>
+      <div class="comment-list" aria-live="polite">
+        <article class="comment">
+          <span class="comment-avatar">DJ</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Dinuka Jayasekara</span><br><span class="comment-role">Batch '22 Software Engineering</span></span><time class="comment-time">1 hour ago</time></div>
+            <p class="comment-text">Proud moment for NSBM! The cricket team was unbelievable in the final. Congratulations to everyone who took part.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">MS</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Mr. Samarasinghe</span><br><span class="comment-role">Senior Lecturer, Faculty of Business</span></span><time class="comment-time">Yesterday</time></div>
+            <p class="comment-text">Well done to all the players. It is great to see students balancing their studies and sports so well.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">AR</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Ayesha Rahman</span><br><span class="comment-role">Engineering Student</span></span><time class="comment-time">2 days ago</time></div>
+            <p class="comment-text">When will the selection for the next season start? I would like to try for the volleyball team as a first year student.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="page article-page" id="notices" hidden>
+<header class="article-hero" style="--hero-img:url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1800&q=90')">
+    <a class="back-link" href="#home">&larr; Back to News Archive</a>
+    <div class="hero-inner">
+      <div class="article-labels">
+        <span class="category">NOTICES</span>
+        <span class="article-meta">◷ &nbsp;Oct 28, 2026 &nbsp;•&nbsp; ◎ 1.8k views</span>
+      </div>
+      <h1>End Semester Examination Timetable Released for All Faculties</h1>
+      <div class="hero-bottom">
+        <div class="author">
+          <span class="author-avatar">EO</span>
+          <span><span class="author-name">Examinations Office</span><br><span class="author-role">NSBM Green University</span></span>
+        </div>
+        <div class="hero-actions">
+          <button class="save-article" type="button" aria-label="Save article" aria-pressed="false"><svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg><span class="save-label">Save</span></button>
+          <button class="share-button" type="button">↗ &nbsp;Share</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-column">
+    <article class="article-body">
+      <p class="lead">The Examinations Office has released the end semester examination timetable for all faculties. Students are advised to check their exam dates, times and venues carefully and to read the instructions below before the examinations begin.</p>
+
+      <h2>Timetable and Admission Details</h2>
+      <p>The examinations will begin on the first Monday of next month and continue for three weeks. Individual timetables are now available on the student portal under the Examinations section. Students must collect their admission cards from the portal and bring a printed copy, along with their student ID, to every exam. Students without a valid admission card or student ID will not be allowed into the examination hall.</p>
+      <p>"Please check your timetable early and report any clashes immediately," said an official from the Examinations Office. "Clashes reported after the deadline cannot be accepted."</p>
+      <blockquote>
+        <p>“Please check your timetable early and report any clashes immediately.”</p>
+        <cite>— Examinations Office, NSBM Green University</cite>
+      </blockquote>
+
+      <h2>Important Instructions for Students</h2>
+      <p>Students should arrive at the venue at least thirty minutes before the exam starts. Mobile phones, smart watches and any unauthorised material are strictly prohibited inside the hall. Students who need special arrangements or want to report a timetable clash must contact the Examinations Office through the student portal before the deadline. Students with pending fees or attendance issues should clear them with the relevant offices as soon as possible.</p>
+      <figure class="article-figure">
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&amp;fit=crop&amp;w=1200&amp;q=90" alt="A student studying and writing notes at a desk">
+        <figcaption>Students are advised to start their revision early and check the timetable on the portal.</figcaption>
+      </figure>
+      <p>The Examinations Office wishes all students the very best for their exams. Any further updates or changes will be announced on the student portal and on NSBM NewsDesk.</p>
+    </article>
+
+    <section class="author-bio" aria-label="About the author">
+      <span class="author-avatar">EO</span>
+      <div>
+        <h2>About the Examinations Office</h2>
+        <p>The Examinations Office at NSBM Green University manages the planning, scheduling and conduct of all university examinations, and handles results, re-corrections and student examination queries.</p>
+        
+      </div>
+    </section>
+
+    <section class="discussion" aria-labelledby="discussion-title-notices">
+      <h2 class="discussion-title" id="discussion-title-notices">Discussion (<span class="comment-count">3</span> comments)</h2>
+      <form class="comment-form">
+        <label for="comment-input-notices">Leave a comment</label>
+        <textarea class="comment-input" id="comment-input-notices" placeholder="Share your thoughts or ask a question about this notice..." required></textarea>
+        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
+      </form>
+      <div class="comment-list" aria-live="polite">
+        <article class="comment">
+          <span class="comment-avatar">HD</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Hiruni Dissanayake</span><br><span class="comment-role">Batch '23 Computing</span></span><time class="comment-time">1 hour ago</time></div>
+            <p class="comment-text">Thanks for the early notice. Can we download the admission card from the portal right now or will it open closer to the exam date?</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">MR</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Mr. Rajapaksha</span><br><span class="comment-role">Lecturer, Faculty of Computing</span></span><time class="comment-time">Yesterday</time></div>
+            <p class="comment-text">Reminder to all students: please check for any clashes this week. It is much easier to fix them before the deadline.</p>
+          </div>
+        </article>
+        <article class="comment">
+          <span class="comment-avatar">TK</span>
+          <div>
+            <div class="comment-head"><span><span class="comment-name">Thilina Kumara</span><br><span class="comment-role">Business Student</span></span><time class="comment-time">2 days ago</time></div>
+            <p class="comment-text">Two of my exams seem to be on the same day. Who should I contact to report this clash?</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
 
   <script>
+    // ================= HOME script =================
+
     const searchInput = document.querySelector("#archive-search");
     const cards = [...document.querySelectorAll(".news-card")];
     const filterButtons = [...document.querySelectorAll(".filter")];
@@ -479,7 +1157,7 @@
     }
 
     searchInput.addEventListener("input", updateArticles);
-    document.querySelector(".top-search").addEventListener("input", (event) => {
+    document.querySelector(".top-search")?.addEventListener("input", (event) => {
       searchInput.value = event.target.value;
       updateArticles();
     });
@@ -518,6 +1196,197 @@
         button.setAttribute("aria-label", saved ? "Remove bookmark" : "Bookmark article");
       });
     });
+  
+
+    // ================= ARTICLE script (runs once per article view) =================
+
+    function initArticle(page) {
+      const saveButton = page.querySelector(".save-article");
+      saveButton.addEventListener("click", () => {
+        const saved = saveButton.getAttribute("aria-pressed") !== "true";
+        saveButton.setAttribute("aria-pressed", String(saved));
+        saveButton.classList.toggle("saved", saved);
+        saveButton.setAttribute("aria-label", saved ? "Remove bookmark" : "Save article");
+        saveButton.querySelector(".save-label").textContent = saved ? "Saved" : "Save";
+      });
+
+      const shareButton = page.querySelector(".share-button");
+      const shareWrap = document.createElement("div");
+      shareWrap.className = "share-wrap";
+      shareButton.parentElement.insertBefore(shareWrap, shareButton);
+      shareWrap.append(shareButton);
+      shareButton.setAttribute("aria-haspopup", "true");
+      shareButton.setAttribute("aria-expanded", "false");
+
+      const shareMenu = document.createElement("div");
+      shareMenu.className = "share-menu";
+      shareMenu.setAttribute("role", "group");
+      shareMenu.setAttribute("aria-label", "Share article");
+      shareMenu.hidden = true;
+
+      const whatsappLink = document.createElement("a");
+      whatsappLink.target = "_blank";
+      whatsappLink.rel = "noopener noreferrer";
+      whatsappLink.textContent = "WhatsApp";
+
+      const facebookLink = document.createElement("a");
+      facebookLink.target = "_blank";
+      facebookLink.rel = "noopener noreferrer";
+      facebookLink.textContent = "Facebook";
+
+      const copyLinkButton = document.createElement("button");
+      copyLinkButton.type = "button";
+      copyLinkButton.textContent = "Copy link";
+
+      shareMenu.append(whatsappLink, facebookLink, copyLinkButton);
+      shareWrap.append(shareMenu);
+
+      function closeShare() {
+        shareMenu.hidden = true;
+        shareButton.setAttribute("aria-expanded", "false");
+      }
+
+      shareButton.addEventListener("click", () => {
+        // build the links when opening, so they use this article's current URL (#slug) and title
+        whatsappLink.href = `https://wa.me/?text=${encodeURIComponent(`${document.title} ${window.location.href}`)}`;
+        facebookLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+        shareMenu.hidden = !shareMenu.hidden;
+        shareButton.setAttribute("aria-expanded", String(!shareMenu.hidden));
+      });
+
+      copyLinkButton.addEventListener("click", async () => {
+        closeShare();
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          shareButton.textContent = "✓ Link copied";
+          window.setTimeout(() => { shareButton.innerHTML = "↗ &nbsp;Share"; }, 1800);
+        } catch {
+          window.prompt("Copy this article link:", window.location.href);
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        if (shareWrap.contains(event.target)) return;
+        closeShare();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeShare();
+      });
+
+      const commentList = page.querySelector(".comment-list");
+      const commentCount = page.querySelector(".comment-count");
+      const commentInput = page.querySelector(".comment-input");
+      const commentForm = page.querySelector(".comment-form");
+      const submitButton = commentForm.querySelector(".submit-comment");
+      const status = document.createElement("p");
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      commentForm.append(status);
+
+      function renderComment(item) {
+        const comment = document.createElement("article");
+        comment.className = "comment";
+        const avatar = document.createElement("span");
+        avatar.className = "comment-avatar";
+        avatar.textContent = item.author_name === "You" ? "YO" : item.author_name.slice(0, 2).toUpperCase();
+        const content = document.createElement("div");
+        const heading = document.createElement("div");
+        heading.className = "comment-head";
+        const author = document.createElement("span");
+        const authorName = document.createElement("span");
+        authorName.className = "comment-name";
+        authorName.textContent = item.author_name;
+        author.append(authorName);
+        const time = document.createElement("time");
+        time.className = "comment-time";
+        const date = new Date(item.created_at.replace(" ", "T"));
+        time.dateTime = Number.isNaN(date.getTime()) ? "" : date.toISOString();
+        time.textContent = Number.isNaN(date.getTime()) ? item.created_at : date.toLocaleString();
+        heading.append(author, time);
+        const message = document.createElement("p");
+        message.className = "comment-text";
+        message.textContent = item.body;
+        content.append(heading, message);
+        comment.append(avatar, content);
+        return comment;
+      }
+
+      function updateCommentCount() {
+        commentCount.textContent = String(commentList.children.length);
+      }
+
+      const commentsUrl = `api/comments.php?article=${encodeURIComponent(page.id)}`;
+      fetch(commentsUrl)
+        .then(async (response) => {
+          if (!response.ok) throw new Error("Unable to load saved comments.");
+          return response.json();
+        })
+        .then((data) => {
+          data.comments.reverse().forEach((item) => commentList.prepend(renderComment(item)));
+          updateCommentCount();
+        })
+        .catch(() => {
+          status.textContent = "Saved comments could not be loaded. Please try again later.";
+        });
+
+      commentForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const text = commentInput.value.trim();
+        if (!text) {
+          commentInput.setCustomValidity("Please enter a comment before posting.");
+          commentInput.reportValidity();
+          return;
+        }
+
+        submitButton.disabled = true;
+        status.textContent = "";
+        try {
+          const response = await fetch(commentsUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ body: text })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Unable to post your comment.");
+          commentList.prepend(renderComment(data.comment));
+          updateCommentCount();
+          commentInput.value = "";
+        } catch (error) {
+          status.textContent = error.message || "Unable to post your comment. Please try again.";
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      commentInput.addEventListener("input", () => commentInput.setCustomValidity(""));
+    }
+
+    document.querySelectorAll(".article-page").forEach(initArticle);
+
+
+    // ---- tiny hash router: #computing, #business ... ; anything else = home ----
+    const pages = [...document.querySelectorAll(".page")];
+    const pageTitles = {
+      "computing": "NSBM Computing Students Develop Digital Platform for Recreation Center Management",
+      "business": "NSBM 6th Student Research Symposium in Marketing, Tourism and Multimedia",
+      "engineering": "NSBM Opens Rs. 720 Million Civil Engineering Laboratory Complex",
+      "events": "NSBM Green University Celebrates 10 Years of Excellence and National Impact",
+      "sports": "NSBM Cricket Team Crowned Champions Again at KDU Inter-University T20 Championship 2026",
+      "notices": "End Semester Examination Timetable Released for All Faculties"
+};
+    const homeTitle = document.title;
+
+    function route() {
+      const id = location.hash.slice(1);
+      const target = pages.some((p) => p.id === id) ? id : "home";
+      pages.forEach((p) => { p.hidden = p.id !== target; });
+      document.title = target === "home" ? homeTitle : pageTitles[target];
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("hashchange", route);
+    route();
+
   </script>
 </body>
 </html>
