@@ -118,7 +118,7 @@
       background:
         linear-gradient(0deg, var(--page) 0%, rgb(245 248 244 / 92%) 9%, rgb(245 248 244 / 22%) 70%),
         linear-gradient(90deg, rgb(245 248 244 / 25%), rgb(245 248 244 / 5%)),
-        url("nsbm computing.jpg") center 42% / cover;
+        url("../../assets/images/nsbm computing.jpg") center 42% / cover;
     }
     .hero-inner { max-width: 860px; margin: 0 auto; padding: 177px 24px 14px; }
     .article-labels { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
@@ -222,8 +222,8 @@
       background: var(--soft);
     }
     .author-bio .author-avatar { width: 48px; height: 48px; flex: 0 0 48px; }
-    .author-bio h2 { margin: 0 0 4px; font-size: 12px; }
-    .author-bio p { margin: 0 0 5px; color: #59645e; font-size: 10px; line-height: 1.5; }
+    .author-bio h2 { margin: 0 0 4px; font-size: 10px; }
+    .author-bio p { margin: 0 0 5px; color: #59645e; font-size: 8px; line-height: 1.5; }
 
     .discussion-title { margin: 0 0 11px; font-size: 14px; }
     .comment-form, .comment {
@@ -326,24 +326,7 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="NSBM NewsDesk home">
-      <span class="brand-mark"><img src="logo.png" alt="NSBM Logo"></span>
-      <span>NSBM NewsDesk</span>
-    </a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a class="active" href="index.html">News</a>
-      <a href="#">Submit Article</a>
-      <a href="#">My Bookmarks</a>
-      <a href="#">My Submissions</a>
-      <a href="#">Admin Dashboard</a>
-    </nav>
-    <div class="header-actions">
-      <input class="top-search" type="search" aria-label="Search news" placeholder="⌕  Search news...">
-      
-    </div>
-  </header>
+  
   
 
   <header class="article-hero">
@@ -357,10 +340,6 @@
         <div class="author">
           <span class="author-avatar">PS</span>
           <span><span class="author-name">Dr. Rasika Ranaweera</span><br><span class="author-role">Dean, Faculty of Computing</span></span>
-        </div>
-        <div class="hero-actions">
-          <button id="save-article" class="save-article" type="button" aria-label="Save article" aria-pressed="false"><svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h10A2.25 2.25 0 0 1 19.25 6v14.25L12 15.5l-7.25 4.75V6A2.25 2.25 0 0 1 7 3.75Z"></path></svg><span class="save-label">Save</span></button>
-          <button id="share-article" type="button">↗ &nbsp;Share</button>
         </div>
       </div>
     </div>
@@ -385,7 +364,7 @@ The platform is now live and officially handed over to Ms. Shanika Sewwandi, Exe
       <h2>Features and Benefits</h2>
       <p>The platform offers a range of features, including:</p>
       <figure class="article-figure">
-        <img src="nsbm computing.jpg" alt="Students collaborating on a robotics project in a university laboratory">
+        <img src="../../assets/images/nsbm computing.jpg" alt="Students collaborating on a robotics project in a university laboratory">
         <figcaption>NSBM Computing Students showcasing their Recreation Center Management Platform</figcaption>
       </figure>
       
@@ -402,11 +381,6 @@ The platform is now live and officially handed over to Ms. Shanika Sewwandi, Exe
 
     <section class="discussion" aria-labelledby="discussion-title">
       <h2 class="discussion-title" id="discussion-title">Discussion (<span id="comment-count">3</span> comments)</h2>
-      <form class="comment-form" id="comment-form">
-        <label for="comment-input">Leave a comment</label>
-        <textarea id="comment-input" placeholder="Share your thoughts or ask a question about this research lab..." required></textarea>
-        <div class="form-footer"><button class="submit-comment" type="submit">Post Comment</button></div>
-      </form>
       <div class="comment-list" id="comment-list" aria-live="polite">
         <article class="comment">
           <span class="comment-avatar">KA</span>
@@ -436,135 +410,6 @@ The platform is now live and officially handed over to Ms. Shanika Sewwandi, Exe
   
   
 
-  <footer>
-    <div class="footer-content">
-      <section><h2>NSBM NewsDesk</h2><p>The official campus news and club-boost portal for NSBM Green University, Sri Lanka. Keeping the academic community connected and informed.</p></section>
-      <section><h2>Quick Links</h2><div class="footer-links"><a href="index.html">Home</a><a href="index.html">Latest News</a><a href="#">Submit an Article</a><a href="#">Bookmarks</a></div></section>
-      <section><h2>Contact</h2><p>NSBM Green University, Pitipana, Homagama, Sri Lanka<br>Email: newsdesk@nsbm.ac.lk</p></section>
-    </div>
-    <div class="copyright">© 2024 NSBM NewsDesk. All rights reserved.</div>
-  </footer>
-
-  <script>
-    const saveButton = document.querySelector("#save-article");
-    saveButton.addEventListener("click", () => {
-      const saved = saveButton.getAttribute("aria-pressed") !== "true";
-      saveButton.setAttribute("aria-pressed", String(saved));
-      saveButton.classList.toggle("saved", saved);
-      saveButton.setAttribute("aria-label", saved ? "Remove bookmark" : "Save article");
-      saveButton.querySelector(".save-label").textContent = saved ? "Saved" : "Save";
-    });
-
-    const shareButton = document.querySelector("#share-article");
-    const shareWrap = document.createElement("div");
-    shareWrap.className = "share-wrap";
-    shareButton.parentElement.insertBefore(shareWrap, shareButton);
-    shareWrap.append(shareButton);
-    shareButton.setAttribute("aria-haspopup", "true");
-    shareButton.setAttribute("aria-expanded", "false");
-
-    const shareMenu = document.createElement("div");
-    shareMenu.className = "share-menu";
-    shareMenu.setAttribute("role", "group");
-    shareMenu.setAttribute("aria-label", "Share article");
-    shareMenu.hidden = true;
-
-    const whatsappLink = document.createElement("a");
-    whatsappLink.href = `https://wa.me/?text=${encodeURIComponent(`${document.title} ${window.location.href}`)}`;
-    whatsappLink.target = "_blank";
-    whatsappLink.rel = "noopener noreferrer";
-    whatsappLink.textContent = "WhatsApp";
-
-    const facebookLink = document.createElement("a");
-    facebookLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-    facebookLink.target = "_blank";
-    facebookLink.rel = "noopener noreferrer";
-    facebookLink.textContent = "Facebook";
-
-    const copyLinkButton = document.createElement("button");
-    copyLinkButton.type = "button";
-    copyLinkButton.textContent = "Copy link";
-
-    shareMenu.append(whatsappLink, facebookLink, copyLinkButton);
-    shareWrap.append(shareMenu);
-
-    shareButton.addEventListener("click", () => {
-      shareMenu.hidden = !shareMenu.hidden;
-      shareButton.setAttribute("aria-expanded", String(!shareMenu.hidden));
-    });
-
-    copyLinkButton.addEventListener("click", async () => {
-      shareMenu.hidden = true;
-      shareButton.setAttribute("aria-expanded", "false");
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        shareButton.textContent = "✓ Link copied";
-        window.setTimeout(() => { shareButton.innerHTML = "↗ &nbsp;Share"; }, 1800);
-      } catch {
-        window.prompt("Copy this article link:", window.location.href);
-      }
-    });
-
-    document.addEventListener("click", (event) => {
-      if (shareWrap.contains(event.target)) return;
-      shareMenu.hidden = true;
-      shareButton.setAttribute("aria-expanded", "false");
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      shareMenu.hidden = true;
-      shareButton.setAttribute("aria-expanded", "false");
-    });
-
-    const commentList = document.querySelector("#comment-list");
-    const commentCount = document.querySelector("#comment-count");
-
-    function updateCount(change) {
-      commentCount.textContent = String(Number(commentCount.textContent) + change);
-    }
-
-    document.querySelector("#comment-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const input = document.querySelector("#comment-input");
-      const text = input.value.trim();
-      if (!text) {
-        input.setCustomValidity("Please enter a comment before posting.");
-        input.reportValidity();
-        return;
-      }
-
-      const comment = document.createElement("article");
-      comment.className = "comment";
-      const avatar = document.createElement("span");
-      avatar.className = "comment-avatar";
-      avatar.textContent = "YO";
-      const content = document.createElement("div");
-      const heading = document.createElement("div");
-      heading.className = "comment-head";
-      const author = document.createElement("span");
-      const authorName = document.createElement("span");
-      authorName.className = "comment-name";
-      authorName.textContent = "You";
-      author.append(authorName);
-      const time = document.createElement("time");
-      time.className = "comment-time";
-      time.textContent = "Just now";
-      heading.append(author, time);
-      const message = document.createElement("p");
-      message.className = "comment-text";
-      message.textContent = text;
-      content.append(heading, message);
-      comment.append(avatar, content);
-      commentList.prepend(comment);
-
-      updateCount(1);
-      input.value = "";
-    });
-
-    document.querySelector("#comment-input").addEventListener("input", (event) => {
-      event.target.setCustomValidity("");
-    });
-  </script>
+  
 </body>
 </html>
