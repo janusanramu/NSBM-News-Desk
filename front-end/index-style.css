@@ -49,63 +49,6 @@ body {
   color: #d93025;
 }
 
-/* Header & Navbar */
-.site-header {
-  background: var(--bg-white);
-  border-bottom: 1px solid var(--border);
-}
-
-.navbar {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.brand-logo {
-  height: 36px;
-  width: auto;
-}
-
-.brand-name {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--text-dark);
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 12px;
-  align-items: center;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #475569;
-  font-weight: 500;
-  font-size: 14px;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
-}
-
-.nav-links a.active, 
-.nav-links a:hover {
-  color: var(--primary);
-  font-weight: 600;
-}
 
 /* Categories Dropdown */
 .dropdown {
@@ -252,30 +195,6 @@ body {
 .avatar-badge .icon {
   width: 20px;
   height: 20px;
-}
-
-/* Breaking Bar */
-.breaking-bar {
-  background: #e2ece6;
-  padding: 8px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 13px;
-}
-
-.breaking-badge {
-  background: var(--primary-dark);
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-.breaking-text {
-  color: #334155;
-  font-weight: 500;
 }
 
 /* Hero Feature */
@@ -631,6 +550,32 @@ body {
   border-radius: var(--radius-lg);
 }
 
+.newsletter-promo-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2.5fr) minmax(150px, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.newsletter-promo-image {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 394 / 606;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #e1e9e3;
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 50, 25, 0.06);
+}
+
+.newsletter-promo-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .newsletter-card h3 {
   font-size: 18px;
   margin-bottom: 8px;
@@ -727,6 +672,23 @@ body {
 @media (max-width: 900px) {
   .hero-feature, .content-grid, .footer-container {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 901px) {
+  .newsletter-promo-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .newsletter-promo-row {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-promo-image {
+    width: min(100%, 220px);
+    justify-self: center;
   }
 }
 

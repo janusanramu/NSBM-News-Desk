@@ -32,6 +32,9 @@
     <symbol id="i-bookmark" viewBox="0 0 24 24">
       <path d="M6 3h12v18l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
     </symbol>
+    <symbol id="i-bookmark-filled" viewBox="0 0 24 24">
+      <path d="M6 3h12v18l-6-4-6 4z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+    </symbol>
     <symbol id="i-eye" viewBox="0 0 24 24">
       <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2" />
       <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2" />
@@ -51,57 +54,7 @@
     </symbol>
   </svg>
 
-  <!-- Student Header Navbar -->
-  <header class="site-header">
-    <nav class="navbar">
-      <a href="registered.html" class="brand">
-        <img src="images/nsbm-logo.png" alt="NSBM Logo" class="brand-logo">
-        <span class="brand-name">NSBM NewsDesk</span>
-      </a>
-
-      <!-- Full Logged-in Student Links -->
-      <ul class="nav-links">
-        <li><a href="registered.html" class="active">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="submit-article.html">Submit Article</a></li>
-        <li><a href="bookmarks.html">My Bookmarks</a></li>
-        <li><a href="my-submissions.html">My Submissions</a></li>
-      </ul>
-
-
-      <div class="nav-actions">
-        <div class="search-box">
-          <svg class="icon">
-            <use href="#i-search" />
-          </svg>
-          <input type="search" placeholder="Search news...">
-        </div>
-
-        <div class="profile-menu">
-          <button type="button" class="avatar-badge" id="profileToggle" title="Student Profile" aria-expanded="false">
-            <svg class="icon">
-              <use href="#i-user" />
-            </svg>
-          </button>
-
-          <div class="profile-dropdown" id="profileDropdown" hidden>
-            <a href="profile.html">My Profile</a>
-            <a href="bookmarks.html">My Bookmarks</a>
-            <button type="button" id="logoutBtn">Logout</button>
-          </div>
-        </div>
-      </div>
-
-    </nav>
-
-    <!-- Breaking News Ticker Bar -->
-    <div class="breaking-bar">
-      <span class="breaking-badge">BREAKING</span>
-      <p class="breaking-text">Annual Green Walk 2026 announced with massive participation from all faculties &bull;
-        Faculty of Computing wins the Inter-Faculty Hackathon 2026 &bull; Admissions for the new intake open</p>
-    </div>
-  </header>
-
+  
   <!-- Main Container Workspace -->
   <main class="container">
 
@@ -137,12 +90,11 @@
     <div class="filter-row">
       <div class="category-tabs">
         <button class="cat-btn active">All News</button>
-        <button class="cat-btn">Computing</button>
-        <button class="cat-btn">Business</button>
-        <button class="cat-btn">Engineering</button>
-        <button class="cat-btn">Student Clubs</button>
+        <button class="cat-btn">Campus Life</button>
+        <button class="cat-btn">Academics</button>
+        <button class="cat-btn">Research</button>
+        <button class="cat-btn">Club &amp; Societies</button>
         <button class="cat-btn">Sports</button>
-        <button class="cat-btn">Notices</button>
       </div>
       <button type="button" class="subscribe-btn" id="subscribeFeedBtn" aria-haspopup="dialog"><svg class="icon">
           <use href="#i-bell" />
@@ -272,7 +224,6 @@
             <h3><svg class="icon icon-red">
                 <use href="#i-megaphone" />
               </svg> Announcements</h3>
-            <span class="live-feed">LIVE FEED</span>
           </div>
 
           <div class="notice-list">
@@ -327,47 +278,16 @@
             board.</p>
           <a href="submit-article.html" class="btn-submit-cta">Submit Your Article &gt;</a>
         </div>
-
+        <figure class="team-promo">
+          <img src="images/nsbm-newsdesk-team.jpg?v=3" alt="NSBM NewsDesk team, Faculty of Computing">
+        </figure>
       </aside>
 
     </div>
   </main>
 
-  <!-- 3-Column Footer -->
-  <footer class="site-footer">
-    <div class="footer-container">
-
-      <div class="footer-col brand-col">
-        <h4>NSBM NewsDesk</h4>
-        <p>The official campus news and club-post portal for NSBM Green University, Sri Lanka. Keeping the academic
-          community connected and informed.</p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="registered.html">Home</a></li>
-          <li><a href="news.html">Latest News</a></li>
-          <li><a href="submit-article.html">Submit an Article</a></li>
-          <li><a href="bookmarks.html">Bookmarks</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>NSBM Green University, Pitipana, Homagama, Sri Lanka</p>
-        <p>Email: <a href="mailto:newsdesk@nsbm.ac.lk">newsdesk@nsbm.ac.lk</a></p>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      &copy; 2026 NSBM NewsDesk. All rights reserved.
-    </div>
-  </footer>
-
   <!-- Subscribe preferences popup -->
-  <div class="subscription-overlay" id="subscriptionModal" data-categories='["Computing","Business","Engineering","Student Clubs","Sports"]' hidden>
+  <div class="subscription-overlay" id="subscriptionModal" data-categories='["Campus Life","Academics","Research","Club &amp; Societies","Sports"]' hidden>
     <section class="subscription-card" role="dialog" aria-modal="true" aria-labelledby="subscriptionTitle">
       <button class="subscription-close" type="button" id="closeSubscriptionModal" aria-label="Close">&times;</button>
       <div class="subscription-icon" aria-hidden="true">🔔</div>

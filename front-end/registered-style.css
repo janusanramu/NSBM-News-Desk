@@ -141,30 +141,6 @@ body {
   text-decoration: none;
 }
 
-/* Breaking News Bar */
-.breaking-bar {
-  background: #e2ece6;
-  padding: 8px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 13px;
-}
-
-.breaking-badge {
-  background: var(--primary);
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-.breaking-text {
-  color: #334155;
-  font-weight: 500;
-}
-
 /* Hero Feature */
 .hero-feature {
   background: var(--bg-white);
@@ -739,10 +715,6 @@ body {
   .search-box input {
     width: 100%;
     min-width: 0;
-  }
-
-  .breaking-text {
-    font-size: 12px;
   }
 
   .hero-feature {
