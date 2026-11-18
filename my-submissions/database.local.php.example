@@ -1,0 +1,7 @@
+<?php
+return [
+    'host' => '127.0.0.1',
+    'database' => 'nsbm_newsdesk',
+    'username' => 'root',
+    'password' => 'your_mysql_password',
+];
