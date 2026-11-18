@@ -708,7 +708,6 @@ body{background:#f5f2ee;overflow-x:hidden}.container{max-width:1500px;margin:0 a
 .carousel-controls button:disabled{opacity:.35;cursor:not-allowed;transform:none}
 @media(max-width:650px){.showcase{min-height:730px}.carousel-window{height:615px}.article-card{top:35px;width:220px!important;height:480px!important;min-height:480px!important;margin-left:-110px}.article-card .image-wrap{height:155px!important}.carousel-controls{margin-top:-30px!important}}
 
-
 /* Author avatar: fixed circle, photo fills it, nothing overflows */
 .article-card .author{min-width:0;gap:8px}
 .article-card .avatar{
