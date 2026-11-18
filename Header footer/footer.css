@@ -1,0 +1,70 @@
+.newsdesk-integrated > .site-footer {
+    position: relative;
+    z-index: 2;
+    margin-top: 56px;
+    background: #102b4e;
+    color: #e6edf5;
+    font: 14px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.site-footer *,
+.site-footer *::before,
+.site-footer *::after { box-sizing: border-box; }
+
+.site-footer .footer-inner {
+    width: min(100% - 48px, 1240px);
+    margin: 0 auto;
+    padding: 44px 0 34px;
+    display: grid;
+    grid-template-columns: minmax(240px, 1.6fr) repeat(2, minmax(150px, 1fr));
+    gap: 48px;
+}
+
+.site-footer .footer-main { max-width: 390px; }
+.site-footer .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -.35px;
+    text-decoration: none;
+}
+.site-footer .footer-brand .brand-logo { background: #ffffff1a; color: #8ce2b0; }
+.site-footer img.brand-logo { padding: 4px; object-fit: contain; }
+.site-footer .footer-main p { margin: 15px 0 0; color: #c3cfdb; font-size: 13px; }
+.site-footer .footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; }
+.site-footer .footer-column h2 { margin: 2px 0 5px; color: #fff; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.site-footer .footer-column a { color: #c3cfdb; font-size: 13px; text-decoration: none; transition: color .15s ease; }
+.site-footer .footer-column a:hover { color: #8ce2b0; }
+.site-footer .footer-bottom {
+    width: min(100% - 48px, 1240px);
+    min-height: 58px;
+    margin: 0 auto;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    border-top: 1px solid #ffffff24;
+    color: #afbdca;
+    font-size: 12px;
+}
+
+body[data-role="student"] > .site-footer { background: #073f36; }
+body[data-role="student"] > .site-footer .footer-brand .accent { color: #8ce2b0; }
+body[data-role="student"] > .site-footer .footer-brand .brand-logo { background: #ffffff1a; color: #8ce2b0; }
+body[data-role="student"] > .site-footer .footer-column a:hover { color: #a7f3c5; }
+
+@media (max-width: 760px) {
+    .newsdesk-integrated > .site-footer { margin-top: 38px; }
+    .site-footer .footer-inner { width: min(100% - 32px, 1240px); padding: 34px 0 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
+    .site-footer .footer-main { grid-column: 1 / -1; }
+    .site-footer .footer-bottom { width: min(100% - 32px, 1240px); align-items: flex-start; flex-direction: column; gap: 4px; }
+}
+
+@media (max-width: 420px) {
+    .site-footer .footer-inner { grid-template-columns: 1fr; gap: 22px; }
+    .site-footer .footer-main { grid-column: auto; }
+}
