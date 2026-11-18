@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/app/render.php';$r=app_role();if($r==='student'){header('Location: '.url_for('student-home.php'));exit;}if($r==='admin'){header('Location: '.url_for('admin.php'));exit;}render_original('home/index.html','home','guest');
