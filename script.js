@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", () => {
     
     let userBookmarks = window.bookmarksData || [];
@@ -173,5 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
     articleGrid.addEventListener("touchstart", e => {touchX=e.touches[0].clientX},{passive:true});
     articleGrid.addEventListener("touchend", e => {const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45)moveSlide(dx<0?1:-1)},{passive:true});
     renderArticles();
+
 });
 
