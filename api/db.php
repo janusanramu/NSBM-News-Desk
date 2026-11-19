@@ -1,31 +1,18 @@
 <?php
 declare(strict_types=1);
 
-const DB_HOST = 'localhost';
-const DB_PORT = '3306';
-const DB_NAME = 'nsbm_newsdesk';
-const DB_USER = 'root';
-const DB_PASS = '';
-
-function getDbConnection(): PDO
+function database(): PDO
 {
-    $dsn = 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4';
+    $host = getenv('NSBM_DB_HOST') ?: '127.0.0.1';
+    $name = getenv('NSBM_DB_NAME') ?: 'nsbm_newsdesk';
+    $user = getenv('NSBM_DB_USER') ?: 'root';
+    $password = getenv('NSBM_DB_PASS') ?: '';
 
-    $options = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $host, $name);
+
+    return new PDO($dsn, $user, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ];
-
-    try {
-        return new PDO($dsn, DB_USER, DB_PASS, $options);
-    } catch (PDOException $e) {
-        http_response_code(500);
-        header('Content-Type: application/json');
-        echo json_encode([
-            'success' => false,
-            'message' => 'Database connection failed. Please check your MySQL settings.'
-        ], JSON_THROW_ON_ERROR);
-        exit;
-    }
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
 }
