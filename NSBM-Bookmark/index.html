@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookmarks | NSBM NewsDesk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="container">
+
+    <section class="showcase" aria-label="Saved news carousel">
+      <div class="showcase-head"><div><p class="eyebrow">YOUR PERSONAL NEWS COLLECTION</p><h2>Explore your <em>bookmarks.</em></h2><p class="showcase-sub">Your favorite campus stories, all in one place. Swipe through the highlights.</p></div><div class="showcase-counter"><span id="visibleCount">05</span> SAVED STORIES</div></div>
+      <div class="carousel-window"><section class="article-grid" id="articleGrid" aria-live="polite"></section></div>
+      <div class="carousel-controls"><button id="prevSlide" aria-label="Previous stories">←</button><button id="nextSlide" aria-label="Next stories">→</button></div>
+      <div class="bookmark-tools"><label for="searchInput">Search saved stories</label><input id="searchInput" type="search" placeholder="Search title, category or author..." autocomplete="off"></div>
+      <div class="filters" id="categoryFilters"><button class="filter active" data-category="all">All</button></div>
+    </section>
+
+    <div id="noResults" class="empty-state hidden">
+        <div style="font-size: 28px; color: #ef4444; margin-bottom: 12px;">🔖</div>
+        <h3>No Bookmarked Articles Found</h3>
+        <p>You have not saved any articles matching your search or category filter.</p>
+    </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

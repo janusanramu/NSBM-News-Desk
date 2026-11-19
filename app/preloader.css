@@ -1,0 +1,19 @@
+/* Used on every NSBM NewsDesk page rendered through render.php (guest, student, admin). */
+#nsbm-page-preloader{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#effcf5 0%,#fff 72%);opacity:1;visibility:visible;transition:opacity .58s ease,visibility .58s ease;isolation:isolate}
+#nsbm-page-preloader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+#nsbm-page-preloader .nsbm-loader{position:relative;width:210px;height:210px;display:grid;place-items:center;isolation:isolate}
+#nsbm-page-preloader .nsbm-loader::before{content:"";position:absolute;inset:12px;border-radius:50%;background:conic-gradient(from 0deg,#1c60a0,#2fbd58,#9bd342,#1c60a0);filter:blur(14px);opacity:.18;animation:nsbmLoaderSpin 5s linear infinite}
+#nsbm-page-preloader .nsbm-loader::after{content:"";position:absolute;inset:23px;border-radius:50%;border:2px solid transparent;border-top-color:#1c60a0;border-bottom-color:#43b956;animation:nsbmLoaderSpin 3s linear infinite}
+#nsbm-page-preloader .nsbm-pulse{position:absolute;inset:35px;border:2px solid rgba(55,176,94,.38);border-radius:50%;animation:nsbmLoaderWave 2.2s ease-out infinite}
+#nsbm-page-preloader .nsbm-pulse:nth-child(2){animation-delay:1.1s;border-color:rgba(30,99,167,.35)}
+#nsbm-page-preloader .nsbm-loader img{position:relative;z-index:2;width:116px;max-width:116px;height:140px;max-height:140px;object-fit:contain;filter:drop-shadow(0 9px 15px rgba(21,84,120,.15));animation:nsbmLoaderFloat 2.5s ease-in-out infinite}
+@keyframes nsbmLoaderSpin{to{transform:rotate(360deg)}}
+@keyframes nsbmLoaderWave{0%{transform:scale(.65);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+@keyframes nsbmLoaderFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.045)}}
+@media(prefers-color-scheme:dark){body[data-role="admin"][data-theme="dark"] #nsbm-page-preloader,body[data-role="student"][data-theme="dark"] #nsbm-page-preloader{background:radial-gradient(circle at center,#12392b 0%,#071d17 76%)}}
+@media(prefers-reduced-motion:reduce){#nsbm-page-preloader .nsbm-loader::before,#nsbm-page-preloader .nsbm-loader::after,#nsbm-page-preloader .nsbm-pulse,#nsbm-page-preloader .nsbm-loader img{animation:none}#nsbm-page-preloader{transition:none}}
+/* Prevent static/dummy news cards flashing before database feed loads */
+.newsdesk-page .card-grid,
+.newsdesk-page #news-grid {
+    visibility: hidden;
+}
