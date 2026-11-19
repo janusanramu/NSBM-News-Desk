@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="SubmitArticle.css?v=5" rel="stylesheet"/>
+<title>Submit Article | NSBM NewsDesk</title><meta content="#082d22" name="theme-color"/></head>
+<body>
+<!-- MAIN CONTENT -->
+<main class="page-container">
+<div class="page-heading"><div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dot"></span> CREATOR STUDIO</div><h1>Bring your story <em>to life.</em></h1><p class="page-description">Write, refine and share the stories that matter to the NSBM community.</p><div class="hero-tags"><span>✦ Campus voices</span><span>✦ Original stories</span><span>✦ Community impact</span></div></div><div aria-hidden="true" class="hero-art"><span class="hero-orb orb-one"></span><span class="hero-orb orb-two"></span><div class="hero-art-icon">✎</div><span class="hero-art-caption">YOUR STORY STARTS HERE</span></div></div>
+<!-- CONTENT GRID -->
+<div class="content-layout">
+<!-- ARTICLE FORM -->
+<section class="form-section">
+<div class="section-heading"><div class="section-heading-copy"><span class="section-kicker">THE EDITOR</span><h2>Create your article</h2><p>Everything you need to turn an idea into a story.</p></div><div class="editor-step">01 <span>/ 02</span></div></div>
+<div class="form-progress"><span class="form-progress-label"><span class="progress-icon">✦</span> Article completeness</span><span id="completionPercent">0%</span><div class="form-progress-track"><div id="completionBar"></div></div></div><form action="api.php?action=articles" enctype="multipart/form-data" id="articleForm" method="POST">
+<!-- ARTICLE TITLE -->
+<div class="form-group">
+<label for="articleTitle">
+                            Article Title
+                            <span class="required">*</span>
+</label>
+<input id="articleTitle" maxlength="120" name="articleTitle" placeholder="Enter your article title" required="" type="text"/>
+<small>Maximum 120 characters</small>
+</div>
+<!-- CATEGORY -->
+<div class="form-group">
+<label for="category">
+                            Category
+                            <span class="required">*</span>
+</label>
+<select id="category" name="category" required="">
+<option value="">
+                                Select a category
+                            </option>
+<option value="Campus Life">
+                                Campus Life
+                            </option>
+<option value="Academics">
+                                Academics
+                            </option>
+<option value="Research">
+                                Research
+                            </option>
+<option value="Clubs &amp; Societies">
+                                Clubs &amp; Societies
+                            </option>
+<option value="Sports">
+                                Sports
+                            </option>
+</select>
+</div>
+<!-- AUTHOR -->
+<div class="form-group">
+<label for="author">
+                            Author Name
+                            <span class="required">*</span>
+</label>
+<input id="author" maxlength="100" name="author" placeholder="Enter your name" required="" type="text"/>
+</div>
+<!-- SUMMARY -->
+<div class="form-group">
+<label for="summary">
+                            Article Summary
+                            <span class="required">*</span>
+</label>
+<textarea id="summary" maxlength="300" name="summary" placeholder="Write a short summary of your article..." required="" rows="3"></textarea>
+<div class="character-info">
+<small>Maximum 300 characters</small>
+<small id="summaryCount">0 / 300</small>
+</div>
+</div>
+<!-- ARTICLE CONTENT -->
+<div class="form-group">
+<label for="content">
+                            Article Content
+                            <span class="required">*</span>
+</label>
+<!-- EDITOR TABS -->
+<div class="editor-tabs">
+<button class="editor-tab active" id="writeTab" type="button">
+                                Write
+                            </button>
+<button class="editor-tab" id="previewTab" type="button">
+                                Preview
+                            </button>
+</div>
+<!-- WRITE AREA -->
+<textarea class="article-content" id="content" name="content" placeholder="Write your complete article here..." required="" rows="12"></textarea>
+<!-- PREVIEW AREA -->
+<div class="content-preview" hidden="" id="contentPreview">
+</div>
+</div>
+<!-- COVER IMAGE -->
+<div class="form-group">
+<label for="coverImage">
+                            Cover Image
+                        </label>
+<div class="upload-area" id="uploadArea">
+<div class="upload-icon">
+<svg fill="none" height="38" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="38">
+<path d="M12 16V4"></path>
+<path d="M7 9l5-5 5 5"></path>
+<path d="M4 16v4h16v-4"></path>
+</svg>
+</div>
+<p>
+<strong>Click to upload</strong>
+                                or drag and drop
+                            </p>
+<small>
+                                JPG, JPEG, PNG or WEBP
+                            </small>
+<input accept="image/jpeg,image/png,image/webp" id="coverImage" name="coverImage" type="file"/>
+</div>
+<div class="image-preview" id="imagePreview"></div>
+</div>
+<!-- ARTICLE CONTENT IMAGE -->
+<div class="form-group">
+<label for="articleContentImage">Article Content Image (Optional)</label>
+<div class="upload-area">
+<div class="upload-icon">✦</div>
+<p><strong>Choose an additional image</strong></p>
+<small>JPG, JPEG, PNG or WEBP up to 4 MB</small>
+<input accept="image/jpeg,image/png,image/webp" id="articleContentImage" name="articleContentImage" type="file"/>
+</div>
+<div class="image-preview" id="articleContentImagePreview"></div>
+</div>
+<!-- FORM BUTTONS -->
+<div class="form-actions">
+<button class="btn btn-secondary" id="saveDraft" type="button">
+                            Save Draft
+                        </button>
+<button class="btn btn-primary" id="submitArticle" type="submit">
+                            Submit for Review
+                            <span>→</span>
+</button>
+</div>
+<!-- FORM MESSAGE -->
+<div aria-live="polite" class="form-message" id="formMessage" role="status"></div>
+</form>
+</section>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+<!-- OVERVIEW -->
+<div class="sidebar-card overview-card"><div class="overview-top"><div><span class="section-kicker">YOUR WORKSPACE</span><h3>Submission Overview</h3><p class="sidebar-description">Your publishing journey, at a glance.</p></div><span aria-hidden="true" class="overview-top-icon">▥</span></div><div class="stat-grid"><a aria-label="Pending review submissions" class="stat-tile pending-item" data-status-link="pending" href="#"><div class="stat-top"><span class="stat-icon">◷</span><span class="stat-arrow">↗</span></div><strong id="pendingCount">00</strong><span class="stat-label">Pending review</span></a><a aria-label="Published submissions" class="stat-tile published-item" data-status-link="published" href="#"><div class="stat-top"><span class="stat-icon">✓</span><span class="stat-arrow">↗</span></div><strong id="publishedCount">00</strong><span class="stat-label">Published</span></a></div><div class="publication-progress"><div class="publication-progress-top"><span>Publication rate</span><strong id="publicationRate">0%</strong></div><div class="publication-track"><div id="publicationBar"></div></div><p id="publicationHint">Your publishing journey starts here.</p></div><div class="total-row"><span><span class="total-icon">▤</span> Total submissions</span><strong id="totalCount">00</strong></div></div>
+<!-- GUIDELINES -->
+<div class="sidebar-card guidelines-card">
+<span class="section-kicker">BEFORE YOU PUBLISH</span><h3>Submission Guidelines</h3>
+<ul>
+<li>
+                            Use a clear and meaningful article title.
+                        </li>
+<li>
+                            Select the correct article category.
+                        </li>
+<li>
+                            Write original and informative content.
+                        </li>
+<li>
+                            Use appropriate cover images.
+                        </li>
+<li>
+                            Check your article before submitting.
+                        </li>
+</ul>
+</div>
+<!-- HELP CARD -->
+<div class="sidebar-card help-card">
+<div class="help-symbol">✳</div><h3>Need Help?</h3>
+<p>
+                        Contact the NewsDesk team if you need
+                        assistance with your submission.
+                    </p>
+<a href="mailto:newsdesk@nsbm.ac.lk">
+                        Contact NewsDesk →
+                    </a>
+</div>
+</aside>
+</div>
+</main>
+<script src="SubmitArticle.js?v=20261107-submit-score"></script></body>
+</html>

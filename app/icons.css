@@ -1,0 +1,64 @@
+/* NSBM NewsDesk: distinctive icon styling for pages outside the shared header
+   (footer, login/register, dashboards, submissions, cards). Loaded after each page's own CSS. */
+
+/* ---------- Footer ---------- */
+.site-footer .social-links a { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.05)); border: 1px solid rgba(255,255,255,.25); color: #9af5bd; transition: transform .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease; }
+.site-footer .social-links a:hover { background: linear-gradient(135deg, #3bb54a, #14a06b); border-color: transparent; color: #fff; transform: translateY(-3px) rotate(-6deg); box-shadow: 0 8px 18px rgba(59,181,74,.4); }
+.site-footer .footer-contact li i { display: inline-grid; place-items: center; flex: 0 0 auto; width: 26px; height: 26px; margin-top: 0; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.22); color: #9af5bd; font-size: 11px; }
+.site-footer .footer-workspace li > i { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 8px; background: rgba(154,245,189,.14); color: #9af5bd; font-size: 11px; transition: transform .2s ease, background .2s ease; }
+.site-footer .footer-workspace li:hover > i { background: linear-gradient(135deg, #3bb54a, #14a06b); color: #fff; transform: rotate(-8deg) scale(1.1); }
+
+/* ---------- Sign-in / register / forgot password / terms / guidelines ---------- */
+.input-wrap > .material-symbols-outlined:first-child { display: grid; place-items: center; width: 28px; height: 28px; margin-left: -4px; border-radius: 9px; background: #e3f6ea; color: #0a7d5a; font-size: 18px; transition: background .2s ease, color .2s ease, transform .2s ease; }
+.input-wrap:focus-within > .material-symbols-outlined:first-child { background: linear-gradient(135deg, #3bb54a, #14a06b); color: #fff; transform: scale(1.06); }
+.btn-primary .material-symbols-outlined { transition: transform .22s ease; }
+.btn-primary:hover .material-symbols-outlined { transform: translateX(5px); }
+.toggle-pass .material-symbols-outlined { transition: transform .2s ease, color .2s ease; }
+.toggle-pass:hover .material-symbols-outlined { transform: scale(1.18); color: #0a7d5a; }
+.logo-tile { box-shadow: 0 0 0 5px rgba(59,181,74,.22), 0 10px 22px rgba(6,78,59,.3); animation: icon-float 4s ease-in-out infinite; }
+.feature-top > .material-symbols-outlined { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); }
+.forgot-art-ring { box-shadow: 0 0 0 8px rgba(59,181,74,.2), 0 0 0 18px rgba(59,181,74,.1); }
+
+/* ---------- Student dashboard ---------- */
+.tabs .tab .tab-icon { min-width: 28px; height: 28px; border-radius: 9px; background: #e3f6ea; color: #0a7d5a; transition: transform .2s ease, background .2s ease, color .2s ease; }
+.tabs .tab:hover .tab-icon { transform: rotate(-8deg) scale(1.08); }
+.tabs .tab.active .tab-icon { background: rgba(255,255,255,.2); color: #fff; }
+.settings-card-title .settings-icon, .settings-nav-bell { width: 30px; height: 30px; border-radius: 10px; background: #e3f6ea; color: #0a7d5a; display: inline-grid; place-items: center; }
+.settings-nav-bell { display: inline-grid; }
+
+/* ---------- Admin dashboard ---------- */
+.side-link i { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14); transition: transform .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease; }
+.side-link:hover i { background: linear-gradient(135deg, #3bb54a, #14a06b); color: #fff; transform: rotate(-8deg) scale(1.08); }
+.side-link.active i { background: linear-gradient(135deg, #3bb54a, #14a06b); color: #fff; box-shadow: 0 4px 10px rgba(20,160,107,.4); }
+.as-nav i, .as-icon i { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: #e3f6ea; color: #0a7d5a; font-size: 13px; transition: transform .2s ease, background .2s ease, color .2s ease; }
+.as-nav:hover i { transform: rotate(-8deg) scale(1.08); }
+.as-nav.active i { background: linear-gradient(135deg, #3bb54a, #14a06b); color: #fff; }
+.spotlight-icon { background: linear-gradient(135deg, #d6f5e3, #effcf4); box-shadow: 0 0 0 4px rgba(32,166,108,.14); animation: icon-float 4s ease-in-out infinite; }
+.primary-button i { transition: transform .22s ease; }
+.primary-button:hover i { transform: rotate(90deg) scale(1.12); }
+.stat-icon { box-shadow: 0 0 0 4px rgba(32,166,108,.12); }
+.stat-card:hover .stat-icon, .stat:hover .stat-icon { transform: translateY(-2px) rotate(-6deg) scale(1.06); }
+
+/* ---------- My Submissions ---------- */
+.stat-icon .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+.stat-icon.neutral { background: linear-gradient(135deg, #eef1ef, #dfe5e1); }
+.stat-icon.green { background: linear-gradient(135deg, #d9f5e5, #b8ebcf); }
+.stat-icon.amber { background: linear-gradient(135deg, #fff1cf, #ffe29a); }
+.stat-icon.red { background: linear-gradient(135deg, #ffe1e1, #ffc3c3); }
+.eyebrow > .material-symbols-outlined { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: #e3f6ea; color: #0a7d5a; font-size: 16px; }
+.btn .material-symbols-outlined { transition: transform .22s ease; }
+.btn:hover .material-symbols-outlined { transform: rotate(90deg) scale(1.1); }
+
+/* ---------- Cards, bookmarks, upload ---------- */
+.bookmark-btn svg, .bookmark-icon { transition: transform .22s ease, color .2s ease, fill .2s ease; }
+.bookmark-btn:hover svg, .bookmark-btn:hover .bookmark-icon { transform: scale(1.2) rotate(-8deg); color: #0a7d5a; }
+.bookmark-btn[aria-pressed="true"] svg, .bookmark-btn.saved svg { filter: drop-shadow(0 2px 5px rgba(20,160,107,.5)); }
+.views svg.icon, .views .icon { color: #14a06b; }
+.btn:hover svg.icon, .subscribe-btn:hover svg.icon { transform: translateX(3px); }
+svg.icon { transition: transform .2s ease; }
+svg.icon-red { animation: icon-pulse 2.2s ease-in-out infinite; }
+.upload-icon { animation: icon-float 4s ease-in-out infinite; }
+
+@keyframes icon-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes icon-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+@media (prefers-reduced-motion: reduce) { .logo-tile, .spotlight-icon, .upload-icon, svg.icon-red { animation: none; } }

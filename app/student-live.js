@@ -1,0 +1,85 @@
+/* Live student dashboard: submissions, bookmarks, subscriptions, profile and password. */
+(()=>{'use strict';
+const {api,toast,route,categoryGroups,articleCategoryGroup,categoryLabel}=window.NSBM;
+const $=id=>document.getElementById(id);
+let submissions=[],bookmarks=[],categories=[],subscriptions={},editing=null,editingCategoryId=0,editingCategoryGroup='',coverUrl='',contentImageUrl='',contentPreviewUrl='';
+const setContentPreview=src=>{const preview=$('articleContentPreview');if(!preview)return;if(contentPreviewUrl){URL.revokeObjectURL(contentPreviewUrl);contentPreviewUrl='';}preview.src=src||'';preview.hidden=!src;};
+const clearEditor=()=>{editing=null;editingCategoryId=0;editingCategoryGroup='';coverUrl='';contentImageUrl='';$('articleForm').reset();setContentPreview('');$('saveArticle').textContent='Submit for Review';$('articleFeedback').textContent='';};
+const item=(tag,css,text)=>{const n=document.createElement(tag);if(css)n.className=css;if(text!=null)n.textContent=text;return n;};
+function animateDashboardCard(card,index){card.classList.add('newsdesk-dashboard-card-enter');card.style.setProperty('--newsdesk-stagger-delay',`${Math.min(index*80,640)}ms`);card.addEventListener('animationend',()=>card.classList.remove('newsdesk-dashboard-card-enter'),{once:true});}
+function updateEngagement(){
+  const card=document.querySelector('.engagement-card');
+  if(!card)return;
+  const published=submissions.filter(a=>a.status==='published');
+  const total=submissions.reduce((s,a)=>s+Number(a.view_count||0),0);
+  const value=card.querySelector('.engagement-value');
+  if(value){
+    const leaves=[...value.querySelectorAll('*')].filter(e=>!e.children.length);
+    const number=leaves.find(e=>/^[\d,.]+k?$/i.test(e.textContent.trim()));
+    if(number)number.textContent=total.toLocaleString();
+    const badge=leaves.find(e=>e!==number&&e.textContent.trim()!=='');
+    if(badge)badge.textContent='↑ '+published.length+' published';
+  }
+  const updated=card.querySelector('.updated');
+  if(updated)updated.textContent='Updated live from your published stories';
+  const chart=card.querySelector('.chart');
+  if(chart){
+    const bars=[...chart.children];
+    const recent=published.slice(0,bars.length).reverse();
+    const max=Math.max(1,...recent.map(a=>Number(a.view_count||0)));
+    const offset=bars.length-recent.length;
+    bars.forEach((bar,i)=>{
+      const a=recent[i-offset];
+      const views=a?Number(a.view_count||0):0;
+      bar.style.setProperty('--h',(a?Math.max(10,views/max*100):4)+'%');
+      bar.title=a?a.title+' ('+views+' views)':'No story yet';
+    });
+    chart.setAttribute('aria-label','Reader reach for your latest published stories');
+  }
+}
+function updateCounts(){const subs=document.querySelector('.stat strong[data-count]');if(subs){subs.dataset.count=String(submissions.length);subs.textContent=String(submissions.length);}const reads=document.querySelector('.stat strong[data-format=compact]');if(reads){const total=submissions.reduce((sum,a)=>sum+Number(a.view_count||0),0);reads.dataset.count=String(total);reads.textContent=total>999?(total/1000).toFixed(1)+'k':String(total);}const saved=document.querySelector('.stat .saved-number');if(saved){saved.dataset.count=String(bookmarks.length);saved.textContent=String(bookmarks.length);}const timeline=document.querySelector('#overview .timeline');if(timeline){timeline.replaceChildren();const latest=submissions.slice(0,4);if(!latest.length){timeline.textContent='Your submissions will appear here once you publish your first story.';}else latest.forEach(a=>{const row=item('article','activity');const detail=item('div');const h=item('h3',null,a.title);const p=item('p',null,a.status==='published'?'Published on NewsDesk':a.status==='rejected'?'Needs changes':'Awaiting admin review');detail.append(h,p);const icon=item('div','activity-icon '+(a.status==='published'?'publish':'edit'),a.status==='published'?'↟':'✎');icon.setAttribute('aria-hidden','true');row.append(icon,detail);timeline.append(row);});}}
+const statuses={pending_review:'Pending',published:'Published',rejected:'Rejected',draft:'Draft',archived:'Archived'};
+function authorBadge(name,path){const row=item('div','content-author'),avatar=item('span','content-author-avatar',String(name||'NewsDesk').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase());if(typeof path==='string'&&/^uploads\/(?:profile|avatars)\/[a-f0-9]{24,32}\.(?:jpg|png|webp)$/.test(path)){const img=item('img','content-author-avatar');img.alt='';img.src=route(path);img.onerror=()=>img.replaceWith(avatar);row.append(img);}else row.append(avatar);row.append(item('span',null,'By '+(name||'NSBM NewsDesk')));return row;}
+function renderSubmissions(){const list=$('submissionList');if(!list)return;list.replaceChildren();if(!submissions.length){list.append(item('p','content-empty','No submissions yet. Create your first article!'));return;}
+ submissions.forEach((a,index)=>{const card=item('article','content-entry'),body=item('div'),actions=item('div','content-actions');const h=item('h3',null,a.title);const meta=item('p',null,[categoryLabel(a),statuses[a.status]||a.status,(a.created_at||'').slice(0,10)].join(' • '));const summary=item('p',null,a.summary||'');body.append(authorBadge(a.author,a.author_photo_url),h,meta,summary);
+ if(a.status==='rejected'&&a.rejection_reason)body.append(item('p','submission-rejection','Reviewer feedback: '+a.rejection_reason));
+ if(['draft','pending_review','rejected'].includes(a.status)){const edit=item('button','secondary-action','Edit');edit.type='button';edit.addEventListener('click',()=>{editing=Number(a.id);editingCategoryId=Number(a.category_id);editingCategoryGroup=articleCategoryGroup(a);coverUrl=a.cover_image_url||'';contentImageUrl=a.content_image_url||'';file.value='';contentFile.value='';setContentPreview(contentImageUrl?route(contentImageUrl):'');$('articleTitle').value=a.title;$('articleCategory').value=editingCategoryGroup;$('articleSummary').value=a.summary||'';$('articleBody').value=a.body||'';$('saveArticle').textContent='Update Submission';activateTab('submit');history.replaceState(null,'','#submit');});const del=item('button','secondary-action','Delete');del.type='button';del.addEventListener('click',async()=>{if(!confirm('Delete this submission?'))return;try{await api('articles','DELETE',{id:Number(a.id)});toast('Submission deleted.');await loadArticles();}catch(e){toast(e.message,false);}});actions.append(edit,del);}
+ if(a.status==='published'){const read=item('a','secondary-action','Read article');read.href=route('article.php?id='+encodeURIComponent(a.id));actions.append(read);}card.append(body,actions);animateDashboardCard(card,index);list.append(card);});
+}
+function renderBookmarks(){const list=$('bookmarkList');if(!list)return;list.replaceChildren();if(!bookmarks.length){list.append(item('p','content-empty','No bookmarks yet. Save an article from the News page.'));return;}
+ bookmarks.forEach((b,index)=>{const card=item('article','content-entry'),body=item('div'),h=item('h3',null,b.title),p=item('p',null,[categoryLabel(b),b.summary].filter(Boolean).join(' • '));const actions=item('div','content-actions');const read=item('a','secondary-action','Read');read.href=route('article.php?id='+encodeURIComponent(b.id));const remove=item('button','secondary-action','Remove');remove.type='button';remove.addEventListener('click',async()=>{try{await api('bookmarks','POST',{article_id:Number(b.id),saved:false});await loadBookmarks();toast('Bookmark removed.');}catch(e){toast(e.message,false);}});body.append(authorBadge(b.author,b.author_photo_url),h,p);actions.append(read,remove);card.append(body,actions);animateDashboardCard(card,index);list.append(card);});}
+async function loadArticles(){submissions=(await api('articles')).articles||[];renderSubmissions();updateCounts();updateEngagement();}
+async function loadBookmarks(){bookmarks=(await api('bookmarks')).bookmarks||[];renderBookmarks();updateCounts();}
+function renderCategories(){const list=$('subscription-list');if(!list)return;const text=$('category-search')?.value.trim().toLowerCase()||'';const visible=categoryGroups.filter(group=>group.name.toLowerCase().includes(text)).sort((a,b)=>Number(groupIds(b).some(id=>subscriptions[id]))-Number(groupIds(a).some(id=>subscriptions[id])));list.replaceChildren();const count=categoryGroups.filter(group=>groupIds(group).some(id=>subscriptions[id])).length;$('subscription-status').textContent=`${count} ${count===1?'category':'categories'} followed`;
+ if(!visible.length){list.append(item('p','subscription-empty','No matching categories.'));return;}
+ visible.forEach(group=>{const ids=groupIds(group),followed=ids.filter(id=>subscriptions[id]),active=followed.length>0,complete=ids.length>0&&followed.length===ids.length,row=item('article','category-item'),info=item('div','category-info'),title=item('h3',null,group.name),description=item('p',null,groupDescription(group.slug)),status=item('span','category-state'+(active?' is-followed':''),complete?'✓ Subscribed':active?'✓ Partially subscribed':'Not subscribed'),actions=item('div','category-actions');info.append(title,description,status);
+ if(active){const label=item('label','notification-toggle'),toggle=item('input');toggle.type='checkbox';toggle.checked=followed.every(id=>subscriptions[id].notifications);toggle.setAttribute('aria-label','Notifications for '+group.name);toggle.addEventListener('change',async()=>{try{await Promise.all(followed.map(id=>api('subscriptions','POST',{category_id:id,subscribed:true,notifications:toggle.checked})));followed.forEach(id=>subscriptions[id].notifications=toggle.checked);toast('Notification preference saved.');}catch(e){toggle.checked=!toggle.checked;toast(e.message,false);}});label.append(toggle,item('span',null,'Notifications'));actions.append(label);}
+ const button=item('button','category-button'+(active?' unsubscribe':''),active?'Unsubscribe':'+ Subscribe');button.type='button';button.addEventListener('click',async()=>{button.disabled=true;try{await Promise.all(ids.map(id=>api('subscriptions','POST',{category_id:id,subscribed:!active,notifications:true})));ids.forEach(id=>{if(active)delete subscriptions[id];else subscriptions[id]={notifications:true};});renderCategories();toast(active?'Unsubscribed.':'Category subscribed!');}catch(e){toast(e.message,false);button.disabled=false;}});actions.append(button);row.append(info,actions);list.append(row);});
+}
+function groupIds(group){return categories.filter(category=>group.slugs.includes(category.slug)&&Number(category.is_active)!==0).map(category=>Number(category.id));}
+function groupCategoryId(slug){const group=categoryGroups.find(entry=>entry.slug===slug);const category=group&&(categories.find(entry=>entry.slug===group.slug)||categories.find(entry=>group.slugs.includes(entry.slug)));return category?Number(category.id):0;}
+function groupDescription(slug){return({ 'campus-life':'Campus events, notices, and student life.','academics':'Academic news from all faculties.','research':'Research projects, discoveries, and academic symposiums.','clubs-societies':'Club and society activities across campus.','sports':'University teams, sports, and competitions.'})[slug]||'Latest campus updates.';}
+async function loadCategories(){categories=(await api('categories')).categories.filter(c=>Number(c.is_active)!==0);const select=$('articleCategory');select.replaceChildren();categoryGroups.forEach(group=>{if(!groupCategoryId(group.slug))throw Error('The '+group.name+' news category is not configured in the database.');select.add(new Option(group.name,group.slug));});const sub=(await api('subscriptions')).subscriptions||[];subscriptions={};sub.forEach(r=>subscriptions[r.category_id]={notifications:!!Number(r.notifications)});renderCategories();}
+$('category-search')?.addEventListener('input',renderCategories);
+$('newSubmission')?.addEventListener('click',()=>{clearEditor();activateTab('submit');history.replaceState(null,'','#submit');});
+$('clearArticle')?.addEventListener('click',clearEditor);
+const fileRow=item('div','form-group full-width');const label=item('label',null,'Cover photo (optional, JPG, PNG or WebP up to 4 MB)');const file=item('input');file.type='file';file.accept='image/jpeg,image/png,image/webp';file.id='articleCover';label.append(file);fileRow.append(label);$('articleBody')?.closest('.form-group')?.after(fileRow);
+const contentFileRow=item('div','form-group full-width');const contentLabel=item('label',null,'Article Content Image (Optional)');const contentFile=item('input');contentFile.type='file';contentFile.accept='image/jpeg,image/png,image/webp';contentFile.id='articleContentImage';const contentHint=item('small',null,'JPG, PNG or WebP up to 4 MB. This image appears in your article below its text.');const contentPreview=item('img','article-content-upload-preview');contentPreview.id='articleContentPreview';contentPreview.alt='Article content image preview';contentPreview.hidden=true;contentLabel.append(contentFile);contentFileRow.append(contentLabel,contentHint,contentPreview);fileRow.after(contentFileRow);
+contentFile.addEventListener('change',()=>{const selected=contentFile.files[0];if(!selected){setContentPreview(contentImageUrl?route(contentImageUrl):'');return;}if(contentPreviewUrl)URL.revokeObjectURL(contentPreviewUrl);contentPreviewUrl=URL.createObjectURL(selected);contentPreview.src=contentPreviewUrl;contentPreview.hidden=false;});
+$('articleForm')?.addEventListener('submit',async e=>{e.preventDefault();e.stopImmediatePropagation();const button=$('saveArticle');button.disabled=true;try{
+ let uploaded=coverUrl;if(file.files.length){const data=new FormData();data.append('image',file.files[0]);uploaded=(await api('cover','POST',data)).url;}
+ let uploadedContentImage=contentImageUrl;if(contentFile.files.length){const data=new FormData();data.append('image',contentFile.files[0]);uploadedContentImage=(await api('article-content-image','POST',data)).url;}
+ const selectedGroup=$('articleCategory').value;const categoryId=editing&&selectedGroup===editingCategoryGroup?editingCategoryId:groupCategoryId(selectedGroup);if(!categoryId)throw Error('Select a configured news category.');
+ const payload={title:$('articleTitle').value.trim(),body:$('articleBody').value.trim(),summary:$('articleSummary').value.trim(),category:String(categoryId),cover_image_url:uploaded,content_image_url:uploadedContentImage};if(editing)payload.id=editing;
+ await api('articles','POST',payload);clearEditor();await loadArticles();activateTab('submissions');history.replaceState(null,'','#submissions');toast('Article submitted for admin review.');
+ }catch(ex){$('articleFeedback').textContent=ex.message;toast(ex.message,false);}finally{button.disabled=false;}},true);
+// Use the existing settings UI; save account details and password through PHP instead of displaying a false success.
+$('settingsForm')?.addEventListener('submit',async e=>{e.preventDefault();e.stopImmediatePropagation();try{const name=$('fullName').value.trim(),faculty=$('faculty').value;const old=$('currentPassword').value,next=$('newPassword').value,confirm=$('confirmPassword').value;
+ if(old||next||confirm){if(!old||next.length<8||next!==confirm)throw Error('Enter your current password and matching new password (8+ characters).');await api('password','POST',{current:old,next});}
+ await api('profile','POST',{name,faculty,degree:$('degree').value,intake:$('intake').value});const snap=settingsSnapshot();write('settings',snap);savedSettings=snap;markDirty();updateProfileDisplay();['currentPassword','newPassword','confirmPassword'].forEach(id=>$(id).value='');settingsMessage('Account settings saved successfully.');toast('Account settings saved.');
+ }catch(ex){settingsMessage(ex.message,true);toast(ex.message,false);}},true);
+async function loadProfile(){const d=(await api('profile')).profile;if(!d)return;$('fullName').value=d.name;$('studentId').value=d.student_id||'';$('email').value=d.email;$('email').readOnly=true;if(d.faculty)$('faculty').value=d.faculty;updateDegrees(d.degree||'');if(d.intake&&!Array.from($('intake').options).some(option=>option.value===d.intake))$('intake').add(new Option(d.intake,d.intake));$('intake').value=d.intake||'';const h=document.querySelector('.name-row h1');if(h)h.textContent=d.name;const f=document.querySelector('.faculty');if(f)f.textContent=[d.faculty,d.degree,d.intake].filter(Boolean).join(' • ')||'NSBM Student';const membership=document.querySelector('.profile-banner .membership');if(membership){const since=d.created_at?new Date(String(d.created_at).replace(' ','T')).toLocaleDateString(undefined,{month:'long',year:'numeric'}):'your registration';membership.textContent='Member since '+since+' • Account active';}savedSettings=settingsSnapshot();markDirty();}
+async function initialize(){try{await Promise.all([loadCategories(),loadArticles(),loadBookmarks(),loadProfile()]);}catch(e){toast(e.message,false);}finally{document.body.classList.add('live-ready');}}
+setTimeout(()=>document.body.classList.add('live-ready'),4000);
+initialize();
+})();
