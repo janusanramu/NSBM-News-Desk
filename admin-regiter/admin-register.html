@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Registration | NSBM NewsDesk</title>
+
+    <link rel="stylesheet" href="admin-register.css">
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <div class="register-card">
+
+            <div class="logo">
+                <h1>NSBM <span>NewsDesk</span></h1>
+                <p>ADMIN PORTAL</p>
+            </div>
+
+            <h2>Create Admin Account</h2>
+
+            <p class="subtitle">
+                Register to access the administration dashboard.
+            </p>
+
+            <form id="registerForm" action="register.php" method="post">
+
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" name="fullName"
+                        placeholder="Enter your full name" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" name="email"
+                        placeholder="Enter your email address" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Admin ID</label>
+                    <input type="text" id="adminId" name="adminId"
+                        placeholder="Enter your admin ID" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" name="password"
+                        placeholder="Create a password" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword"
+                        placeholder="Confirm your password" required>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        I agree to the terms and conditions
+                    </label>
+                </div>
+
+                <button type="submit">Create Account</button>
+
+            </form>
+
+            <p id="message"></p>
+
+            <div class="footer">
+                NSBM Green University | NewsDesk
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="admin-register.js"></script>
+
+</body>
+</html>
