@@ -37,7 +37,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 $pdo->rollBack();
                 $status = 'invalid';
             } else {
-                $update = $pdo->prepare('UPDATE users SET password_hash = :hash WHERE id = :user_id');
+                $update = $pdo->prepare('UPDATE users SET password = :hash WHERE id = :user_id');
                 $update->execute([
                     'hash' => password_hash($password, PASSWORD_DEFAULT),
                     'user_id' => $reset['user_id'],
@@ -89,6 +89,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Reset Password | NSBM NewsDesk</title>
   <link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="../app/icons.css?v=1">
 </head>
 <body class="theme-dark">
 <main class="auth-hero register">

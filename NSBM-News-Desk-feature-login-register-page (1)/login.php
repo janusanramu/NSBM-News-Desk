@@ -13,16 +13,23 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     try {
         $pdo = database();
         $query = $pdo->prepare(
-            'SELECT id, full_name, email, password_hash, role FROM users WHERE email = :email LIMIT 1'
+            'SELECT id, name, email, password, role, account_status FROM users WHERE email = :email LIMIT 1'
         );
         $query->execute(['email' => $email]);
         $user = $query->fetch();
-        if (!$user || !password_verify($password, $user['password_hash'])) {
+        if (!$user || $user['role'] !== 'student' || !password_verify($password, $user['password'])) {
             redirect('login.php?error=invalid');
         }
 
-        if (password_needs_rehash($user['password_hash'], PASSWORD_DEFAULT)) {
-            $update = $pdo->prepare('UPDATE users SET password_hash = :hash WHERE id = :id');
+        if (($user['account_status'] ?? 'approved') === 'pending') {
+            redirect('login.php?error=pending');
+        }
+        if (($user['account_status'] ?? 'approved') === 'rejected') {
+            redirect('login.php?error=rejected');
+        }
+
+        if (password_needs_rehash($user['password'], PASSWORD_DEFAULT)) {
+            $update = $pdo->prepare('UPDATE users SET password = :hash WHERE id = :id');
             $update->execute([
                 'hash' => password_hash($password, PASSWORD_DEFAULT),
                 'id' => $user['id'],
@@ -32,11 +39,11 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         unset($_SESSION['csrf_token']);
         $_SESSION['user'] = [
             'id' => (int) $user['id'],
-            'name' => $user['full_name'],
+            'name' => $user['name'],
             'email' => $user['email'],
-            'role' => $user['role'],
+            'role' => 'student',
         ];
-        redirect('index.html');
+        redirect('../student-home.php');
     } catch (PDOException $exception) {
         error_log('NewsDesk login database error: ' . $exception->getMessage());
         redirect('login.php?error=unavailable');
@@ -48,11 +55,17 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
 
 $notice = match ($_GET['error'] ?? '') {
     'invalid' => 'The email or password is incorrect.',
+    'pending' => 'Your account is awaiting administrator approval. You can sign in once your NSBM student status is confirmed.',
+    'rejected' => 'Your registration was not approved. Please contact the NewsDesk team at newsdesk@nsbm.ac.lk.',
     'unavailable' => 'Sign-in is temporarily unavailable. Please try again later.',
-    default => (($_GET['status'] ?? '') === 'registered'
-        ? 'Your account has been created. You can now sign in.'
-        : ''),
+    default => '',
 };
+$noticeType = 'error';
+if ($notice === '' && !empty($_SESSION['registration_pending'])) {
+    unset($_SESSION['registration_pending']);
+    $notice = 'Registration received. An administrator will confirm that you are an NSBM student. You can sign in once your account is approved.';
+    $noticeType = 'success';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,9 +76,10 @@ $notice = match ($_GET['error'] ?? '') {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0" rel="stylesheet">
-<link rel="stylesheet" href="login.css">
+<link rel="stylesheet" href="login.css?v=alerts-1">
 <title>Login | NSBM NewsDesk</title>
 
+<link rel="stylesheet" href="../app/icons.css?v=1">
 </head>
 
 <body class="theme-dark">
@@ -85,21 +99,19 @@ $notice = match ($_GET['error'] ?? '') {
       </div>
     </aside>
     <section class="glass-card login-panel">
+      <a class="login-back-home" href="../index.php">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        <span>Back to Home</span>
+      </a>
       <div class="logo-tile"><span class="material-symbols-outlined">newspaper</span></div>
       <h1>Welcome Back</h1>
       <p class="sub">Sign in to access your bookmarks, submissions, and campus news feed.</p>
-    <?php if ($notice !== ''): ?><p role="status" style="color:#b2f8cf;margin:0 0 16px"><?= e($notice) ?></p><?php endif; ?>
-    <div class="demo-box">
-      <h4><span class="material-symbols-outlined">info</span>Demo Email Shortcuts</h4>
-      <div class="demo-row">
-        <span>Student: <code>username@students.nsbm.ac.lk</code></span>
-        <button type="button" class="fill-btn" data-email="username@students.nsbm.ac.lk">Fill</button>
-      </div>
-      <div class="demo-row">
-        <span>Admin: <code>username@admin.nsbm.ac.lk</code></span>
-        <button type="button" class="fill-btn" data-email="username@admin.nsbm.ac.lk">Fill</button>
-      </div>
+    <?php if ($notice !== ''): ?>
+    <div class="login-alert login-alert--<?= e($noticeType) ?>" role="<?= $noticeType === 'error' ? 'alert' : 'status' ?>">
+      <span class="material-symbols-outlined" aria-hidden="true"><?= $noticeType === 'error' ? 'error' : 'check_circle' ?></span>
+      <span><?= e($notice) ?></span>
     </div>
+    <?php endif; ?>
     <form id="loginForm" action="login.php" method="POST" novalidate>
       <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
       <div class="field">
@@ -131,6 +143,7 @@ $notice = match ($_GET['error'] ?? '') {
       <button type="submit" class="btn-primary">Sign In <span class="material-symbols-outlined">arrow_forward</span></button>
     </form>
       <p class="switch-line">Don't have an account? <a href="register.php">Register here</a></p>
+      <p class="switch-line">Administrator? <a href="../admin-login.php">Admin Login</a></p>
     </section>
   </div>
 </main>

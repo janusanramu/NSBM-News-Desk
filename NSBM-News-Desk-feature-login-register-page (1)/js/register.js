@@ -43,17 +43,52 @@ document.addEventListener('DOMContentLoaded', () => {
     if (error) error.textContent = message;
   }
   function checkInput(input) {
+    if (input.disabled) return true;
     const value = ['password', 'confirm'].includes(input.id) ? input.value : input.value.trim();
     let message = '';
     if (!value) message = 'This field is required.';
     else if (input.id === 'fullname' && value.length < 2) message = 'Enter your full name.';
+    else if (input.id === 'student_id' && value.length > 50) message = 'Student ID must be 50 characters or fewer.';
     else if (input.id === 'email' && !/^[^\s@]+@(?:[a-z0-9-]+\.)*nsbm\.ac\.lk$/i.test(value)) message = 'Use a valid NSBM student or staff email address.';
     else if (input.id === 'password' && (value.length < 8 || new TextEncoder().encode(value).length > 72)) message = 'Password must contain 8 to 72 bytes.';
     else if (input.id === 'confirm' && value !== password.value) message = 'Passwords do not match.';
     showError(input, message);
     return !message;
   }
-  const fields = ['fullname', 'email', 'faculty', 'password', 'confirm'].map(id => document.getElementById(id)).filter(Boolean);
+  const faculty = document.getElementById('faculty');
+  const studentId = document.getElementById('student_id');
+  const degree = document.getElementById('degree');
+  const intake = document.getElementById('intake');
+  const studentIdField = studentId?.closest('.field');
+  const degreeField = degree?.closest('.field');
+  const intakeField = intake?.closest('.field');
+  const degreeOptions = JSON.parse(document.getElementById('degreeOptions')?.textContent || '{}');
+  function updateFacultyFields() {
+    if (!faculty || !studentId || !studentIdField || !degree || !degreeField || !intake || !intakeField) return;
+    const isStaff = faculty.value === 'Staff';
+    const degrees = degreeOptions[faculty.value] || [];
+    const placeholder = new Option('Select your degree', '', true, true);
+    placeholder.disabled = true;
+    degree.replaceChildren(placeholder);
+    degrees.forEach(name => degree.add(new Option(name, name)));
+    degree.disabled = isStaff || degrees.length === 0;
+    degree.required = !isStaff && degrees.length > 0;
+    degreeField.hidden = isStaff || degrees.length === 0;
+    studentId.disabled = isStaff;
+    studentId.required = !isStaff;
+    studentIdField.hidden = isStaff;
+    intake.disabled = isStaff;
+    intake.required = !isStaff;
+    intakeField.hidden = isStaff;
+    degree.value = '';
+    if (isStaff) {
+      studentId.value = '';
+      intake.value = '';
+    }
+  }
+  faculty?.addEventListener('change', updateFacultyFields);
+  updateFacultyFields();
+  const fields = ['fullname', 'student_id', 'email', 'faculty', 'degree', 'intake', 'password', 'confirm'].map(id => document.getElementById(id)).filter(Boolean);
   fields.forEach(input => {
     input.addEventListener('blur', () => checkInput(input));
     input.addEventListener('input', () => { if (input.closest('.field')?.classList.contains('has-error')) checkInput(input); });

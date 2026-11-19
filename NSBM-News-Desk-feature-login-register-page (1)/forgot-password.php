@@ -85,7 +85,7 @@ $notice = match ($_GET['error'] ?? '') {
 <title>Forgot Password | NSBM NewsDesk</title>
 
 <style>
-/* Forgot password page: scoped styles, existing header/footer untouched */
+/* Forgot password page: scoped styles. */
 .forgot-hero .login-shell{width:100%;}
 .forgot-hero .forgot-feature{position:relative;overflow:hidden;min-height:490px;}
 .forgot-hero .forgot-art{position:relative;display:grid;place-items:center;min-height:230px;margin:16px auto 8px;isolation:isolate;}
@@ -99,40 +99,10 @@ $notice = match ($_GET['error'] ?? '') {
 .forgot-hero .switch-line .material-symbols-outlined{font-size:18px;}
 @media(max-width:700px){.forgot-hero .forgot-feature{min-height:350px}.forgot-hero .forgot-art{min-height:170px}.forgot-hero .forgot-art-ring{width:125px;height:125px}.forgot-hero .forgot-art-ring .material-symbols-outlined{font-size:62px}}
 </style>
+<link rel="stylesheet" href="../app/icons.css?v=1">
 </head>
 
 <body class="theme-dark">
-
-<header class="site-header">
-  <a href="index.html" class="brand">
-    <img src="images/logo.png" alt="NSBM Green University">
-    <span>NSBM NewsDesk</span>
-  </a>
-  <nav class="main-nav">
-    <a href="index.html">Home</a>
-    <a href="news.html">News</a>
-    <a href="submit-article.html">Submit Article</a>
-    <a href="bookmarks.html">My Bookmarks</a>
-    <a href="submissions.html">My Submissions</a>
-    <a href="admin.html">Admin Dashboard</a>
-  </nav>
-  <div class="search-box">
-    <span class="material-symbols-outlined">search</span>
-    <input type="text" placeholder="Search news...">
-  </div>
-  <button type="button" class="theme-toggle" aria-label="Switch to light theme" title="Toggle theme"><span class="material-symbols-outlined">light_mode</span></button>
-  <button type="button" class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span class="material-symbols-outlined">menu</span></button>
-  <a href="login.php" class="avatar-btn" aria-label="Account">
-    <span class="material-symbols-outlined">person</span>
-  </a>
-</header>
-
-<div class="ticker">
-  <span class="badge">BREAKING</span>
-  <div class="ticker-track">
-    <div class="ticker-inner" id="tickerInner"></div>
-  </div>
-</div>
 
 <main class="auth-hero login forgot-hero">
   <div class="login-shell">
@@ -172,31 +142,6 @@ $notice = match ($_GET['error'] ?? '') {
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-grid">
-    <div>
-      <h3>NSBM NewsDesk</h3>
-      <p>The official campus news and club-post portal for NSBM Green University, Sri Lanka. Keeping the academic community connected and informed.</p>
-    </div>
-    <div>
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">Latest News</a></li>
-        <li><a href="submit-article.html">Submit an Article</a></li>
-        <li><a href="bookmarks.html">Bookmarks</a></li>
-      </ul>
-    </div>
-    <div class="footer-contact">
-      <h3>Contact</h3>
-      <p>NSBM Green University, Pitipana, Homagama, Sri Lanka</p>
-      <p>Email: newsdesk@nsbm.ac.lk</p>
-    </div>
-  </div>
-  <div class="footer-bottom">&copy; 2026 NSBM NewsDesk. All rights reserved.</div>
-</footer>
-
-<script src="js/script.js" defer></script>
 <script src="js/forgot-password.js" defer></script>
 <script src="js/illustration-motion.js" defer></script>
 </body>

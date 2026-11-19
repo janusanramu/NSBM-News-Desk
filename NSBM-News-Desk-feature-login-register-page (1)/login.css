@@ -536,3 +536,22 @@ body.theme-light .site-header { background:#fff; border-color:#064E3B20; }
 body.theme-light .ticker { background:#e8f7eb; }
 body.theme-light .ticker-inner { color:#064E3B; }
 @media (prefers-reduced-motion:reduce) { .mouse-scrub-video,.auth-hero.register .mouse-scrub-video { transition:none; } }
+
+/* Back to Home button (same design as the register page) */
+.login-back-home { align-self:flex-start; display:inline-flex; align-items:center; gap:9px; margin:0 0 16px; padding:8px 14px 8px 9px; border:1px solid #c8e5d3; border-radius:999px; background:linear-gradient(135deg,#edf8f1,#fff); color:#075d40; font-size:12px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px #064e3b12; transition:transform .2s ease,background .2s ease,box-shadow .2s ease; }
+.login-back-home .material-symbols-outlined { display:grid; width:27px; height:27px; place-items:center; border-radius:50%; background:#064e3b; color:#fff; font-size:17px; transition:transform .2s ease,background .2s ease; }
+.login-back-home:hover { transform:translateY(-2px); background:#e2f4e9; box-shadow:0 7px 16px #064e3b20; }
+.login-back-home:hover .material-symbols-outlined { transform:translateX(-2px); background:#3bb54a; }
+.login-back-home:focus-visible { outline:3px solid #3bb54a; outline-offset:3px; }
+
+/* Clearly visible sign-in messages (error = red box, success = green box) */
+.login-alert { display:flex; align-items:center; gap:10px; margin:0 0 18px; padding:12px 14px; border-radius:12px; border:1px solid; border-left-width:5px; text-align:left; font-size:14px; font-weight:600; line-height:1.4; }
+.login-alert .material-symbols-outlined { flex:0 0 auto; font-size:22px; font-variation-settings:'FILL' 1; }
+.login-alert--error { background:#fdeaea; border-color:#e9a3a3; border-left-color:#c62828; color:#8f1d1d; animation:login-alert-shake .45s ease; }
+.login-alert--error .material-symbols-outlined { color:#c62828; }
+.login-alert--success { background:#e6f6ec; border-color:#9fd8b6; border-left-color:#1b8f55; color:#0b5d3b; }
+.login-alert--success .material-symbols-outlined { color:#1b8f55; }
+@keyframes login-alert-shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(3px)} }
+.error-msg { font-size:13px; font-weight:600; }
+@media (prefers-reduced-motion:reduce) { .login-alert--error { animation:none; } }
+
